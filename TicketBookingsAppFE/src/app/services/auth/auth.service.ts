@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TokenService } from '../token/token.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { loginRequestDTO } from '../../models/DTOs';
+import { loginRequestDTO, registerRequestDTO } from '../../models/DTOs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
-  //` Function to login
+  //` Login Function
   login(loginPayload: loginRequestDTO): Observable<any> {
     return this.http
       .post<any>(`${this.baseRequestUrlHttp}/login`, loginPayload)
@@ -25,6 +25,14 @@ export class AuthService {
       );
   }
 
+  //` Register Function
+  register(registerPayload: registerRequestDTO): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseRequestUrlHttp}/register`,
+      registerPayload
+    );
+  }
+
   //` Logout method
   logout(): void {
     this.tokenService.removeToken(); // Remove token on logout
@@ -32,6 +40,6 @@ export class AuthService {
 
   //` Check if the user is logged in
   isLoggedIn(): boolean {
-    return !!this.tokenService.getToken();
+    return this.tokenService.getToken() ? true : false;
   }
 }
