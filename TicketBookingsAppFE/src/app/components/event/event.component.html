@@ -1,4 +1,5 @@
 <div class="bg-white shadow-lg rounded-lg overflow-hidden mt-4 w-full h-full">
+  @if(event){
   <div class="p-4 flex flex-col flex-1 h-full">
     <h2 class="text-xl font-semibold mb-6">{{ event.name }}</h2>
     <div class="flex-1">
@@ -17,9 +18,10 @@
     </div>
     <button
       class="bg-blue-500 text-white px-4 py-2 rounded mt-6 w-full hover:bg-blue-600"
-      routerLink="/booking"
+      (click)="bookEvent(event.eventID)"
     >
       Book Now
     </button>
   </div>
+  }
 </div>

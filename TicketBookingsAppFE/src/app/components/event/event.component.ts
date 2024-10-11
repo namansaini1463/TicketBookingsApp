@@ -1,16 +1,7 @@
 import { Component, Input } from '@angular/core';
-
-export interface Event {
-  eventID: string; // Guid maps to string in TypeScript
-  name: string;
-  date: string; // DateOnly doesn't have a direct equivalent, using ISO date string
-  time: string; // TimeOnly, similarly, can be represented as a string (e.g., 'HH:mm:ss')
-  venue: string;
-  state: string;
-  ticketPrice: number; // decimal maps to number in TypeScript
-  availableTickets: number;
-  eventDescription?: string; // '?' makes the property optional
-}
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
+import { Event } from '../../models/Event';
 
 @Component({
   selector: 'app-event',
@@ -20,5 +11,20 @@ export interface Event {
   styleUrl: './event.component.css',
 })
 export class EventComponent {
-  @Input() event!: Event;
+  @Input() event: Event | null = null;
+
+  constructor(private router: Router, private authService: AuthService) {}
+
+  // Method to handle "Book Now" button click
+  bookEvent(eventId: string): void {
+    if (this.authService.isLoggedIn()) {
+      // Navigate to the booking page with the event ID
+      this.router.navigate([`/book`, eventId]);
+    } else {
+      // If the user is not logged in, redirect them to the login page
+      this.router.navigate(['/login'], {
+        queryParams: { returnUrl: `/book/${eventId}` },
+      });
+    }
+  }
 }
