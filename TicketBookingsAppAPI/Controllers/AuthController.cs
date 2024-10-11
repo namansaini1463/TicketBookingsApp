@@ -103,6 +103,7 @@ namespace TicketBookingsAppAPI.Controllers
                             Name = loginRequestDTO.userNameOrEmail,
                             Username = loginRequestDTO.userNameOrEmail,
                             JWTToken = jwtToken,
+                            UserID = user.Id
                         };
 
                         return Ok(response);

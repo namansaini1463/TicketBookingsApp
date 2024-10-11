@@ -7,9 +7,8 @@ namespace TicketBookingsAppAPI.Repositories
     {
         Task<List<Booking>> GetAllBookings();
         Task<Booking> BookEvent(Booking bookingDM);
-
         Task<Booking?> DeleteBooking(Guid bookingID);
-
-        //Task<List<Booking>> DeleteAllBookings(Guid bookingID);
+        Task<Booking?> GetBookingById(Guid bookingID);
+        Task<List<Booking>?> GetUserBookings(string userID);
     }
 }
