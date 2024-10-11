@@ -1,0 +1,66 @@
+<nav class="bg-stone-800 p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="flex flex-row justify-center items-center gap-2 cursor-pointer">
+      <img src="Icon.png" alt="Icon" class="h-8 w-8 rounded-full" />
+      <a class="text-white text-lg font-exo" routerLink="/">Ticket Booking</a>
+    </div>
+    <div class="flex items-center">
+      <ul class="flex space-x-4">
+        <li>
+          <a
+            class="text-white font-exo"
+            routerLink="/home"
+            routerLinkActive="text-blue-400 "
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            class="text-white font-exo"
+            routerLink="/events"
+            routerLinkActive="text-blue-400"
+            >Events</a
+          >
+        </li>
+        <!-- Show 'My Bookings' and 'Logout' if logged in -->
+        @if(isLoggedIn){
+        <li>
+          <a
+            class="text-white font-exo"
+            routerLink="/bookings"
+            routerLinkActive="text-blue-400"
+            >My Bookings</a
+          >
+        </li>
+        <li>
+          <a class="text-white font-exo cursor-pointer" (click)="logout()">
+            Logout
+          </a>
+        </li>
+
+        }
+
+        <!-- Show 'Login' if not logged in -->
+        @if(!isLoggedIn){
+
+        <li>
+          <a
+            class="text-white font-exo"
+            routerLink="/login"
+            routerLinkActive="text-blue-400"
+            >Login</a
+          >
+        </li>
+        }
+        <!-- <li>
+          <a
+            class="text-white font-exo"
+            routerLink="/login"
+            routerLinkActive="text-blue-400"
+            >Login/Sign Up</a
+          >
+        </li> -->
+      </ul>
+    </div>
+  </div>
+</nav>

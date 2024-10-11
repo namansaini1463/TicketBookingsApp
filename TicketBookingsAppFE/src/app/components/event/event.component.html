@@ -1,0 +1,25 @@
+<div class="bg-white shadow-lg rounded-lg overflow-hidden mt-4 w-full h-full">
+  <div class="p-4 flex flex-col flex-1 h-full">
+    <h2 class="text-xl font-semibold mb-6">{{ event.name }}</h2>
+    <div class="flex-1">
+      <p class="text-gray-600"><strong>Date:</strong> {{ event.date }}</p>
+      <p class="text-gray-600"><strong>Time: </strong>{{ event.time }}</p>
+      <p class="text-gray-600"><strong>Venue: </strong>{{ event.venue }}</p>
+      <p class="text-gray-600">
+        <strong>Ticket Price:</strong> ₹ {{ event.ticketPrice }}
+      </p>
+      <p class="text-gray-600">
+        <strong>Available Tickets: </strong>{{ event.availableTickets }}
+      </p>
+      <p class="text-gray-600 w-full">
+        <strong>Description: </strong>{{ event.eventDescription }}
+      </p>
+    </div>
+    <button
+      class="bg-blue-500 text-white px-4 py-2 rounded mt-6 w-full hover:bg-blue-600"
+      routerLink="/booking"
+    >
+      Book Now
+    </button>
+  </div>
+</div>

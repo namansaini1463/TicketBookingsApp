@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\models\\dtos\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\models\\dtos\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RegisterRequestDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\RegisterRequestDTO.cs",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\DTOs\\RegisterRequestDTO.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\RegisterRequestDTO.cs",
+              "RelativeToolTip": "TicketBookingsAppAPI\\Models\\DTOs\\RegisterRequestDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T04:31:23.159Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAADwv3UAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T04:26:33.813Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Program.cs",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Program.cs*",
+              "RelativeToolTip": "TicketBookingsAppAPI\\Program.cs*",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAIwH4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T05:19:20.92Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

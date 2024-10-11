@@ -1,0 +1,99 @@
+<div class="container font-exo mx-auto p-4">
+  <h1 class="text-3xl font-bold mb-4 text-center">
+    Ticket Booking Application - Register
+  </h1>
+  <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
+    <form [formGroup]="userRegisterForm" (ngSubmit)="onSubmit()">
+      <!-- Username -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="username"
+        >
+          Name
+        </label>
+        <input
+          formControlName="username"
+          type="text"
+          id="username"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your name"
+          required
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+          Username or Email
+        </label>
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter username or email"
+          required
+        />
+      </div>
+
+      <!-- Phone Number -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+          Phone Number
+        </label>
+        <input
+          formControlName="phone"
+          type="tel"
+          id="phone"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your phone number"
+          required
+        />
+        @if (userRegisterForm.get('phone')?.invalid &&
+        userRegisterForm.get('phone')?.touched) {
+        <div class="text-red-500">Please enter a valid phone number.</div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-6">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="password"
+        >
+          Password
+        </label>
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your password"
+          required
+        />
+        @if (userRegisterForm.get('password')?.invalid &&
+        userRegisterForm.get('password')?.touched) {
+        <div class="text-red-500">
+          Password must be atleast 4 characters long
+        </div>
+        }
+      </div>
+
+      <div class="flex items-center justify-between">
+        <button
+          class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full font-semibold hover:bg-blue-600"
+          type="submit"
+        >
+          Register
+        </button>
+      </div>
+      <p class="text-center text-gray-600 mt-4">
+        Already have an account?
+        <a routerLink="/login" class="text-blue-500 cursor-pointer"
+          >Login here</a
+        >
+      </p>
+    </form>
+  </div>
+</div>
