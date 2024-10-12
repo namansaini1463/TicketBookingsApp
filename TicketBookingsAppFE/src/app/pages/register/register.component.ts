@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { registerRequestDTO } from '../../models/AuthDTOs';
+import { registerRequestDTO } from '../../models/Auth';
 
 @Component({
   selector: 'app-register',

@@ -2,19 +2,24 @@ import { Injectable } from '@angular/core';
 import { TokenService } from '../token/token.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap, throwError } from 'rxjs';
-import { loginRequestDTO, registerRequestDTO } from '../../models/AuthDTOs';
+import { loginRequestDTO, registerRequestDTO } from '../../models/Auth';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseRequestUrlHttps = 'https://localhost:7290/api/Auth';
-  private baseRequestUrlHttp = 'http://localhost:5027/api/auth';
+  private readonly baseRequestUrlHttps = 'https://localhost:7290/api/Auth';
+  private readonly baseRequestUrlHttp = 'http://localhost:5027/api/auth';
 
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   LoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService,
+    private userService: UserService
+  ) {
     // Initialize the logged-in state
     this.isLoggedInSubject.next(this.checkInitialLoginState());
   }
@@ -27,13 +32,6 @@ export class AuthService {
     }
   }
 
-  private handleError(error: any) {
-    console.error('An error occurred:', error);
-    return throwError(
-      () => new Error('Something bad happened; please try again later.')
-    );
-  }
-
   // constructor(private http: HttpClient, private tokenService: TokenService) {}
 
   //` Login Function
@@ -44,6 +42,7 @@ export class AuthService {
         tap((response) => {
           // Store the JWT token using the TokenService
           this.tokenService.setToken(response.jwtToken);
+          this.userService.setUserID(response.userID);
         })
       );
   }
@@ -59,6 +58,7 @@ export class AuthService {
   //` Logout method
   logout(): void {
     this.tokenService.removeToken(); // Remove token on logout
+    this.userService.removeUserID();
   }
 
   //` Check if the user is logged in

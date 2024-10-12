@@ -33,6 +33,22 @@
   },
   {
     "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
+    "Method": "GetUserBookings",
+    "RelativePath": "api/Bookings/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
     "Method": "GetAllBookings",
     "RelativePath": "api/Bookings/All",
     "HttpMethod": "GET",
@@ -57,22 +73,6 @@
       {
         "Name": "addBookingDTO",
         "Type": "TicketBookingsAppAPI.Models.DTOs.AddBookingDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
-    "Method": "GetUserBookings",
-    "RelativePath": "api/Bookings/Bookings/{userId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
         "IsRequired": true
       }
     ],
