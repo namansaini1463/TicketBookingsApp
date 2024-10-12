@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { loginRequestDTO } from '../../models/AuthDTOs';
+import { loginRequestDTO } from '../../models/Auth';
 
 @Component({
   selector: 'app-login',

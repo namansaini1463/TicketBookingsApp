@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { registerRequestDTO } from '../../models/AuthDTOs';
+import { registerRequestDTO } from '../../models/Auth';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   ) {
     this.userRegisterForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required], Validators.email],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
       password: ['', [Validators.required, Validators.minLength(4)]],
     });

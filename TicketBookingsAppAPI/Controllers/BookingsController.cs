@@ -30,7 +30,7 @@ namespace TicketBookingsAppAPI.Controllers
 
             if (eventToBeBooked == null)
             {
-                return NotFound();
+                return NotFound("No event was found! Booking was uncessful!");
             }
 
             var bookingDM = new Booking
@@ -69,7 +69,7 @@ namespace TicketBookingsAppAPI.Controllers
 
         // GET : GET ALL THE EVENTS BOOKED BY A USER
         [HttpGet]
-        [Route("Bookings/{userId}")]
+        [Route("{userId}")]
         public async Task<IActionResult> GetUserBookings([FromRoute] string userId)
         {
             var userBookings = await bookingRepository.GetUserBookings(userId);
@@ -80,6 +80,7 @@ namespace TicketBookingsAppAPI.Controllers
             }
 
             var userBookingsDTO = mapper.Map<List<BookingDTO>>(userBookings);
+
             return Ok(userBookingsDTO);
         }
 

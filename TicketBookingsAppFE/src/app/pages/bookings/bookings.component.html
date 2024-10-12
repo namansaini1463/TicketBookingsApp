@@ -1,1 +1,54 @@
-<p>bookings works!</p>
+<div
+  class="my-userBookings-container max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg"
+>
+  <h1 class="text-center text-4xl font-bold font-exo mb-8 text-gray-800">
+    My Bookings
+  </h1>
+
+  <!-- Display booked events -->
+  @if (userBookings.length > 0) {
+  <div>
+    <div class="space-y-6">
+      <div
+        class="p-6 bg-white rounded-lg shadow-md"
+        *ngFor="let booking of userBookings"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-exo text-blue-600">
+            {{ booking.bookingEvent.name }}
+          </h3>
+          <div>
+            <b>Booked On</b>
+            <p class="text-sm text-gray-500">
+              {{ booking.bookingDate | date : "medium" }}
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="text-gray-700">
+            <p><strong>Tickets:</strong> {{ booking.numberOfTickets }}</p>
+            <p><strong>Total Price:</strong> ₹ {{ booking.amount }}</p>
+          </div>
+          <!-- Delete button -->
+          <button
+            class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded"
+            (click)="onDeleteBooking(booking.bookingID)"
+          >
+            Delete Booking
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  } @else {
+  <div class="flex flex-col justify-center items-center">
+    <p class="text-center text-gray-500">You have no bookings at the moment.</p>
+    <button
+      class="bg-blue-500 text-white px-4 py-2 rounded mt-6 w-1/6 hover:bg-blue-600"
+      (click)="onClick()"
+    >
+      Book Now
+    </button>
+  </div>
+  }
+</div>

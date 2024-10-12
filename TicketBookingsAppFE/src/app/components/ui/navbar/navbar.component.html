@@ -1,7 +1,7 @@
 <nav class="bg-stone-800 p-4">
   <div class="container mx-auto flex justify-between items-center">
     <div class="flex flex-row justify-center items-center gap-2 cursor-pointer">
-      <img src="Icon.png" alt="Icon" class="h-8 w-8 rounded-full" />
+      <img src="Icon.png" alt="Icon" class="h-10 w-10 rounded-full" />
       <a class="text-white text-lg font-exo" routerLink="/">Ticket Booking</a>
     </div>
     <div class="flex items-center">
@@ -33,6 +33,14 @@
           >
         </li>
         <li>
+          <a
+            class="text-white font-exo"
+            routerLink="/profile"
+            routerLinkActive="text-blue-400"
+            >{{ username }}</a
+          >
+        </li>
+        <li>
           <a class="text-white font-exo cursor-pointer" (click)="logout()">
             Logout
           </a>
@@ -52,14 +60,6 @@
           >
         </li>
         }
-        <!-- <li>
-          <a
-            class="text-white font-exo"
-            routerLink="/login"
-            routerLinkActive="text-blue-400"
-            >Login/Sign Up</a
-          >
-        </li> -->
       </ul>
     </div>
   </div>

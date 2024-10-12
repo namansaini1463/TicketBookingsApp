@@ -7,6 +7,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { BookEventComponent } from './pages/book-event/book-event.component';
 import { AuthGuard } from './guards/auth.guard';
 import { BookingsComponent } from './pages/bookings/bookings.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,11 @@ export const routes: Routes = [
   {
     path: 'bookings',
     component: BookingsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [AuthGuard],
   },
   // Wildcard route to handle invalid URLs
