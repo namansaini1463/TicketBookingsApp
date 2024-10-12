@@ -1,4 +1,4 @@
-<div class="container font-exo mx-auto p-4">
+<div class="container font-exo mx-auto p-4 max-h-[85vh] overflow-y-auto">
   <h1 class="text-3xl font-bold mb-4 text-center">
     Ticket Booking Application - Register
   </h1>
@@ -17,9 +17,18 @@
           type="text"
           id="username"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-          placeholder="Enter your name"
+          placeholder="Enter your username"
           required
         />
+        <div
+          *ngIf="
+            userRegisterForm.get('username')?.invalid &&
+            userRegisterForm.get('username')?.touched
+          "
+          class="text-red-500"
+        >
+          Please enter your username
+        </div>
       </div>
 
       <!-- Email -->
@@ -32,9 +41,18 @@
           type="email"
           id="email"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-          placeholder="Enter username or email"
+          placeholder="Enter your email"
           required
         />
+        <div
+          *ngIf="
+            userRegisterForm.get('email')?.invalid &&
+            userRegisterForm.get('email')?.touched
+          "
+          class="text-red-500"
+        >
+          Please enter your email
+        </div>
       </div>
 
       <!-- Phone Number -->

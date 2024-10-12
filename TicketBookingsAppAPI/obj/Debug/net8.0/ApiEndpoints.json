@@ -32,6 +32,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.AuthController",
+    "Method": "Update",
+    "RelativePath": "api/Auth/Update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateUserRequest",
+        "Type": "TicketBookingsAppAPI.Models.DTOs.UpdateUserRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
     "Method": "GetUserBookings",
     "RelativePath": "api/Bookings/{userId}",

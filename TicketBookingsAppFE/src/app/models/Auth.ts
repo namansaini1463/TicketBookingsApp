@@ -10,3 +10,10 @@ export interface registerRequestDTO {
   phoneNumber: string;
   roles: string[];
 }
+
+export interface updateRequestDTO {
+  userID: string;
+  username: string;
+  oldPassword?: string;
+  newPassword?: string;
+}

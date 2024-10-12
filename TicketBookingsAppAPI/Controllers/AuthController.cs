@@ -101,7 +101,7 @@ namespace TicketBookingsAppAPI.Controllers
                         var response = new LoginResponseDTO
                         {
                             Name = loginRequestDTO.userNameOrEmail,
-                            Username = loginRequestDTO.userNameOrEmail,
+                            Username = user.Name,
                             JWTToken = jwtToken,
                             UserID = user.Id
                          };
@@ -113,6 +113,55 @@ namespace TicketBookingsAppAPI.Controllers
 
             // Return 401 Unauthorized if the credentials are invalid
             return Unauthorized(new { message = "Username or password is incorrect." });
+        }
+
+        //UPDATE: /api/auth/update
+        [HttpPut]
+        [Route("Update")]
+        public async Task<IActionResult> Update([FromBody] UpdateUserRequestDTO updateUserRequest)
+        {
+            // Find the user by their ID
+            var user = await userManager.FindByIdAsync(updateUserRequest.UserID);
+
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            // Update Username and Email
+            bool isUserUpdated = false;
+            if (!string.IsNullOrEmpty(updateUserRequest.Username) && updateUserRequest.Username != user.UserName)
+            {
+                user.UserName = updateUserRequest.Username;
+                user.Name = updateUserRequest.Username;
+                var updateResult = await userManager.UpdateAsync(user);
+                if (!updateResult.Succeeded)
+                {
+                    return BadRequest(new { message = "Failed to update user details.", errors = updateResult.Errors.Select(e => e.Description) });
+                }
+                isUserUpdated = true;
+            }
+
+            // Update Password
+            if (!string.IsNullOrEmpty(updateUserRequest.OldPassword) && !string.IsNullOrEmpty(updateUserRequest.NewPassword))
+            {
+                // Check if the old password is correct
+                var passwordCheck = await userManager.CheckPasswordAsync(user, updateUserRequest.OldPassword);
+                if (!passwordCheck)
+                {
+                    return BadRequest(new { message = "Old password is incorrect." });
+                }
+
+                // Change the password
+                var changePasswordResult = await userManager.ChangePasswordAsync(user, updateUserRequest.OldPassword, updateUserRequest.NewPassword);
+                if (!changePasswordResult.Succeeded)
+                {
+                    return BadRequest(new { message = "Failed to update password.", errors = changePasswordResult.Errors.Select(e => e.Description) });
+                }
+            }
+
+            // Successfully updated
+            return Ok(new { message = "User updated successfully." });
         }
     }
 }
