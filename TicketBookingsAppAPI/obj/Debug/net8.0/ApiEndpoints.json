@@ -64,6 +64,22 @@
   },
   {
     "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
+    "Method": "GetUserBookings",
+    "RelativePath": "api/Bookings/Bookings/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
     "Method": "DeleteEvent",
     "RelativePath": "api/Bookings/Delete/{BookingId}",
     "HttpMethod": "DELETE",

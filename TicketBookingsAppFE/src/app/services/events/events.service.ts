@@ -6,8 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EventsService {
-  allEvents: Event[] = [];
-
   // http = inject(HttpClient);
   constructor(private http: HttpClient) {} //` Injecting the HttpClient in to the constructor (Dependency Injection)
 
@@ -16,5 +14,9 @@ export class EventsService {
 
   getAllEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(this.baseRequestUrlHttp);
+  }
+
+  getEventByID(eventID: string): Observable<Event> {
+    return this.http.get<Event>(`${this.baseRequestUrlHttp}/${eventID}`);
   }
 }

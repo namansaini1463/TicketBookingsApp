@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TokenService } from '../token/token.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap, throwError } from 'rxjs';
-import { loginRequestDTO, registerRequestDTO } from '../../models/DTOs';
+import { loginRequestDTO, registerRequestDTO } from '../../models/AuthDTOs';
 
 @Injectable({
   providedIn: 'root',

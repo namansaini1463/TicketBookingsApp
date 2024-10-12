@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { EventComponent } from '../../components/event/event.component';
 import { EventsService } from '../../services/events/events.service';
-import { Event } from '../../components/event/event.component'; //? This is the Event interface
-import { FormsModule } from '@angular/forms';
+import { Event } from '../../models/Event';
 
 @Component({
   selector: 'app-events',
@@ -20,7 +20,7 @@ export class EventsComponent implements OnInit {
     this.eventsSerice.getAllEvents().subscribe(
       (data: any[]) => {
         this.events = data.map((item) => ({
-          eventID: item.id,
+          eventID: item.eventID,
           name: item.name,
           date: item.date,
           time: item.time,

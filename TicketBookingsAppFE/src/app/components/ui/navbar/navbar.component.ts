@@ -2,7 +2,7 @@ import { NgModule, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router'; // Import Router and NavigationEnd
-import { AuthService } from '../../services/auth/auth.service';
+import { AuthService } from '../../../services/auth/auth.service';
 import { filter } from 'rxjs/operators'; // Import filter for filtering events
 
 @Component({
