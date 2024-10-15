@@ -1,4 +1,4 @@
-<div class="container mx-auto p-4 font-exo max-h-[90vh] overflow-y-auto">
+<div class="container mx-auto p-4 font-exo max-h-[85vh] overflow-y-auto">
   <h1 class="text-3xl font-bold mb-4 text-center">
     Ticket Booking Application - Events
   </h1>
@@ -6,8 +6,12 @@
   <div
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
   >
-    @for (event of events; track $index) {
+    @if(events.length){ @for (event of events; track $index) {
     <app-event [event]="event"></app-event>
+    } } @else {
+    <div class="flex flex-col justify-center items-center">
+      <p class="text-center text-gray-500">No events found</p>
+    </div>
     }
   </div>
 </div>

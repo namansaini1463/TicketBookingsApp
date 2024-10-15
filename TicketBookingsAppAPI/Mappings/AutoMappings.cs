@@ -10,6 +10,9 @@ namespace TicketBookingsAppAPI.Mappings
         {
             CreateMap<Event, EventDTO>().ReverseMap();
             CreateMap<Event, AddNewEventDTO>().ReverseMap();
+            CreateMap<Booking, BookingDTO>().ReverseMap();
+            CreateMap<AddBookingDTO, Booking>().ReverseMap();
+
         }
     }
 }

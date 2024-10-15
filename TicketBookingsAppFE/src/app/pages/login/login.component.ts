@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
-import { loginRequestDTO } from '../../models/DTOs';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { loginRequestDTO } from '../../models/Auth';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +15,13 @@ import { loginRequestDTO } from '../../models/DTOs';
 })
 export class LoginComponent implements OnInit {
   userLoginForm!: FormGroup; //^ Define the form group
+  returnURL!: string;
 
   constructor(
     private fb: FormBuilder, // Injecting FormBuilder
     private authService: AuthService, // Injecting AuthService
-    private router: Router // Injecting Router for redirection
+    private router: Router, // Injecting Router for redirection
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -38,12 +40,15 @@ export class LoginComponent implements OnInit {
         password: this.userLoginForm.get('password')?.value,
       };
 
+      // Get the returnUrl from query parameters or default to the home page
+      this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/';
+
       // Call the login method in AuthService
       this.authService.login(loginDTO).subscribe(
         (response) => {
           alert('Login successful');
           // Redirect to dashboard or other protected route
-          this.router.navigate(['/']);
+          this.router.navigate([this.returnURL]);
         },
         (error) => {
           console.error('Login failed', error);
