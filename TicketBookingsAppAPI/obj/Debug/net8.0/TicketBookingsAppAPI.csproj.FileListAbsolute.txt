@@ -289,6 +289,14 @@ C:\Users\Admin\Downloads\TicketBookingsApp-main\TicketBookingsApp-main\TicketBoo
 C:\Users\Admin\Downloads\TicketBookingsApp-main\TicketBookingsApp-main\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.pdb
 C:\Users\Admin\Downloads\TicketBookingsApp-main\TicketBookingsApp-main\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.genruntimeconfig.cache
 C:\Users\Admin\Downloads\TicketBookingsApp-main\TicketBookingsApp-main\TicketBookingsAppAPI\obj\Debug\net8.0\ref\TicketBookingsAppAPI.dll
+C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.AssemblyInfo.cs
+C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.sourcelink.json
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\bin\Debug\net8.0\appsettings.json
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\bin\Debug\net8.0\TicketBookingsAppAPI.exe
@@ -413,13 +421,6 @@ C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\bin\Debug\net8.0\r
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.csproj.AssemblyReference.cache
-C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.AssemblyInfoInputs.cache
-C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.AssemblyInfo.cs
-C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.csproj.CoreCompileInputs.cache
-C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\staticwebassets\msbuild.TicketBookingsAppAPI.Microsoft.AspNetCore.StaticWebAssets.props
@@ -434,4 +435,3 @@ C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\r
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.pdb
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.genruntimeconfig.cache
 C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\ref\TicketBookingsAppAPI.dll
-C:\Users\Admin\Desktop\TicketBookingsApp\TicketBookingsAppAPI\obj\Debug\net8.0\TicketBookingsAppAPI.sourcelink.json

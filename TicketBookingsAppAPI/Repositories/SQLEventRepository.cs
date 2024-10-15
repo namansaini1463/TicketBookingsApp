@@ -8,44 +8,44 @@ namespace TicketBookingsAppAPI.Repositories
 {
     public class SQLEventRepository : IEventRepository
     {
-        private readonly TicketBookingsAppDBContext ticketBookingsAppDBContext;
+        //private readonly TicketBookingsAppDBContext ticketBookingsAppDBContext;
 
-        public SQLEventRepository(TicketBookingsAppDBContext ticketBookingsAppDBContext)
-        {
-            this.ticketBookingsAppDBContext = ticketBookingsAppDBContext;
-        }
+        //public SQLEventRepository(TicketBookingsAppDBContext ticketBookingsAppDBContext)
+        //{
+        //    this.ticketBookingsAppDBContext = ticketBookingsAppDBContext;
+        //}
 
-        public async Task<Event> AddEvent(Event addEvent)
-        {
-            await ticketBookingsAppDBContext.Events.AddAsync(addEvent);
-            await ticketBookingsAppDBContext.SaveChangesAsync();
+        //public async Task<Event> AddEvent(Event addEvent)
+        //{
+        //    await ticketBookingsAppDBContext.Events.AddAsync(addEvent);
+        //    await ticketBookingsAppDBContext.SaveChangesAsync();
 
-            return addEvent;
-        }
+        //    return addEvent;
+        //}
 
-        public async Task<Event?> DeleteEvent(Guid EventID)
-        {
-            var existingEvent = await ticketBookingsAppDBContext.Events.FirstOrDefaultAsync(e => e.EventID == EventID);
+        //public async Task<Event?> DeleteEvent(Guid EventID)
+        //{
+        //    var existingEvent = await ticketBookingsAppDBContext.Events.FirstOrDefaultAsync(e => e.EventID == EventID);
 
-            if (existingEvent == null) {
-                return null;
-            }
+        //    if (existingEvent == null) {
+        //        return null;
+        //    }
 
-            ticketBookingsAppDBContext.Events.Remove(existingEvent);
-            await ticketBookingsAppDBContext.SaveChangesAsync();
+        //    ticketBookingsAppDBContext.Events.Remove(existingEvent);
+        //    await ticketBookingsAppDBContext.SaveChangesAsync();
 
-            return existingEvent;   
-        }
+        //    return existingEvent;   
+        //}
 
-        public async Task<List<Event>> GetAllEvents()
-        {
-            return await ticketBookingsAppDBContext.Events.ToListAsync();
-        }
+        //public async Task<List<Event>> GetAllEvents()
+        //{
+        //    return await ticketBookingsAppDBContext.Events.ToListAsync();
+        //}
 
-        public async Task<Event?> GetEvent(Guid EventID)
-        {
-            return await ticketBookingsAppDBContext.Events.FirstOrDefaultAsync(e => e.EventID == EventID);
+        //public async Task<Event?> GetEvent(Guid EventID)
+        //{
+        //    return await ticketBookingsAppDBContext.Events.FirstOrDefaultAsync(e => e.EventID == EventID);
 
-        }
+        //}
     }
 }

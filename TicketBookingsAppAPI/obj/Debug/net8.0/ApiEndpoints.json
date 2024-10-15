@@ -48,67 +48,30 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
-    "Method": "GetUserBookings",
-    "RelativePath": "api/Bookings/{userId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
-    "Method": "GetAllBookings",
-    "RelativePath": "api/Bookings/All",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
-    "Method": "BookEventById",
-    "RelativePath": "api/Bookings/Book/{EventId}",
+    "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
+    "Method": "PostEvent",
+    "RelativePath": "api/Events",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "EventId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "addBookingDTO",
-        "Type": "TicketBookingsAppAPI.Models.DTOs.AddBookingDTO",
+        "Name": "createEventDTO",
+        "Type": "EventCreateDTO",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
-    "Method": "DeleteEvent",
-    "RelativePath": "api/Bookings/Delete/{BookingId}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+    "ReturnTypes": [
       {
-        "Name": "BookingId",
-        "Type": "System.Guid",
-        "IsRequired": true
+        "Type": "TicketBookingsAppAPI.Models.Domain.Event",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
       }
-    ],
-    "ReturnTypes": []
+    ]
   },
   {
     "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
@@ -118,23 +81,17 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
-    "Method": "AddEvent",
-    "RelativePath": "api/Events",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+    "ReturnTypes": [
       {
-        "Name": "addNewEventDTO",
-        "Type": "TicketBookingsAppAPI.Models.DTOs.AddNewEventDTO",
-        "IsRequired": true
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EventDTO, TicketBookingsAppAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
       }
-    ],
-    "ReturnTypes": []
+    ]
   },
   {
     "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
@@ -150,22 +107,16 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
-    "Method": "Delete",
-    "RelativePath": "api/Events/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+    "ReturnTypes": [
       {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
+        "Type": "EventDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
       }
-    ],
-    "ReturnTypes": []
+    ]
   }
 ]

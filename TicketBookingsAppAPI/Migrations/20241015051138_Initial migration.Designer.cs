@@ -12,8 +12,8 @@ using TicketBookingsAppAPI.Data;
 namespace TicketBookingsAppAPI.Migrations
 {
     [DbContext(typeof(TicketBookingsAppDBContext))]
-    [Migration("20241007090953_updated the datatype of usedId to string")]
-    partial class updatedthedatatypeofusedIdtostring
+    [Migration("20241015051138_Initial migration")]
+    partial class Initialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -366,7 +366,7 @@ namespace TicketBookingsAppAPI.Migrations
             modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Booking", b =>
                 {
                     b.HasOne("TicketBookingsAppAPI.Models.Domain.Event", "BookingEvent")
-                        .WithMany("Bookings")
+                        .WithMany()
                         .HasForeignKey("EventID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -380,11 +380,6 @@ namespace TicketBookingsAppAPI.Migrations
                     b.Navigation("BookingEvent");
 
                     b.Navigation("BookingUser");
-                });
-
-            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Event", b =>
-                {
-                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

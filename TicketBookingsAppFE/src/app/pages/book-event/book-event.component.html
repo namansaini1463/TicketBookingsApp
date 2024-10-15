@@ -4,7 +4,7 @@
   <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
     @if(event){
 
-    <!-- Event Details -->
+    <!-- Event Details
     <div class="mb-6">
       <h2 class="text-xl font-semibold">{{ event.name }}</h2>
       <p class="text-gray-600"><strong>Date:</strong> {{ event.date }}</p>
@@ -16,17 +16,15 @@
       <p class="text-gray-600">
         <strong>Available Tickets:</strong> {{ event.availableTickets }}
       </p>
-    </div>
+    </div> -->
 
     <!-- Booking Form -->
-    <form (ngSubmit)="onSubmit()">
-      <!-- Number of Tickets with + and - buttons -->
+    <!-- <form (ngSubmit)="onSubmit()">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="tickets">
           Select Number of Tickets
         </label>
         <div class="flex items-center">
-          <!-- Minus Button -->
           <button
             type="button"
             (click)="decreaseTickets()"
@@ -36,7 +34,6 @@
             -
           </button>
 
-          <!-- Number of Tickets Input (Two-Way Binding) -->
           <input
             type="number"
             id="tickets"
@@ -48,7 +45,6 @@
             readonly
           />
 
-          <!-- Plus Button -->
           <button
             type="button"
             (click)="increaseTickets()"
@@ -60,12 +56,10 @@
         </div>
       </div>
 
-      <!-- Dynamically Updated Total Price -->
       <div class="mb-6">
         <p class="text-lg"><strong>Total Price:</strong> ₹{{ totalPrice }}</p>
       </div>
 
-      <!-- Submit Button -->
       <div class="flex items-center justify-between">
         <button
           class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full font-semibold hover:bg-blue-600"
@@ -74,7 +68,7 @@
           Confirm Booking
         </button>
       </div>
-    </form>
+    </form> -->
     }
   </div>
 </div>

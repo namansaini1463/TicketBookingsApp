@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TicketBookingsAppAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -183,21 +183,21 @@ namespace TicketBookingsAppAPI.Migrations
                 columns: table => new
                 {
                     BookingID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     EventID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NumberOfTickets = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BookingUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bookings", x => x.BookingID);
                     table.ForeignKey(
-                        name: "FK_Bookings_AspNetUsers_BookingUserId",
-                        column: x => x.BookingUserId,
+                        name: "FK_Bookings_AspNetUsers_UserID",
+                        column: x => x.UserID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Bookings_Events_EventID",
                         column: x => x.EventID,
@@ -255,14 +255,14 @@ namespace TicketBookingsAppAPI.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_BookingUserId",
-                table: "Bookings",
-                column: "BookingUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Bookings_EventID",
                 table: "Bookings",
                 column: "EventID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bookings_UserID",
+                table: "Bookings",
+                column: "UserID");
         }
 
         /// <inheritdoc />
