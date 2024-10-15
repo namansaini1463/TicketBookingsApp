@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { updateRequestDTO } from '../../models/Auth';
 import { Subscription } from 'rxjs';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -25,7 +26,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -46,13 +48,6 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  // Unsubscribe from the username observable when the component is destroyed
-  ngOnDestroy(): void {
-    if (this.usernameSubscription) {
-      this.usernameSubscription.unsubscribe();
-    }
-  }
-
   // Handle form submission
   onSubmit(): void {
     if (this.profileForm.valid) {
@@ -60,19 +55,35 @@ export class ProfileComponent implements OnInit {
       const userID = localStorage.getItem('userID'); // Assuming userID is stored in localStorage
 
       if (userID) {
+        // Compare the current username (from the observable) with the new one
+        const currentUsername = this.userService.getUserName(); // This should return the current username from the service
+
+        if (currentUsername === userName && !newPassword && !oldPassword) {
+          alert(
+            'The new username must be different from the current username!'
+          );
+          return;
+        }
+
+        if (oldPassword && !newPassword) {
+          alert('Please enter a new password');
+          return;
+        }
+
         var updateDTO: updateRequestDTO = {
           userID: userID,
           username: userName,
           oldPassword: oldPassword,
           newPassword: newPassword,
         };
+
         this.authService.updateUser(updateDTO).subscribe(
           () => {
             this.router.navigate(['/login']); // Navigate to login after logout
           },
           (error) => {
             console.error('Profile update failed', error);
-            alert('Failed to update profile');
+            alert(`Failed to update profile : ${error.error.errors[0]}`);
           }
         );
       }

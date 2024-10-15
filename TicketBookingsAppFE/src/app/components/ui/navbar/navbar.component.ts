@@ -48,8 +48,10 @@ export class NavbarComponent implements OnInit {
 
   // Handle logout
   logout(): void {
-    this.authService.logout(); // Call the logout method from AuthService
-    this.router.navigate(['/login']); // Optionally navigate to login page after logging out
-    alert('You were logged out!');
+    if (confirm('Are you sure you want to log out ?')) {
+      this.authService.logout(); // Call the logout method from AuthService
+      this.router.navigate(['/login']); // Optionally navigate to login page after logging out
+      alert('You were logged out!');
+    }
   }
 }
