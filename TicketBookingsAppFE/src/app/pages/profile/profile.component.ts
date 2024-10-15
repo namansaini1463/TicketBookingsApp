@@ -76,6 +76,7 @@ export class ProfileComponent implements OnInit {
           oldPassword: oldPassword,
           newPassword: newPassword,
         };
+
         this.authService.updateUser(updateDTO).subscribe(
           () => {
             this.router.navigate(['/login']); // Navigate to login after logout
