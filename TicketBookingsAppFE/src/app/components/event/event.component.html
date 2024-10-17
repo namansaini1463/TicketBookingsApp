@@ -1,55 +1,11 @@
 <div class="bg-white shadow-lg rounded-lg overflow-hidden mt-4 w-full h-full">
-  <ng-container *ngIf="event">
+  @if(event){
+  <ng-container>
     <div class="p-4 flex flex-col flex-1 h-full">
-      <!-- Event Images or Carousel -->
-      <div *ngIf="event.images.length > 0" class="w-full h-64">
-        <ng-container *ngIf="event.images.length === 1">
-          <!-- Single Image -->
-          <img
-            [src]="event.images[0].imageUrl"
-            alt="Event Image"
-            class="w-full h-full object-cover rounded-lg"
-          />
-        </ng-container>
+      <!-- Images Carousel -->
+      <app-carousel [images]="event.images"></app-carousel>
 
-        <ng-container *ngIf="event.images.length > 1">
-          <!-- Carousel for Multiple Images -->
-          <div class="relative w-full h-64 overflow-hidden">
-            <!-- Carousel Track (Sliding area) -->
-            <div
-              class="flex transition-transform duration-500 ease-in-out"
-              [style.transform]="'translateX(' + -currentSlide * 100 + '%)'"
-            >
-              <!-- Each image in the carousel -->
-              <div
-                *ngFor="let image of event.images"
-                class="w-full h-64 flex-shrink-0"
-              >
-                <img
-                  [src]="image.imageUrl"
-                  alt="Event Image"
-                  class="w-full h-full object-cover rounded-lg"
-                />
-              </div>
-            </div>
-
-            <!-- Previous and Next Buttons -->
-            <button
-              class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded z-50"
-              (click)="prevSlide()"
-            >
-              ‹
-            </button>
-            <button
-              class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded z-50"
-              (click)="nextSlide()"
-            >
-              ›
-            </button>
-          </div>
-        </ng-container>
-      </div>
-
+      <!-- Event Name -->
       <h1 class="text-xl font-semibold mb-6 text-blue-700 mt-4">
         {{ event.name }}
       </h1>
@@ -64,6 +20,7 @@
           </span>
         </ng-container>
       </div>
+
       <p class="text-gray-600 w-full">
         <strong>Description: </strong>
         {{ event.eventDescription || "No description available" }}
@@ -165,4 +122,5 @@
       </button>
     </div>
   </ng-container>
+  }
 </div>

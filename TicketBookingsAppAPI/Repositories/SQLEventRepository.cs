@@ -8,6 +8,49 @@ namespace TicketBookingsAppAPI.Repositories
 {
     public class SQLEventRepository : IEventRepository
     {
+        private readonly TicketBookingsAppDBContext ticketBookingsAppDBContext;
+
+        public SQLEventRepository(TicketBookingsAppDBContext ticketBookingsAppDBContext)
+        {
+            this.ticketBookingsAppDBContext = ticketBookingsAppDBContext;
+        }
+        public async Task<List<Event>> GetAllEvents()
+        {
+            // Fetch all events, including related TicketTypes and Images
+            var allEventsDM = await ticketBookingsAppDBContext.Events
+                                             .Include(e => e.TicketTypes)
+                                             .Include(e => e.Images)
+                                             .ToListAsync();
+            if(allEventsDM == null)
+            {
+                return null;
+            }
+
+            return allEventsDM;
+        }
+
+        public async Task<Event?> GetEvent(Guid id)
+        {
+            var eventDM = await ticketBookingsAppDBContext.Events
+                                             .Include(e => e.TicketTypes)
+                                             .Include(e => e.Images)
+                                             .FirstOrDefaultAsync(e => e.EventID == id);
+            if (eventDM == null)
+            {
+                return null;
+            }
+
+            return eventDM;
+        }
+
+        public async Task<Event> PostEvent(Event addEvent)
+        {
+            await ticketBookingsAppDBContext.Events.AddAsync(addEvent);
+            await ticketBookingsAppDBContext.SaveChangesAsync();
+
+            return addEvent;
+        }
+
         //private readonly TicketBookingsAppDBContext ticketBookingsAppDBContext;
 
         //public SQLEventRepository(TicketBookingsAppDBContext ticketBookingsAppDBContext)
@@ -47,5 +90,6 @@ namespace TicketBookingsAppAPI.Repositories
         //    return await ticketBookingsAppDBContext.Events.FirstOrDefaultAsync(e => e.EventID == EventID);
 
         //}
+
     }
 }

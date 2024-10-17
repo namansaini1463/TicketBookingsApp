@@ -1,13 +1,17 @@
 export interface loginRequestDTO {
-  userNameOrEmail: string;
+  email: string;
   password: string;
 }
 
 export interface registerRequestDTO {
-  name: string;
-  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
   password: string;
-  phoneNumber: string;
+  phoneNumber?: string;
+  profilePictureUrl?: string;
+  preferredLanguage?: string;
+  preferredCurrency?: string;
   roles: string[];
 }
 

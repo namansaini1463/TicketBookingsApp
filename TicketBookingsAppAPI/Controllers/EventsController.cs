@@ -11,15 +11,17 @@ namespace TicketBookingsAppAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
     public class EventsController : ControllerBase
     {
         private readonly TicketBookingsAppDBContext ticketBookingsAppDBContext;
+        private readonly IEventRepository eventRepository;
+        private readonly IEventRepository eventRepository1;
         private readonly IMapper mapper;
 
-        public EventsController(TicketBookingsAppDBContext ticketBookingsAppDBContext, IMapper mapper)
+        public EventsController(TicketBookingsAppDBContext ticketBookingsAppDBContext, IEventRepository eventRepository, IMapper mapper)
         {
             this.ticketBookingsAppDBContext = ticketBookingsAppDBContext;
+            this.eventRepository = eventRepository;
             this.mapper = mapper;
         }
 
@@ -65,20 +67,19 @@ namespace TicketBookingsAppAPI.Controllers
             };
 
             // Save the event to the database
-            ticketBookingsAppDBContext.Events.Add(newEventDM);
-            await ticketBookingsAppDBContext.SaveChangesAsync();
+            newEventDM = await eventRepository.PostEvent(newEventDM);
+
+            var newEventDTO = mapper.Map<EventDTO>(newEventDM);
 
             // Return the created event
-            return CreatedAtAction(nameof(GetEvent), new { id = newEventDM.EventID }, newEventDM);
+            return CreatedAtAction(nameof(GetEvent), new { id = newEventDTO.EventID }, newEventDTO);
         }
 
+        // GET: api/Events/id
         [HttpGet("{id}")]
         public async Task<ActionResult<EventDTO>> GetEvent(Guid id)
         {
-            var eventDM = await ticketBookingsAppDBContext.Events
-                                            .Include(e => e.TicketTypes)
-                                            .Include(e => e.Images)
-                                            .FirstOrDefaultAsync(e => e.EventID == id);
+            var eventDM = await eventRepository.GetEvent(id);
 
             if (eventDM == null)
             {
@@ -90,14 +91,11 @@ namespace TicketBookingsAppAPI.Controllers
             return Ok(eventDTO);
         }
 
+        // GET : api/Events
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventDTO>>> GetAllEvents()
         {
-            // Fetch all events, including related TicketTypes and Images
-            var allEventsDM = await ticketBookingsAppDBContext.Events
-                                             .Include(e => e.TicketTypes)
-                                             .Include(e => e.Images)
-                                             .ToListAsync();
+            var allEventsDM = await eventRepository.GetAllEvents();
 
             if (allEventsDM == null || !allEventsDM.Any())
             {
@@ -109,8 +107,6 @@ namespace TicketBookingsAppAPI.Controllers
 
             return Ok(allEventsDTO);  // Return the list of EventDTOs
         }
-
-
 
 
         //private readonly TicketBookingsAppDBContext ticketBookingsAppDBContext;

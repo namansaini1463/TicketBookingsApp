@@ -4,30 +4,57 @@
   </h1>
   <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
     <form [formGroup]="userRegisterForm" (ngSubmit)="onSubmit()">
-      <!-- Username -->
+      <!-- First Name -->
       <div class="mb-4">
         <label
           class="block text-gray-700 text-sm font-bold mb-2"
-          for="username"
+          for="firstName"
         >
-          Username
+          First Name
         </label>
         <input
-          formControlName="username"
+          formControlName="firstName"
           type="text"
-          id="username"
+          id="firstName"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-          placeholder="Enter your username"
+          placeholder="Enter your first name"
           required
         />
         <div
           *ngIf="
-            userRegisterForm.get('username')?.invalid &&
-            userRegisterForm.get('username')?.touched
+            userRegisterForm.get('firstName')?.invalid &&
+            userRegisterForm.get('firstName')?.touched
           "
           class="text-red-500"
         >
-          Please enter your username
+          Please enter your first name.
+        </div>
+      </div>
+
+      <!-- Last Name -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="lastName"
+        >
+          Last Name
+        </label>
+        <input
+          formControlName="lastName"
+          type="text"
+          id="lastName"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your last name"
+          required
+        />
+        <div
+          *ngIf="
+            userRegisterForm.get('lastName')?.invalid &&
+            userRegisterForm.get('lastName')?.touched
+          "
+          class="text-red-500"
+        >
+          Please enter your last name.
         </div>
       </div>
 
@@ -51,27 +78,31 @@
           "
           class="text-red-500"
         >
-          Please enter your email
+          Please enter a valid email.
         </div>
       </div>
 
       <!-- Phone Number -->
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
-          Phone Number
+          Phone Number (optional)
         </label>
         <input
-          formControlName="phone"
+          formControlName="phoneNumber"
           type="tel"
           id="phone"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
           placeholder="Enter your phone number"
-          required
         />
-        @if (userRegisterForm.get('phone')?.invalid &&
-        userRegisterForm.get('phone')?.touched) {
-        <div class="text-red-500">Please enter a valid phone number.</div>
-        }
+        <div
+          *ngIf="
+            userRegisterForm.get('phoneNumber')?.invalid &&
+            userRegisterForm.get('phoneNumber')?.touched
+          "
+          class="text-red-500"
+        >
+          Please enter a valid phone number.
+        </div>
       </div>
 
       <!-- Password -->
@@ -90,12 +121,67 @@
           placeholder="Enter your password"
           required
         />
-        @if (userRegisterForm.get('password')?.invalid &&
-        userRegisterForm.get('password')?.touched) {
-        <div class="text-red-500">
-          Password must be atleast 4 characters long
+        <div
+          *ngIf="
+            userRegisterForm.get('password')?.invalid &&
+            userRegisterForm.get('password')?.touched
+          "
+          class="text-red-500"
+        >
+          Password must be at least 8 characters long.
         </div>
-        }
+      </div>
+
+      <!-- Optional Fields -->
+      <!-- Profile Picture URL -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="profilePictureUrl"
+        >
+          Profile Picture URL (optional)
+        </label>
+        <input
+          formControlName="profilePictureUrl"
+          type="url"
+          id="profilePictureUrl"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter profile picture URL"
+        />
+      </div>
+
+      <!-- Preferred Language -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="preferredLanguage"
+        >
+          Preferred Language (optional)
+        </label>
+        <input
+          formControlName="preferredLanguage"
+          type="text"
+          id="preferredLanguage"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your preferred language"
+        />
+      </div>
+
+      <!-- Preferred Currency -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="preferredCurrency"
+        >
+          Preferred Currency (optional)
+        </label>
+        <input
+          formControlName="preferredCurrency"
+          type="text"
+          id="preferredCurrency"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your preferred currency"
+        />
       </div>
 
       <div class="flex items-center justify-between">

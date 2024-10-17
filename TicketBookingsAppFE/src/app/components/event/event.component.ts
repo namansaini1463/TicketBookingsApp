@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { Event } from '../../models/Event';
 import { CommonModule } from '@angular/common';
+import { CarouselComponent } from '../ui/carousel/carousel.component';
 
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CarouselComponent],
   templateUrl: './event.component.html',
   styleUrl: './event.component.css',
 })

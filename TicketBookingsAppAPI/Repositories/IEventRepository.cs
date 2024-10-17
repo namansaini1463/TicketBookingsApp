@@ -7,9 +7,11 @@ namespace TicketBookingsAppAPI.Repositories
 {
     public interface IEventRepository
     {
-        //Task<List<Event>> GetAllEvents();
-        //Task<Event?> GetEvent(Guid id);
-        //Task<Event> AddEvent(Event addEvent);
+        Task<List<Event>> GetAllEvents();
+        Task<Event?> GetEvent(Guid id);
+        Task<Event> PostEvent(Event addEvent);
+
         //Task<Event?> DeleteEvent(Guid id);
+        //Task<Event?> UpdateEvent(Guid id);
     }
 }

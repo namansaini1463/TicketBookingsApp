@@ -8,8 +8,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "loginRequestDTO",
-        "Type": "TicketBookingsAppAPI.Models.DTOs.LoginRequestDTO",
+        "Name": "model",
+        "Type": "TicketBookingsAppAPI.Models.DTOs.LoginDTO",
         "IsRequired": true
       }
     ],
@@ -24,8 +24,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "registerRequestDTO",
-        "Type": "TicketBookingsAppAPI.Models.DTOs.RegisterRequestDTO",
+        "Name": "model",
+        "Type": "TicketBookingsAppAPI.Models.DTOs.RegisterDTO",
         "IsRequired": true
       }
     ],

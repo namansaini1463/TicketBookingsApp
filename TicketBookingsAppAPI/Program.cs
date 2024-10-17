@@ -60,9 +60,13 @@ builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMappings));
 
-builder.Services.AddIdentityCore<User>()
-    .AddRoles<IdentityRole>()
-    .AddTokenProvider<DataProtectorTokenProvider<User>>("TicketBookings")
+//builder.Services.AddIdentityCore<User>()
+//    .AddRoles<IdentityRole>()
+//    .AddTokenProvider<DataProtectorTokenProvider<User>>("TicketBookings")
+//    .AddEntityFrameworkStores<TicketBookingsAppDBContext>()
+//    .AddDefaultTokenProviders();
+
+builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<TicketBookingsAppDBContext>()
     .AddDefaultTokenProviders();
 

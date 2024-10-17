@@ -67,10 +67,10 @@ export class AuthService {
 
           // Set userID and username using UserService
           this.userService.setUserID(response.userID);
-          this.userService.setUserName(response.username); // Assuming response contains 'username'
+          // this.userService.setUserName(response.username); // Assuming response contains 'username'
 
           // Emit the username through BehaviorSubject
-          this.usernameSubject.next(response.username);
+          // this.usernameSubject.next(response.username);
 
           // Emit the login state as true
           this.isLoggedInSubject.next(true);
@@ -90,10 +90,10 @@ export class AuthService {
   logout(): void {
     this.tokenService.removeToken(); // Remove token on logout
     this.userService.removeUserID(); // Clear user ID
-    this.userService.removeUserName(); // Clear username
+    // this.userService.removeUserName(); // Clear username
 
     // Clear the username and emit the login state as false
-    this.usernameSubject.next(null); // Emit null to clear the username
+    // this.usernameSubject.next(null); // Emit null to clear the username
     this.isLoggedInSubject.next(false); // Emit the logged out state
   }
 

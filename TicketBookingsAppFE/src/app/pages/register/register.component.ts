@@ -26,11 +26,16 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
+    // Initialize the form with all required fields
     this.userRegisterForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(4)]],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
+      phoneNumber: ['', [Validators.pattern('^[0-9]{10,15}$')]], // Optional phone number
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      profilePictureUrl: [''], // Optional
+      preferredLanguage: [''], // Optional
+      preferredCurrency: [''], // Optional
     });
   }
 
@@ -41,18 +46,28 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/events']);
     }
   }
+
   // Handle form submission
   onSubmit(): void {
     if (this.userRegisterForm.valid) {
+      // Create register DTO object from form values
       let registerDTO: registerRequestDTO = {
-        name: this.userRegisterForm.get('username')?.value,
-        username: this.userRegisterForm.get('email')?.value,
+        firstName: this.userRegisterForm.get('firstName')?.value,
+        lastName: this.userRegisterForm.get('lastName')?.value,
+        email: this.userRegisterForm.get('email')?.value,
         password: this.userRegisterForm.get('password')?.value,
-        phoneNumber: this.userRegisterForm.get('phone')?.value,
-        roles: [],
+        phoneNumber:
+          this.userRegisterForm.get('phoneNumber')?.value || undefined, // Optional phone number
+        profilePictureUrl:
+          this.userRegisterForm.get('profilePictureUrl')?.value || undefined, // Optional
+        preferredLanguage:
+          this.userRegisterForm.get('preferredLanguage')?.value || undefined, // Optional
+        preferredCurrency:
+          this.userRegisterForm.get('preferredCurrency')?.value || undefined, // Optional
+        roles: [], // Assuming roles are assigned separately or default
       };
 
-      // Call AuthService to register
+      // Call AuthService to register the user
       this.authService.register(registerDTO).subscribe(
         (response) => {
           console.log(response);
