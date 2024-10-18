@@ -20,8 +20,12 @@ namespace TicketBookingsAppAPI.Models.DTOs
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Username { get; set; }
 
-        [Phone]
+        [MaxLength(10)]
+        [MinLength(10)]
         public string? PhoneNumber { get; set; }  // Optional phone number field
 
         public string? ProfilePictureUrl { get; set; } // Optional profile picture

@@ -24,7 +24,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "model",
+        "Name": "registerDTO",
         "Type": "TicketBookingsAppAPI.Models.DTOs.RegisterDTO",
         "IsRequired": true
       }

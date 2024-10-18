@@ -53,7 +53,7 @@ export class BookEventComponent {
 
   // Handle form submission
   onSubmit(): void {
-    const userID = this.userService.getUserID();
+    const userID = this.userService.getUserProfile()?.userID ?? null;
     const eventId = this.event.eventID;
 
     const bookingRequest: AddBookingDTO = {

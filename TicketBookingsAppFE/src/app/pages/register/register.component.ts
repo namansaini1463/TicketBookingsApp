@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
   ) {
     // Initialize the form with all required fields
     this.userRegisterForm = this.fb.group({
+      username: ['', [Validators.required, Validators.minLength(4)]],
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email]],
@@ -52,6 +53,7 @@ export class RegisterComponent implements OnInit {
     if (this.userRegisterForm.valid) {
       // Create register DTO object from form values
       let registerDTO: registerRequestDTO = {
+        username: this.userRegisterForm.get('username')?.value,
         firstName: this.userRegisterForm.get('firstName')?.value,
         lastName: this.userRegisterForm.get('lastName')?.value,
         email: this.userRegisterForm.get('email')?.value,

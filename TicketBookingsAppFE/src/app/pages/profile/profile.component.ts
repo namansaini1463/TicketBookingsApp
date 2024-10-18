@@ -31,64 +31,110 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Initialize the form
+    // Initialize the form with the fields in the HTML form
     this.profileForm = this.fb.group({
-      userName: ['', [Validators.required]],
-      oldPassword: ['', Validators.minLength(4)], // Optional for password change
-      newPassword: ['', Validators.minLength(4)], // Optional for password change
+      firstName: ['', [Validators.required, Validators.minLength(2)]], // First Name
+      lastName: ['', [Validators.required, Validators.minLength(2)]], // Last Name
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.email]],
+      phoneNumber: ['', Validators.pattern('^[0-9]{10,15}$')], // Optional phone number pattern
+      profilePictureUrl: [''], // Optional profile picture
+      preferredLanguage: [''], // Optional preferred language
+      preferredCurrency: [''], // Optional preferred currency
+      oldPassword: ['', Validators.minLength(8)], // Optional for password change
+      newPassword: ['', Validators.minLength(8)], // Optional for password change
     });
 
-    // Subscribe to the username observable
-    this.usernameSubscription = this.authService.username$.subscribe(
-      (username) => {
-        if (username) {
-          this.profileForm.get('userName')?.setValue(username); // Dynamically update the username form control
-        }
-      }
-    );
+    // Fetch user data and populate the form
+    const user = this.userService.getUserProfile();
+    if (user) {
+      this.profileForm.patchValue({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        username: user.username,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        profilePictureUrl: user.profilePictureUrl,
+        preferredLanguage: user.preferredLanguage,
+        preferredCurrency: user.preferredCurrency,
+      });
+    } else {
+      // Handle the case where no user profile is available
+      console.error('No user profile found in local storage');
+    }
   }
 
   // Handle form submission
   onSubmit(): void {
     if (this.profileForm.valid) {
-      const { userName, oldPassword, newPassword } = this.profileForm.value;
-      const userID = localStorage.getItem('userID'); // Assuming userID is stored in localStorage
+      const {
+        firstName,
+        lastName,
+        username,
+        email,
+        phoneNumber,
+        profilePictureUrl,
+        preferredLanguage,
+        preferredCurrency,
+        oldPassword,
+        newPassword,
+      } = this.profileForm.value;
 
-      if (userID) {
-        // Compare the current username (from the observable) with the new one
-        const currentUsername = this.userService.getUserName(); // This should return the current username from the service
+      // Retrieve the user profile from local storage and parse it
+      const storedUser = localStorage.getItem('userProfile');
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
 
-        if (currentUsername === userName && !newPassword && !oldPassword) {
-          alert(
-            'The new username must be different from the current username!'
-          );
-          return;
+        // Extract the userID from the parsed user object
+        const userID = user.userID;
+
+        // If oldPassword or newPassword is provided, make sure both are filled in
+        if (oldPassword || newPassword) {
+          if (!oldPassword || !newPassword) {
+            alert(
+              'Please provide both old and new password to change the password.'
+            );
+            return;
+          }
         }
 
-        if (oldPassword && !newPassword) {
-          alert('Please enter a new password');
-          return;
-        }
-
-        var updateDTO: updateRequestDTO = {
+        const updateDTO: updateRequestDTO = {
           userID: userID,
-          username: userName,
-          oldPassword: oldPassword,
-          newPassword: newPassword,
+          firstName: firstName,
+          lastName: lastName,
+          username: username,
+          email: email,
+          phoneNumber: phoneNumber?.length === 0 ? null : phoneNumber,
+          profilePictureUrl: profilePictureUrl,
+          preferredLanguage: preferredLanguage,
+          preferredCurrency: preferredCurrency,
+          oldPassword: oldPassword ? oldPassword : undefined, // Send undefined if not changing password
+          newPassword: newPassword ? newPassword : undefined, // Send undefined if not changing password
         };
 
+        // Call the service to update the user profile
         this.authService.updateUser(updateDTO).subscribe(
           () => {
-            this.router.navigate(['/login']); // Navigate to login after logout
+            alert('Profile updated successfully!');
+            this.router.navigate(['/login']); // Optionally, reload the profile page
           },
           (error) => {
             console.error('Profile update failed', error);
             alert(`Failed to update profile : ${error.error.errors[0]}`);
           }
         );
+      } else {
+        console.error('No user profile found in local storage');
       }
     } else {
-      alert('Please enter valid details');
+      alert('Please fill in all required fields correctly.');
+    }
+  }
+
+  // Unsubscribe when the component is destroyed
+  ngOnDestroy(): void {
+    if (this.usernameSubscription) {
+      this.usernameSubscription.unsubscribe();
     }
   }
 }

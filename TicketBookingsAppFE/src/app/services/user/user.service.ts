@@ -1,41 +1,46 @@
 import { Injectable } from '@angular/core';
+import { UserProfile } from '../../models/Auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private USER_ID_KEY = 'userID'; // Key for local storage
-  private USERNAME_KEY = 'username';
+  private USER_KEY = 'userProfile'; // Key for storing user profile in local storage
+  private USERNAME_KEY = 'username'; // Key for storing username in local storage
 
   constructor() {}
 
-  // Store userID in local storage
-  setUserID(userID: string): void {
-    localStorage.setItem(this.USER_ID_KEY, userID);
+  // Store the complete user profile in local storage
+  setUserProfile(user: UserProfile): void {
+    localStorage.setItem(this.USER_KEY, JSON.stringify(user)); // Save user profile as a JSON string
   }
 
-  // Retrieve userID from local storage
-  getUserID(): string | null {
-    return localStorage.getItem(this.USER_ID_KEY);
+  // Retrieve the user profile from local storage
+  getUserProfile(): UserProfile | null {
+    const storedUser = localStorage.getItem(this.USER_KEY);
+    if (storedUser) {
+      return JSON.parse(storedUser) as UserProfile; // Parse the JSON string back to a UserProfile object
+    }
+    return null; // Return null if the user profile is not found
   }
 
-  // Remove userID from local storage
-  removeUserID(): void {
-    localStorage.removeItem(this.USER_ID_KEY);
+  // Remove the user profile from local storage
+  removeUserProfile(): void {
+    localStorage.removeItem(this.USER_KEY); // Clear the stored user profile from local storage
   }
 
-  // Store username in local storage
+  // Store the username separately in local storage (optional if needed)
   setUserName(username: string): void {
-    localStorage.setItem(this.USERNAME_KEY, username);
+    localStorage.setItem(this.USERNAME_KEY, username); // Save username as a string
   }
 
-  // Retrieve userID from local storage
+  // Retrieve the username from local storage
   getUserName(): string | null {
-    return localStorage.getItem(this.USERNAME_KEY);
+    return localStorage.getItem(this.USERNAME_KEY); // Return the username or null if not found
   }
 
-  // Remove userID from local storage
+  // Remove the stored username from local storage
   removeUserName(): void {
-    localStorage.removeItem(this.USERNAME_KEY);
+    localStorage.removeItem(this.USERNAME_KEY); // Clear the stored username from local storage
   }
 }

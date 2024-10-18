@@ -3,7 +3,11 @@
   <ng-container *ngIf="images.length === 1">
     <!-- Single Image -->
     <img
-      [src]="images[0].imageUrl"
+      [src]="
+        images[0].imageUrl.startsWith('http')
+          ? images[0].imageUrl
+          : 'event-images/' + images[0].imageUrl
+      "
       alt="Event Image"
       class="w-full h-full object-cover rounded-lg"
     />
@@ -20,7 +24,11 @@
         <!-- Each image in the carousel -->
         <div *ngFor="let image of images" class="w-full h-64 flex-shrink-0">
           <img
-            [src]="image.imageUrl"
+            [src]="
+              image.imageUrl.startsWith('http')
+                ? image.imageUrl
+                : 'event-images/' + image.imageUrl
+            "
             alt="Event Image"
             class="w-full h-full object-cover"
           />

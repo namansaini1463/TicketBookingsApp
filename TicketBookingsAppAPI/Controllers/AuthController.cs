@@ -7,6 +7,7 @@ using TicketBookingsAppAPI.Repositories;
 using System.Linq;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace TicketBookingsAppAPI.Controllers
 {
@@ -31,7 +32,7 @@ namespace TicketBookingsAppAPI.Controllers
         // POST: /api/auth/register
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDTO model)
+        public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -41,23 +42,26 @@ namespace TicketBookingsAppAPI.Controllers
             // Create a new User object from the registration data
             var user = new User
             {
-                UserName = model.Email,
-                Email = model.Email,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                PhoneNumber = model.PhoneNumber,  // Optional
-                ProfilePictureUrl = !string.IsNullOrWhiteSpace(model.ProfilePictureUrl)
-                    ? model.ProfilePictureUrl
-                    : "https://res.cloudinary.com/dpd6oloy8/image/upload/v1729058704/DefualtProfilePicture_atiafh.png",  // Default value
-                PreferredLanguage = !string.IsNullOrWhiteSpace(model.PreferredLanguage)
-                    ? model.PreferredLanguage
-                    : "English",  // Default value
-                PreferredCurrency = !string.IsNullOrWhiteSpace(model.PreferredCurrency)
-                    ? model.PreferredCurrency
-                    : "INR"  // Default value
+                UserName = registerDTO.Username,
+                Email = registerDTO.Email,
+                FirstName = registerDTO.FirstName,
+                LastName = registerDTO.LastName,
+                PhoneNumber = !string.IsNullOrWhiteSpace(registerDTO.PhoneNumber)
+                              ? registerDTO.PhoneNumber
+                              : null,  // Default value is null when PhoneNumber is not provided
+                ProfilePictureUrl = !string.IsNullOrWhiteSpace(registerDTO.ProfilePictureUrl)
+                            ? registerDTO.ProfilePictureUrl
+                            : "https://res.cloudinary.com/dpd6oloy8/image/upload/v1729058704/DefualtProfilePicture_atiafh.png",  // Default profile picture URL
+                PreferredLanguage = !string.IsNullOrWhiteSpace(registerDTO.PreferredLanguage)
+                            ? registerDTO.PreferredLanguage
+                            : "English",  // Default value for Preferred Language
+                PreferredCurrency = !string.IsNullOrWhiteSpace(registerDTO.PreferredCurrency)
+                            ? registerDTO.PreferredCurrency
+                            : "INR"  // Default value for Preferred Currency
             };
 
-            var result = await userManager.CreateAsync(user, model.Password);
+
+            var result = await userManager.CreateAsync(user, registerDTO.Password);
 
             // If user registration is successful
             if (result.Succeeded)
@@ -79,13 +83,16 @@ namespace TicketBookingsAppAPI.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO model)
         {
-            var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            // Try to find the user by email or username
+            var user = await userManager.FindByEmailAsync(model.EmailOrUsername) ??
+                       await userManager.FindByNameAsync(model.EmailOrUsername);
 
-            if (result.Succeeded)
+            if (user != null)
             {
-                var user = await userManager.FindByEmailAsync(model.Email);
+                // Validate the password
+                var result = await signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
 
-                if (user != null)
+                if (result.Succeeded)
                 {
                     // Get roles assigned to the user
                     var roles = await userManager.GetRolesAsync(user);
@@ -102,7 +109,20 @@ namespace TicketBookingsAppAPI.Controllers
                         var response = new LoginResponseDTO
                         {
                             JWTToken = jwtToken,
-                            UserID = user.Id
+                            
+                            UserProfile = new UserProfile
+                            {
+                                UserID = user.Id,
+                                Username = user.UserName,
+                                FirstName = user.FirstName,
+                                LastName = user.LastName,
+                                Email = user.Email,
+                                PhoneNumber = user.PhoneNumber,
+                                ProfilePictureUrl = user.ProfilePictureUrl,
+                                PreferredLanguage = user.PreferredLanguage,
+                                PreferredCurrency = user.PreferredCurrency
+                            },
+                            Username = user.UserName,  
                         };
 
                         // Return the response object
@@ -145,9 +165,14 @@ namespace TicketBookingsAppAPI.Controllers
             }
 
             // Update Phone Number
-            if (!string.IsNullOrEmpty(updateUserRequest.PhoneNumber) && updateUserRequest.PhoneNumber != user.PhoneNumber)
+            if (updateUserRequest.PhoneNumber != user.PhoneNumber)
             {
                 user.PhoneNumber = updateUserRequest.PhoneNumber;
+                isUserUpdated = true;
+            } 
+             else
+            {
+                user.PhoneNumber = null;
                 isUserUpdated = true;
             }
 
