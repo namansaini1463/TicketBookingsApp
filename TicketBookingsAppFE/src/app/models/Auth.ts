@@ -24,10 +24,10 @@ export interface registerRequestDTO {
   email: string;
   password: string;
   phoneNumber?: string;
-  profilePictureUrl?: string;
   preferredLanguage?: string;
   preferredCurrency?: string;
   roles: string[];
+  profilePicture?: File | null;
 }
 
 export interface updateRequestDTO {

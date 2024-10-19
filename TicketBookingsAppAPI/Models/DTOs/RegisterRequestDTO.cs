@@ -28,6 +28,8 @@ namespace TicketBookingsAppAPI.Models.DTOs
         [MinLength(10)]
         public string? PhoneNumber { get; set; }  // Optional phone number field
 
+        public IFormFile? ProfilePicture { get; set; }  // Optional profile picture
+
         public string? ProfilePictureUrl { get; set; } // Optional profile picture
 
         public string? PreferredLanguage { get; set; }// Optional preferred language

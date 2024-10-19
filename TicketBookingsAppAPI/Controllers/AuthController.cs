@@ -29,6 +29,7 @@ namespace TicketBookingsAppAPI.Controllers
             //this.signInManager = signInManager;
         }
 
+        /*
         // POST: /api/auth/register
         [HttpPost]
         [Route("Register")]
@@ -77,6 +78,80 @@ namespace TicketBookingsAppAPI.Controllers
 
             return BadRequest(ModelState);
         }
+        */
+
+        [HttpPost]
+        [Route("Register")]
+        public async Task<IActionResult> Register([FromForm] RegisterDTO registerDTO) // Now ProfilePicture is part of RegisterDTO
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string profilePictureUrl = "https://res.cloudinary.com/dpd6oloy8/image/upload/v1729058704/DefualtProfilePicture_atiafh.png"; // Default image URL
+
+            // Handle file upload if a profile picture is provided in the DTO
+            if (registerDTO.ProfilePicture != null && registerDTO.ProfilePicture.Length > 0)
+            {
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "user-profile-images");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                // Generate a unique filename for the uploaded profile picture
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(registerDTO.ProfilePicture.FileName);
+                var filePath = Path.Combine(folderPath, fileName);
+
+                // Save the uploaded file to the server
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await registerDTO.ProfilePicture.CopyToAsync(stream);
+                }
+
+                // Set the profile picture URL to the file path, accessible by the frontend
+                profilePictureUrl = $"http://localhost:5027/user-profile-images/{fileName}";
+            }
+
+            // Create a new User object from the registration data
+            var user = new User
+            {
+                UserName = registerDTO.Username,
+                Email = registerDTO.Email,
+                FirstName = registerDTO.FirstName,
+                LastName = registerDTO.LastName,
+                PhoneNumber = !string.IsNullOrWhiteSpace(registerDTO.PhoneNumber)
+                              ? registerDTO.PhoneNumber
+                              : null,  // Default value is null when PhoneNumber is not provided
+                ProfilePictureUrl = profilePictureUrl,  // Use the uploaded or default profile picture URL
+                PreferredLanguage = !string.IsNullOrWhiteSpace(registerDTO.PreferredLanguage)
+                            ? registerDTO.PreferredLanguage
+                            : "English",  // Default value for Preferred Language
+                PreferredCurrency = !string.IsNullOrWhiteSpace(registerDTO.PreferredCurrency)
+                            ? registerDTO.PreferredCurrency
+                            : "INR"  // Default value for Preferred Currency
+            };
+
+            var result = await userManager.CreateAsync(user, registerDTO.Password);
+
+            // If user registration is successful
+            if (result.Succeeded)
+            {
+                return Ok(new { Message = "User registered successfully. Please login!" });
+            }
+
+            // If registration fails, return the errors
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("error", error.Description);
+            }
+
+            return BadRequest(ModelState);
+        }
+
+
 
         // POST: /api/auth/login
         [HttpPost]
@@ -155,11 +230,15 @@ namespace TicketBookingsAppAPI.Controllers
             if (!string.IsNullOrEmpty(updateUserRequest.Username) && updateUserRequest.Username != user.UserName)
             {
                 user.UserName = updateUserRequest.Username;
-                user.Email = updateUserRequest.Email;  // Update Email if it's part of the request
-                var updateResult = await userManager.UpdateAsync(user);
-                if (!updateResult.Succeeded)
+                isUserUpdated = true;
+            }
+
+            if (!string.IsNullOrEmpty(updateUserRequest.Email) && updateUserRequest.Email != user.Email)
+            {
+                var setEmailResult = await userManager.SetEmailAsync(user, updateUserRequest.Email);
+                if (!setEmailResult.Succeeded)
                 {
-                    return BadRequest(new { message = "Failed to update username or email.", errors = updateResult.Errors.Select(e => e.Description) });
+                    return BadRequest(new { message = "Failed to update email.", errors = setEmailResult.Errors.Select(e => e.Description) });
                 }
                 isUserUpdated = true;
             }

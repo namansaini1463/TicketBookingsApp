@@ -24,9 +24,54 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "registerDTO",
-        "Type": "TicketBookingsAppAPI.Models.DTOs.RegisterDTO",
-        "IsRequired": true
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProfilePicture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProfilePictureUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PreferredLanguage",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PreferredCurrency",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

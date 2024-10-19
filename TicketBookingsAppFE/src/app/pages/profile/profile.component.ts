@@ -22,6 +22,7 @@ import { UserService } from '../../services/user/user.service';
 export class ProfileComponent implements OnInit {
   profileForm!: FormGroup; // Form group for the profile form
   usernameSubscription!: Subscription; // Subscription to handle the username observable
+  profilePictureUrl!: string | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +49,7 @@ export class ProfileComponent implements OnInit {
     // Fetch user data and populate the form
     const user = this.userService.getUserProfile();
     if (user) {
+      this.profilePictureUrl = user.profilePictureUrl;
       this.profileForm.patchValue({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -66,6 +68,8 @@ export class ProfileComponent implements OnInit {
 
   // Handle form submission
   onSubmit(): void {
+    console.log();
+
     if (this.profileForm.valid) {
       const {
         firstName,
@@ -135,6 +139,20 @@ export class ProfileComponent implements OnInit {
   ngOnDestroy(): void {
     if (this.usernameSubscription) {
       this.usernameSubscription.unsubscribe();
+    }
+  }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        // You can either directly send the file to the backend or store it temporarily
+        this.profileForm.patchValue({
+          profilePictureUrl: file.name,
+        });
+      };
+      reader.readAsDataURL(file);
     }
   }
 }

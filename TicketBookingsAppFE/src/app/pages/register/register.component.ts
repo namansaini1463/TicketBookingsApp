@@ -20,6 +20,7 @@ import { registerRequestDTO } from '../../models/Auth';
 })
 export class RegisterComponent implements OnInit {
   userRegisterForm!: FormGroup;
+  selectedFile: File | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +49,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  // Handle form submission
   onSubmit(): void {
     if (this.userRegisterForm.valid) {
       // Create register DTO object from form values
@@ -60,13 +60,12 @@ export class RegisterComponent implements OnInit {
         password: this.userRegisterForm.get('password')?.value,
         phoneNumber:
           this.userRegisterForm.get('phoneNumber')?.value || undefined, // Optional phone number
-        profilePictureUrl:
-          this.userRegisterForm.get('profilePictureUrl')?.value || undefined, // Optional
         preferredLanguage:
           this.userRegisterForm.get('preferredLanguage')?.value || undefined, // Optional
         preferredCurrency:
           this.userRegisterForm.get('preferredCurrency')?.value || undefined, // Optional
-        roles: [], // Assuming roles are assigned separately or default
+        profilePicture: this.selectedFile, // Profile picture as File object
+        roles: [],
       };
 
       // Call AuthService to register the user
@@ -78,11 +77,16 @@ export class RegisterComponent implements OnInit {
         },
         (error) => {
           console.error('Registration failed', error.error);
-          alert(error.error.message);
+
+          alert(error.error);
         }
       );
     } else {
       alert('Please fill in all the required fields correctly.');
     }
+  }
+
+  onFileChange(event: any): void {
+    this.selectedFile = event.target.files[0]; // Handle the file input and save it
   }
 }

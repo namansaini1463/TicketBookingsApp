@@ -78,11 +78,35 @@ export class AuthService {
       );
   }
 
-  //` Register Function
   register(registerPayload: registerRequestDTO): Observable<any> {
+    // Create FormData object to send as 'multipart/form-data'
+    const formData = new FormData();
+
+    // Append the registration data to the FormData object
+    formData.append('Username', registerPayload.username);
+    formData.append('Email', registerPayload.email);
+    formData.append('FirstName', registerPayload.firstName);
+    formData.append('LastName', registerPayload.lastName);
+    formData.append('PhoneNumber', registerPayload.phoneNumber || ''); // Optional phone number
+    formData.append(
+      'PreferredLanguage',
+      registerPayload.preferredLanguage || 'English'
+    );
+    formData.append(
+      'PreferredCurrency',
+      registerPayload.preferredCurrency || 'INR'
+    );
+    formData.append('Password', registerPayload.password);
+
+    // Append the profile picture if it exists
+    if (registerPayload.profilePicture) {
+      formData.append('ProfilePicture', registerPayload.profilePicture || null);
+    }
+
+    // Send the form data
     return this.http.post<any>(
       `${this.baseRequestUrlHttp}/register`,
-      registerPayload
+      formData // Send as FormData
     );
   }
 
@@ -90,6 +114,7 @@ export class AuthService {
   logout(): void {
     this.tokenService.removeToken(); // Remove token on logout
     this.userService.removeUserProfile(); // Clear user ID
+    this.userService.removeUserName();
     // this.userService.removeUserName(); // Clear username
 
     // Clear the username and emit the login state as false
