@@ -2,6 +2,7 @@ import { Event } from './Event';
 
 export interface AddBookingDTO {
   userID: string | null;
+  ticketTypeID: string | null;
   numberOfTickets: number;
 }
 

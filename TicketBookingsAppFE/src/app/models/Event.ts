@@ -25,6 +25,7 @@ export interface TicketType {
   type: string;
   price: number;
   quantityAvailable: number;
+  ticketTypeID: string;
 }
 
 // EventImage DTO structure
@@ -37,4 +38,37 @@ export interface Organizer {
   name: string;
   contactEmail: string;
   phoneNumber: string;
+}
+
+//` Function to map the API response to Event model
+export function mapToEvent(item: any): Event {
+  return {
+    eventID: item.eventID,
+    name: item.name,
+    dateAndTime: item.dateAndTime,
+    venue: {
+      name: item.venue.name,
+      address: item.venue.address,
+      state: item.venue.state,
+      capacity: item.venue.capacity,
+    },
+    eventDescription: item.eventDescription || '',
+    categories: item.categories.$values ? item.categories.$values : [], // Assuming this is an array of enums or strings
+    ticketTypes: item.ticketTypes.$values.map((tt: any) => ({
+      type: tt.type,
+      price: tt.price,
+      quantityAvailable: tt.quantityAvailable,
+      ticketTypeID: tt.ticketTypeID,
+    })),
+    images: item.images.$values.map((img: any) => ({
+      imageUrl: img.imageUrl,
+    })),
+    organizer: {
+      name: item.organizer.name,
+      contactEmail: item.organizer.contactEmail,
+      phoneNumber: item.organizer.phoneNumber,
+    },
+    availableTickets: item.availableTickets,
+    totalTicketPrice: item.totalTicketPrice,
+  };
 }

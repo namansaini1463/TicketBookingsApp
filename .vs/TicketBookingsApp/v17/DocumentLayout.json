@@ -3,6 +3,30 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\models\\dtos\\eventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\models\\dtos\\eventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\models\\dtos\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\models\\dtos\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\models\\domain\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\models\\domain\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\models\\domain\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\models\\domain\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,20 +39,8 @@
       "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\controllers\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\models\\domain\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\models\\domain\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\models\\dtos\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,16 +51,8 @@
       "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\models\\dtos\\loginresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\models\\dtos\\eventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\models\\dtos\\eventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\models\\dtos\\updateuserrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\models\\dtos\\updateuserrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\models\\dtos\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\models\\dtos\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\repositories\\tokenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -57,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\repositories\\itokenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\repositories\\itokenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\admin\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\data\\ticketbookingsappdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -102,37 +102,100 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 3,
+              "Title": "Event.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\Event.cs",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\Domain\\Event.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\Event.cs",
+              "RelativeToolTip": "TicketBookingsAppAPI\\Models\\Domain\\Event.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAADwvx4AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T05:22:57.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EventsController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\EventsController.cs",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Controllers\\EventsController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\EventsController.cs",
+              "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\EventsController.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAmwFgAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T05:50:27.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Booking.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\Booking.cs",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\Domain\\Booking.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\Booking.cs",
+              "RelativeToolTip": "TicketBookingsAppAPI\\Models\\Domain\\Booking.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA5wAcAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T01:37:13.836Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\appsettings.json",
+              "RelativeToolTip": "TicketBookingsAppAPI\\appsettings.json",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-16T08:58:49.975Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginRequestDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\LoginRequestDTO.cs",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\DTOs\\LoginRequestDTO.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\LoginRequestDTO.cs",
+              "RelativeToolTip": "TicketBookingsAppAPI\\Models\\DTOs\\LoginRequestDTO.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T05:47:57.706Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "EventDTO.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\EventDTO.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\DTOs\\EventDTO.cs",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\EventDTO.cs",
               "RelativeToolTip": "TicketBookingsAppAPI\\Models\\DTOs\\EventDTO.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAswB8AAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAxwCkAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-15T06:04:49.981Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Program.cs",
-              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Program.cs",
-              "RelativeToolTip": "TicketBookingsAppAPI\\Program.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAAAI8AAAAVAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "BookingsController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
+              "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAowGYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T06:19:55.963Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-15T05:44:46.236Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\User.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\Domain\\User.cs",
@@ -145,59 +208,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Event.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\Event.cs",
-              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\Domain\\Event.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\Event.cs",
-              "RelativeToolTip": "TicketBookingsAppAPI\\Models\\Domain\\Event.cs",
-              "ViewState": "AgIAAJYAAAAAAAAAAAAiwKkAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Program.cs",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Program.cs",
+              "RelativeToolTip": "TicketBookingsAppAPI\\Program.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAAAI8AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T05:22:57.681Z",
+              "WhenOpened": "2024-10-15T06:19:55.963Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EventsController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\EventsController.cs",
-              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Controllers\\EventsController.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\EventsController.cs",
-              "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\EventsController.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAQwEsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T05:50:27.208Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BookingsController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
-              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
-              "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAowGYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T05:44:46.236Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Booking.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\Booking.cs",
-              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\Domain\\Booking.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\Booking.cs",
-              "RelativeToolTip": "TicketBookingsAppAPI\\Models\\Domain\\Booking.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAA5wAcAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T01:37:13.836Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "RegisterRequestDTO.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\RegisterRequestDTO.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\DTOs\\RegisterRequestDTO.cs",
@@ -205,12 +229,11 @@
               "RelativeToolTip": "TicketBookingsAppAPI\\Models\\DTOs\\RegisterRequestDTO.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAA7wB4AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T05:46:43.876Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T05:46:43.876Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Controllers\\AuthController.cs",
@@ -218,12 +241,11 @@
               "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\AuthController.cs",
               "ViewState": "AgIAABABAAAAAAAAAAAiwPMAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T05:26:21.058Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T05:26:21.058Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "LoginResponseDTO.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\LoginResponseDTO.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\DTOs\\LoginResponseDTO.cs",
@@ -231,12 +253,11 @@
               "RelativeToolTip": "TicketBookingsAppAPI\\Models\\DTOs\\LoginResponseDTO.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAA7wA4AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T08:49:36.874Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T08:49:36.874Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "UpdateUserRequestDTO.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\UpdateUserRequestDTO.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\DTOs\\UpdateUserRequestDTO.cs",
@@ -248,19 +269,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "LoginRequestDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\LoginRequestDTO.cs",
-              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\DTOs\\LoginRequestDTO.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\LoginRequestDTO.cs",
-              "RelativeToolTip": "TicketBookingsAppAPI\\Models\\DTOs\\LoginRequestDTO.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T05:47:57.706Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "TokenRepository.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Repositories\\TokenRepository.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Repositories\\TokenRepository.cs",
@@ -272,7 +281,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "ITokenRepository.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Repositories\\ITokenRepository.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Repositories\\ITokenRepository.cs",
@@ -281,18 +290,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-16T08:36:10.767Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\appsettings.json",
-              "RelativeToolTip": "TicketBookingsAppAPI\\appsettings.json",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-16T08:58:49.975Z"
             },
             {
               "$type": "Document",

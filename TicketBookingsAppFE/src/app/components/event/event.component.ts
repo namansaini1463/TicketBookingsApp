@@ -4,70 +4,46 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Event } from '../../models/Event';
 import { CommonModule } from '@angular/common';
 import { CarouselComponent } from '../ui/carousel/carousel.component';
+import { getFormattedTimeWithTimezone } from '../../utils/getFormattedTimeWithTimeZone';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [CommonModule, CarouselComponent],
+  imports: [CommonModule, CarouselComponent, MatIconModule],
   templateUrl: './event.component.html',
   styleUrl: './event.component.css',
 })
 export class EventComponent {
   @Input() event: Event | null = null;
+  getFormattedTimeWithTimezone = getFormattedTimeWithTimezone;
   currentSlide = 0;
 
   constructor(private router: Router, private authService: AuthService) {}
 
-  getFormattedTimeWithTimezone(dateString: string): string {
-    const date = new Date(dateString);
+  getTotalTicketsAvailable(): number {
+    var totalTicketsAvailable = 0;
 
-    // Get the full time string with long timezone name (e.g., "India Standard Time")
-    const timeWithLongTimezone = date.toLocaleTimeString('en-US', {
-      timeZoneName: 'long',
-    });
-
-    // Get the time string with short timezone name (e.g., "GMT+5:30")
-    const timeWithShortTimezone = date.toLocaleTimeString('en-US', {
-      timeZoneName: 'short',
-    });
-
-    // Extract just the short timezone (e.g., "GMT+5:30") from the second string
-    const shortTimezone = timeWithShortTimezone.slice(
-      timeWithShortTimezone.indexOf('GMT')
+    this.event?.ticketTypes.forEach(
+      (ticketType) => (totalTicketsAvailable += ticketType.quantityAvailable)
     );
 
-    return `${timeWithLongTimezone} ${shortTimezone}`;
+    return totalTicketsAvailable;
   }
 
-  //` Method for showing the previous slide in the carousel
-  prevSlide(): void {
-    if (this.event && this.event.images.length > 1) {
-      this.currentSlide =
-        this.currentSlide > 0
-          ? this.currentSlide - 1
-          : this.event.images.length - 1;
-    }
-  }
-
-  //` Method for showing the next slide in the carousel
-  nextSlide(): void {
-    if (this.event && this.event.images.length > 1) {
-      this.currentSlide =
-        this.currentSlide < this.event.images.length - 1
-          ? this.currentSlide + 1
-          : 0;
-    }
+  goToEvent(eventId: string) {
+    this.router.navigate([`/event`, eventId]);
   }
 
   // Method to handle "Book Now" button click
   bookEvent(eventId: string): void {
     if (this.authService.isLoggedIn()) {
       // Navigate to the booking page with the event ID
-      this.router.navigate([`/book`, eventId]);
+      this.router.navigate([`/event`, eventId]);
     } else {
       // If the user is not logged in, redirect them to the login page
       this.router.navigate(['/login'], {
-        queryParams: { returnUrl: `/book/${eventId}` },
+        queryParams: { returnUrl: `/event/${eventId}` },
       });
     }
   }

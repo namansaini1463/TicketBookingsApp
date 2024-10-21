@@ -38,6 +38,8 @@ public class TicketTypeDTO
     public string Type { get; set; }  // Ticket type (e.g., VIP, General Admission)
     public decimal Price { get; set; }  // Price for this ticket type
     public int QuantityAvailable { get; set; }  // Number of available tickets for this type
+
+    public string TicketTypeID { get; set; } // Ticket ID
 }
 public class EventImageDTO
 {
