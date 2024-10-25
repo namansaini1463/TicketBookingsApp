@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   onFormSubmit(): void {
     if (this.userLoginForm.valid) {
       let loginDTO: loginRequestDTO = {
-        userNameOrEmail: this.userLoginForm.get('userNameOrEmail')?.value,
+        emailOrUsername: this.userLoginForm.get('userNameOrEmail')?.value,
         password: this.userLoginForm.get('password')?.value,
       };
 

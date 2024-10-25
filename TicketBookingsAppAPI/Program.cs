@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using System.Text.Json.Serialization;
 using TicketBookingsAppAPI.Data;
 using TicketBookingsAppAPI.Mappings;
 using TicketBookingsAppAPI.Models.Domain;
@@ -13,7 +15,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -51,12 +58,17 @@ builder.Services.AddDbContext<TicketBookingsAppDBContext>(options => options.Use
 builder.Services.AddScoped<IEventRepository, SQLEventRepository>();
 builder.Services.AddScoped<IBookingRepository, SQLBookingRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddScoped<IShoppingCartRepository, SQLShoppingCartRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMappings));
 
-builder.Services.AddIdentityCore<User>()
-    .AddRoles<IdentityRole>()
-    .AddTokenProvider<DataProtectorTokenProvider<User>>("TicketBookings")
+//builder.Services.AddIdentityCore<User>()
+//    .AddRoles<IdentityRole>()
+//    .AddTokenProvider<DataProtectorTokenProvider<User>>("TicketBookings")
+//    .AddEntityFrameworkStores<TicketBookingsAppDBContext>()
+//    .AddDefaultTokenProviders();
+
+builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<TicketBookingsAppDBContext>()
     .AddDefaultTokenProviders();
 
@@ -120,6 +132,13 @@ app.UseAuthorization();
 
 // Use the CORS policy
 app.UseCors("AllowAngularApp");
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "user-profile-images")),
+    RequestPath = "/user-profile-images"
+});
 
 app.MapControllers();
 

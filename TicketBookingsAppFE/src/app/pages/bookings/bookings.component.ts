@@ -23,7 +23,7 @@ export class BookingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userID = this.userService.getUserID(); // Fetch the userID from the local storage
+    this.userID = this.userService.getUserProfile()?.userID ?? null; // Fetch the userID from the local storage
 
     if (this.userID) {
       // Fetching the user bookings if the userID is available

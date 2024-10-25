@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TicketBookingsAppAPI.Data;
-using TicketBookingsAppAPI.Mappings;
 using TicketBookingsAppAPI.Models.Domain;
 using TicketBookingsAppAPI.Models.DTOs;
 using TicketBookingsAppAPI.Repositories;
@@ -14,11 +11,11 @@ namespace TicketBookingsAppAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
     public class EventsController : ControllerBase
     {
         private readonly TicketBookingsAppDBContext ticketBookingsAppDBContext;
         private readonly IEventRepository eventRepository;
+        private readonly IEventRepository eventRepository1;
         private readonly IMapper mapper;
 
         public EventsController(TicketBookingsAppDBContext ticketBookingsAppDBContext, IEventRepository eventRepository, IMapper mapper)
@@ -28,71 +25,103 @@ namespace TicketBookingsAppAPI.Controllers
             this.mapper = mapper;
         }
 
-        // GET ALL EVENTS
-        // GET : https://localhost:7290/api/Events
-        [HttpGet]
-        //[Authorize(Roles = "User")]
-        public async Task<IActionResult> GetAllEvents()
+        // POST: api/Events
+        [HttpPost]
+        public async Task<ActionResult<Event>> PostEvent([FromBody] EventCreateDTO createEventDTO)
         {
-            var allEvents = await eventRepository.GetAllEvents();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);  // Return 400 Bad Request if validation fails
+            }
 
-            var allEventsDTO = new List<EventDTO>();
-            mapper.Map(allEvents, allEventsDTO);
+            // Map the DTO to the domain model (Event)
+            var newEventDM = new Event
+            {
+                Name = createEventDTO.Name,
+                DateAndTime = createEventDTO.DateAndTime,
+                Venue = new Venue
+                {
+                    Name = createEventDTO.Venue.Name,
+                    Address = createEventDTO.Venue.Address,
+                    State = createEventDTO.Venue.State,
+                    Capacity = createEventDTO.Venue.Capacity
+                },
+                EventDescription = createEventDTO.EventDescription,
+                Categories = createEventDTO.Categories,  
+                TicketTypes = createEventDTO.TicketTypes.Select(t => new TicketType
+                {
+                    Type = t.Type,
+                    Price = t.Price,
+                    QuantityAvailable = t.QuantityAvailable,
+                }).ToList(),
+                Images = createEventDTO.Images.Select(i => new EventImage
+                {
+                    ImageUrl = i.ImageUrl
+                }).ToList(),
+                Organizer = new Organizer
+                {
+                    Name = createEventDTO.Organizer.Name,
+                    ContactEmail = createEventDTO.Organizer.ContactEmail,
+                    PhoneNumber = createEventDTO.Organizer.PhoneNumber
+                }
+            };
 
-            return Ok(allEventsDTO);
+            // Save the event to the database
+            newEventDM = await eventRepository.PostEvent(newEventDM);
+
+            var newEventDTO = mapper.Map<EventDTO>(newEventDM);
+
+            // Return the created event
+            return CreatedAtAction(nameof(GetEvent), new { id = newEventDTO.EventID }, newEventDTO);
         }
 
-        // GET EVENT BY ID
-        // GET : https://localhost:7290/api/Events/{id}
-        [HttpGet]
-        [Route("{id}")]
-        //[Authorize(Roles = "User")]
-        public async Task<IActionResult> GetEvent([FromRoute] Guid id)
+        // GET: api/Events/id
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EventDTO>> GetEvent(Guid id)
         {
-            var eventByID = await eventRepository.GetEvent(id);
+            var eventDM = await eventRepository.GetEvent(id);
 
-            if (eventByID == null)
+            if (eventDM == null)
             {
                 return NotFound();
             }
-
-            var eventByNameDTO = mapper.Map<EventDTO>(eventByID);
-
-            return Ok(eventByNameDTO);
-        }
-
-        
-        // POST A NEW EVENT
-        // POST : https://localhost:7290/api/Events
-        [HttpPost]
-        //[Authorize(Roles = "Event Manager")]
-        public async Task<IActionResult> AddEvent([FromBody] AddNewEventDTO addNewEventDTO)
-        {
-            var eventDM = mapper.Map<Event>(addNewEventDTO);
-
-            eventDM = await eventRepository.AddEvent(eventDM);
 
             var eventDTO = mapper.Map<EventDTO>(eventDM);
 
-            return CreatedAtAction(nameof(AddEvent), new {id = eventDTO.EventID}, eventDTO);
+            return Ok(eventDTO);
         }
 
-        // DELETE AN EVENT BY ID
-        // DELETE : https://localhost:7290/api/Events/{id}
-        [HttpDelete]
-        [Route("{id}")]
-        //[Authorize(Roles = "Event Manager")]
-        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        // GET : api/Events
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EventDTO>>> GetAllEvents(
+            [FromQuery] string? searchTerm = null,
+            [FromQuery] string? sortBy = "name",
+            [FromQuery] string? sortOrder = "asc",
+            [FromQuery] DateTime? startDate = null, 
+            [FromQuery] DateTime? endDate = null,
+            [FromQuery] EventCategory? eventCategory = null
+        )
         {
-            var deletedEventDM = await eventRepository.DeleteEvent(id);
-
-            if(deletedEventDM == null)
+            var filterParameters = new EventFilterParametersDTO
             {
-                return NotFound();
+                searchTerm = searchTerm,
+                sortBy = sortBy,
+                sortOrder = sortOrder,
+                StartDate = startDate,
+                EndDate = endDate,
+                Category = eventCategory
+            };
+
+            var allEventsDM = await eventRepository.GetAllEvents(filterParameters);
+
+            if (allEventsDM == null)
+            {
+                return NotFound();  // Return 404 if no events are found
             }
 
-            return Ok(mapper.Map<EventDTO>(deletedEventDM));
+            var allEventsDTO = mapper.Map<IEnumerable<EventDTO>>(allEventsDM);
 
+            return Ok(allEventsDTO);
         }
     }
 }

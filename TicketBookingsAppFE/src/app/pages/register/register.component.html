@@ -27,7 +27,61 @@
           "
           class="text-red-500"
         >
-          Please enter your username
+          Please enter your username.
+        </div>
+      </div>
+
+      <!-- First Name -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="firstName"
+        >
+          First Name
+        </label>
+        <input
+          formControlName="firstName"
+          type="text"
+          id="firstName"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your first name"
+          required
+        />
+        <div
+          *ngIf="
+            userRegisterForm.get('firstName')?.invalid &&
+            userRegisterForm.get('firstName')?.touched
+          "
+          class="text-red-500"
+        >
+          Please enter your first name.
+        </div>
+      </div>
+
+      <!-- Last Name -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="lastName"
+        >
+          Last Name
+        </label>
+        <input
+          formControlName="lastName"
+          type="text"
+          id="lastName"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your last name"
+          required
+        />
+        <div
+          *ngIf="
+            userRegisterForm.get('lastName')?.invalid &&
+            userRegisterForm.get('lastName')?.touched
+          "
+          class="text-red-500"
+        >
+          Please enter your last name.
         </div>
       </div>
 
@@ -51,29 +105,9 @@
           "
           class="text-red-500"
         >
-          Please enter your email
+          Please enter a valid email.
         </div>
       </div>
-
-      <!-- Phone Number -->
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
-          Phone Number
-        </label>
-        <input
-          formControlName="phone"
-          type="tel"
-          id="phone"
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-          placeholder="Enter your phone number"
-          required
-        />
-        @if (userRegisterForm.get('phone')?.invalid &&
-        userRegisterForm.get('phone')?.touched) {
-        <div class="text-red-500">Please enter a valid phone number.</div>
-        }
-      </div>
-
       <!-- Password -->
       <div class="mb-6">
         <label
@@ -90,12 +124,87 @@
           placeholder="Enter your password"
           required
         />
-        @if (userRegisterForm.get('password')?.invalid &&
-        userRegisterForm.get('password')?.touched) {
-        <div class="text-red-500">
-          Password must be atleast 4 characters long
+        <div
+          *ngIf="
+            userRegisterForm.get('password')?.invalid &&
+            userRegisterForm.get('password')?.touched
+          "
+          class="text-red-500"
+        >
+          Password must be at least 8 characters long.
         </div>
-        }
+      </div>
+
+      <!-- Optional Fields -->
+      <!-- Phone Number -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+          Phone Number (optional)
+        </label>
+        <input
+          formControlName="phoneNumber"
+          type="tel"
+          id="phone"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your phone number"
+        />
+        <div
+          *ngIf="
+            userRegisterForm.get('phoneNumber')?.invalid &&
+            userRegisterForm.get('phoneNumber')?.touched
+          "
+          class="text-red-500"
+        >
+          Please enter a valid phone number.
+        </div>
+      </div>
+
+      <!-- File Upload for Profile Picture -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="profilePicture"
+          >Profile Picture (optional)</label
+        >
+        <input
+          type="file"
+          (change)="onFileChange($event)"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+        />
+      </div>
+
+      <!-- Preferred Language -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="preferredLanguage"
+        >
+          Preferred Language (optional)
+        </label>
+        <input
+          formControlName="preferredLanguage"
+          type="text"
+          id="preferredLanguage"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your preferred language"
+        />
+      </div>
+
+      <!-- Preferred Currency -->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="preferredCurrency"
+        >
+          Preferred Currency (optional)
+        </label>
+        <input
+          formControlName="preferredCurrency"
+          type="text"
+          id="preferredCurrency"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Enter your preferred currency"
+        />
       </div>
 
       <div class="flex items-center justify-between">

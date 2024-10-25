@@ -8,6 +8,7 @@ import { BookEventComponent } from './pages/book-event/book-event.component';
 import { AuthGuard } from './guards/auth.guard';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { EventComponent } from './pages/event/event.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,8 +16,9 @@ export const routes: Routes = [
   { path: 'events', component: EventsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'event/:eventId', component: EventComponent },
   {
-    path: 'book/:eventId',
+    path: 'book/:eventId/:ticketId',
     component: BookEventComponent,
     canActivate: [AuthGuard],
   },
@@ -30,8 +32,8 @@ export const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard],
   },
-  // Wildcard route to handle invalid URLs
-  // { path: '**', redirectTo: '' },
+  //Wildcard route to handle invalid URLs
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

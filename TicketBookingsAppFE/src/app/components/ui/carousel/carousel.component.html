@@ -1,0 +1,59 @@
+<!-- Event Images or Carousel -->
+<div *ngIf="images.length > 0" class="w-full h-64">
+  <ng-container *ngIf="images.length === 1">
+    <!-- Single Image -->
+    <img
+      [src]="images[0].imageUrl"
+      alt="Event Image"
+      class="w-full h-full object-cover rounded-lg"
+    />
+  </ng-container>
+
+  <ng-container *ngIf="images.length > 1">
+    <!-- Carousel for Multiple Images -->
+    <div class="relative w-full h-64 overflow-hidden rounded-lg">
+      <!-- Carousel Track (Sliding area) -->
+      <div
+        class="flex transition-transform duration-500 ease-in-out"
+        [style.transform]="'translateX(' + -currentIndex * 100 + '%)'"
+      >
+        <!-- Each image in the carousel -->
+        <div *ngFor="let image of images" class="w-full h-64 flex-shrink-0">
+          <img
+            [src]="image.imageUrl"
+            alt="Event Image"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+      <div
+        class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2"
+      >
+        <button
+          *ngFor="let image of images; let i = index"
+          (click)="goTo(i)"
+          class="w-3 h-3 rounded-full"
+          [ngClass]="{
+            'bg-white': i === currentIndex,
+            'bg-gray-400': i !== currentIndex
+          }"
+        ></button>
+      </div>
+
+      <!-- Previous and Next Buttons -->
+      <button
+        class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded z-50"
+        (click)="prevSlide()"
+      >
+        ‹
+      </button>
+      <button
+        class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded z-50"
+        (click)="nextSlide()"
+      >
+        ›
+      </button>
+    </div>
+  </ng-container>
+</div>

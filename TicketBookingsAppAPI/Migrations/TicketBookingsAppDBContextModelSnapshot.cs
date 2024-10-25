@@ -177,17 +177,15 @@ namespace TicketBookingsAppAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("EventID")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("BookingStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumberOfTickets")
-                        .HasColumnType("int");
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserID")
                         .IsRequired()
@@ -195,11 +193,60 @@ namespace TicketBookingsAppAPI.Migrations
 
                     b.HasKey("BookingID");
 
-                    b.HasIndex("EventID");
-
                     b.HasIndex("UserID");
 
                     b.ToTable("Bookings");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.BookingItem", b =>
+                {
+                    b.Property<Guid>("BookingItemID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BookingID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TicketTypeID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("BookingItemID");
+
+                    b.HasIndex("BookingID");
+
+                    b.HasIndex("TicketTypeID");
+
+                    b.ToTable("BookingItems");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.CartItem", b =>
+                {
+                    b.Property<Guid>("CartItemID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CartID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TicketTypeID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CartItemID");
+
+                    b.HasIndex("CartID");
+
+                    b.HasIndex("TicketTypeID");
+
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Event", b =>
@@ -208,36 +255,122 @@ namespace TicketBookingsAppAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("AvailableTickets")
-                        .HasColumnType("int");
+                    b.Property<string>("Categories")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
+                    b.Property<DateTimeOffset>("DateAndTime")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("EventDescription")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("TicketPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<TimeOnly>("Time")
-                        .HasColumnType("time");
-
-                    b.Property<string>("Venue")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("EventID");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.EventImage", b =>
+                {
+                    b.Property<Guid>("EventImageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EventID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("SizeInBytes")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("EventImageID");
+
+                    b.HasIndex("EventID");
+
+                    b.ToTable("EventImages");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Payment", b =>
+                {
+                    b.Property<Guid>("PaymentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("BookingID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TransactionID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PaymentID");
+
+                    b.HasIndex("BookingID");
+
+                    b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.ShoppingCart", b =>
+                {
+                    b.Property<Guid>("CartID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CartID");
+
+                    b.HasIndex("UserID")
+                        .IsUnique();
+
+                    b.ToTable("ShoppingCarts");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.TicketType", b =>
+                {
+                    b.Property<Guid>("TicketTypeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EventID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("QuantityAvailable")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("TicketTypeID");
+
+                    b.HasIndex("EventID");
+
+                    b.ToTable("TicketTypes");
                 });
 
             modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.User", b =>
@@ -259,15 +392,21 @@ namespace TicketBookingsAppAPI.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -285,6 +424,18 @@ namespace TicketBookingsAppAPI.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("PreferredCurrency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreferredLanguage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePictureUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -362,21 +513,186 @@ namespace TicketBookingsAppAPI.Migrations
 
             modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Booking", b =>
                 {
-                    b.HasOne("TicketBookingsAppAPI.Models.Domain.Event", "BookingEvent")
-                        .WithMany()
-                        .HasForeignKey("EventID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TicketBookingsAppAPI.Models.Domain.User", "BookingUser")
-                        .WithMany()
+                    b.HasOne("TicketBookingsAppAPI.Models.Domain.User", "User")
+                        .WithMany("Bookings")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BookingEvent");
+                    b.Navigation("User");
+                });
 
-                    b.Navigation("BookingUser");
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.BookingItem", b =>
+                {
+                    b.HasOne("TicketBookingsAppAPI.Models.Domain.Booking", "Booking")
+                        .WithMany("BookingItems")
+                        .HasForeignKey("BookingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TicketBookingsAppAPI.Models.Domain.TicketType", "TicketType")
+                        .WithMany()
+                        .HasForeignKey("TicketTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
+
+                    b.Navigation("TicketType");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.CartItem", b =>
+                {
+                    b.HasOne("TicketBookingsAppAPI.Models.Domain.ShoppingCart", "ShoppingCart")
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TicketBookingsAppAPI.Models.Domain.TicketType", "TicketType")
+                        .WithMany()
+                        .HasForeignKey("TicketTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ShoppingCart");
+
+                    b.Navigation("TicketType");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Event", b =>
+                {
+                    b.OwnsOne("TicketBookingsAppAPI.Models.Domain.Organizer", "Organizer", b1 =>
+                        {
+                            b1.Property<Guid>("EventID")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("ContactEmail")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
+
+                            b1.Property<string>("PhoneNumber")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("EventID");
+
+                            b1.ToTable("Events");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EventID");
+                        });
+
+                    b.OwnsOne("TicketBookingsAppAPI.Models.Domain.Venue", "Venue", b1 =>
+                        {
+                            b1.Property<Guid>("EventID")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Address")
+                                .IsRequired()
+                                .HasMaxLength(500)
+                                .HasColumnType("nvarchar(500)");
+
+                            b1.Property<int>("Capacity")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
+
+                            b1.Property<string>("State")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
+
+                            b1.HasKey("EventID");
+
+                            b1.ToTable("Events");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EventID");
+                        });
+
+                    b.Navigation("Organizer")
+                        .IsRequired();
+
+                    b.Navigation("Venue")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.EventImage", b =>
+                {
+                    b.HasOne("TicketBookingsAppAPI.Models.Domain.Event", "Event")
+                        .WithMany("Images")
+                        .HasForeignKey("EventID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Payment", b =>
+                {
+                    b.HasOne("TicketBookingsAppAPI.Models.Domain.Booking", "Booking")
+                        .WithMany()
+                        .HasForeignKey("BookingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.ShoppingCart", b =>
+                {
+                    b.HasOne("TicketBookingsAppAPI.Models.Domain.User", "User")
+                        .WithOne("ShoppingCart")
+                        .HasForeignKey("TicketBookingsAppAPI.Models.Domain.ShoppingCart", "UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.TicketType", b =>
+                {
+                    b.HasOne("TicketBookingsAppAPI.Models.Domain.Event", "Event")
+                        .WithMany("TicketTypes")
+                        .HasForeignKey("EventID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Booking", b =>
+                {
+                    b.Navigation("BookingItems");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Event", b =>
+                {
+                    b.Navigation("Images");
+
+                    b.Navigation("TicketTypes");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.ShoppingCart", b =>
+                {
+                    b.Navigation("CartItems");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.User", b =>
+                {
+                    b.Navigation("Bookings");
+
+                    b.Navigation("ShoppingCart")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

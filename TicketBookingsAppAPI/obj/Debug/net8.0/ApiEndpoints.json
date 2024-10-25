@@ -8,8 +8,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "loginRequestDTO",
-        "Type": "TicketBookingsAppAPI.Models.DTOs.LoginRequestDTO",
+        "Name": "model",
+        "Type": "TicketBookingsAppAPI.Models.DTOs.LoginDTO",
         "IsRequired": true
       }
     ],
@@ -24,9 +24,54 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "registerRequestDTO",
-        "Type": "TicketBookingsAppAPI.Models.DTOs.RegisterRequestDTO",
-        "IsRequired": true
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProfilePicture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProfilePictureUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PreferredLanguage",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PreferredCurrency",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -40,17 +85,67 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "updateUserRequest",
-        "Type": "TicketBookingsAppAPI.Models.DTOs.UpdateUserRequestDTO",
-        "IsRequired": true
+        "Name": "UserID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProfilePicture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "PreferredLanguage",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PreferredCurrency",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "OldPassword",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "NewPassword",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
-    "Method": "GetUserBookings",
-    "RelativePath": "api/Bookings/{userId}",
+    "ContainingType": "TicketBookingsAppAPI.Controllers.CartController",
+    "Method": "GetCart",
+    "RelativePath": "api/Cart/{userId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -64,51 +159,78 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
-    "Method": "GetAllBookings",
-    "RelativePath": "api/Bookings/All",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
-    "Method": "BookEventById",
-    "RelativePath": "api/Bookings/Book/{EventId}",
+    "ContainingType": "TicketBookingsAppAPI.Controllers.CartController",
+    "Method": "AddToCart",
+    "RelativePath": "api/Cart/AddItem",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "EventId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "addBookingDTO",
-        "Type": "TicketBookingsAppAPI.Models.DTOs.AddBookingDTO",
+        "Name": "cartItemDTO",
+        "Type": "TicketBookingsAppAPI.Models.DTOs.CartItemDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
-    "Method": "DeleteEvent",
-    "RelativePath": "api/Bookings/Delete/{BookingId}",
+    "ContainingType": "TicketBookingsAppAPI.Controllers.CartController",
+    "Method": "RemoveCartItem",
+    "RelativePath": "api/Cart/RemoveItem/{cartItemId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "BookingId",
+        "Name": "cartItemId",
         "Type": "System.Guid",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.CartController",
+    "Method": "UpdateCartItem",
+    "RelativePath": "api/Cart/UpdateItem",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateCartItemDTO",
+        "Type": "TicketBookingsAppAPI.Models.DTOs.UpdateCartItemDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
+    "Method": "PostEvent",
+    "RelativePath": "api/Events",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createEventDTO",
+        "Type": "EventCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "TicketBookingsAppAPI.Models.Domain.Event",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
@@ -117,24 +239,49 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
-    "Method": "AddEvent",
-    "RelativePath": "api/Events",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
     "Parameters": [
       {
-        "Name": "addNewEventDTO",
-        "Type": "TicketBookingsAppAPI.Models.DTOs.AddNewEventDTO",
-        "IsRequired": true
+        "Name": "searchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "sortBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "sortOrder",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "startDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "eventCategory",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[EventDTO, TicketBookingsAppAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
@@ -150,22 +297,16 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
-    "Method": "Delete",
-    "RelativePath": "api/Events/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+    "ReturnTypes": [
       {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
+        "Type": "EventDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
       }
-    ],
-    "ReturnTypes": []
+    ]
   }
 ]

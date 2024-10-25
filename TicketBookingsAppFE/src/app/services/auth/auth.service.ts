@@ -66,7 +66,7 @@ export class AuthService {
           this.tokenService.setToken(response.jwtToken);
 
           // Set userID and username using UserService
-          this.userService.setUserID(response.userID);
+          this.userService.setUserProfile(response.userProfile);
           this.userService.setUserName(response.username); // Assuming response contains 'username'
 
           // Emit the username through BehaviorSubject
@@ -78,19 +78,44 @@ export class AuthService {
       );
   }
 
-  //` Register Function
   register(registerPayload: registerRequestDTO): Observable<any> {
+    // Create FormData object to send as 'multipart/form-data'
+    const formData = new FormData();
+
+    // Append the registration data to the FormData object
+    formData.append('Username', registerPayload.username);
+    formData.append('Email', registerPayload.email);
+    formData.append('FirstName', registerPayload.firstName);
+    formData.append('LastName', registerPayload.lastName);
+    formData.append('PhoneNumber', registerPayload.phoneNumber || ''); // Optional phone number
+    formData.append(
+      'PreferredLanguage',
+      registerPayload.preferredLanguage || 'English'
+    );
+    formData.append(
+      'PreferredCurrency',
+      registerPayload.preferredCurrency || 'INR'
+    );
+    formData.append('Password', registerPayload.password);
+
+    // Append the profile picture if it exists
+    if (registerPayload.profilePicture) {
+      formData.append('ProfilePicture', registerPayload.profilePicture || null);
+    }
+
+    // Send the form data
     return this.http.post<any>(
       `${this.baseRequestUrlHttp}/register`,
-      registerPayload
+      formData // Send as FormData
     );
   }
 
   //` Logout method
   logout(): void {
     this.tokenService.removeToken(); // Remove token on logout
-    this.userService.removeUserID(); // Clear user ID
-    this.userService.removeUserName(); // Clear username
+    this.userService.removeUserProfile(); // Clear user ID
+    this.userService.removeUserName();
+    // this.userService.removeUserName(); // Clear username
 
     // Clear the username and emit the login state as false
     this.usernameSubject.next(null); // Emit null to clear the username
@@ -102,16 +127,59 @@ export class AuthService {
     return this.tokenService.getToken() ? true : false;
   }
 
-  //`Update user function
+  // Update user function to handle FormData
   updateUser(updatePayload: updateRequestDTO): Observable<any> {
+    // Create FormData object to send as 'multipart/form-data'
+    const formData = new FormData();
+
+    // Append the update data to the FormData object
+    formData.append('userID', updatePayload.userID);
+    formData.append('Username', updatePayload.username || '');
+    formData.append('Email', updatePayload.email || '');
+    formData.append('FirstName', updatePayload.firstName || '');
+    formData.append('LastName', updatePayload.lastName || '');
+    formData.append('PhoneNumber', updatePayload.phoneNumber || ''); // Optional phone number
+    formData.append(
+      'PreferredLanguage',
+      updatePayload.preferredLanguage || 'English'
+    );
+    formData.append(
+      'PreferredCurrency',
+      updatePayload.preferredCurrency || 'INR'
+    );
+
+    // Append the password fields only if they exist
+    if (updatePayload.oldPassword) {
+      formData.append('OldPassword', updatePayload.oldPassword);
+    }
+    if (updatePayload.newPassword) {
+      formData.append('NewPassword', updatePayload.newPassword);
+    }
+
+    // Append the profile picture if it exists
+    if (updatePayload.profilePicture) {
+      formData.append('ProfilePicture', updatePayload.profilePicture);
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.tokenService.getToken()}`,
+    });
+
+    // Send the form data
     return this.http
-      .put<any>(`${this.baseRequestUrlHttp}/update`, updatePayload)
+      .put<any>(`${this.baseRequestUrlHttp}/update`, formData, { headers })
       .pipe(
         tap((response) => {
-          // Inform the user that the update was successful
+          this.userService.setUserProfile(response.userProfile);
+
+          // Update username if it was changed
+          if (response.username) {
+            this.usernameSubject.next(response.username);
+          }
+
           alert('Profile updated successfully. You will be logged out.');
 
-          // Log the user out after a successful update
+          // Log out the user after a successful update
           this.logout();
         })
       );

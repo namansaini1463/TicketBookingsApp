@@ -4499,19 +4499,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\NamanSaini\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj",
+      "projectUniqueName": "C:\\Users\\NamanSaini\\Downloads\\TicketBookingsApp-third_requirements_events\\TicketBookingsApp-third_requirements_events\\TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj",
       "projectName": "TicketBookingsAppAPI",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\obj\\",
+      "projectPath": "C:\\Users\\NamanSaini\\Downloads\\TicketBookingsApp-third_requirements_events\\TicketBookingsApp-third_requirements_events\\TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj",
+      "packagesPath": "C:\\Users\\NamanSaini\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\NamanSaini\\Downloads\\TicketBookingsApp-third_requirements_events\\TicketBookingsApp-third_requirements_events\\TicketBookingsAppAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\NamanSaini\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

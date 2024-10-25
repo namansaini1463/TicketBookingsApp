@@ -2,14 +2,13 @@
 
 namespace TicketBookingsAppAPI.Models.DTOs
 {
-    public class LoginRequestDTO
+    public class LoginDTO
     {
         [Required]
-        [DataType(DataType.EmailAddress)]
-        public string userNameOrEmail { get; set; }
+        public string EmailOrUsername { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
+        [MinLength(8, ErrorMessage = "Password must be at least 8 characters long.")]
         public string Password { get; set; }
     }
 }

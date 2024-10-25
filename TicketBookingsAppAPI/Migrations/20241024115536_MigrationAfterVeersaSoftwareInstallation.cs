@@ -5,7 +5,7 @@
 namespace TicketBookingsAppAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class removedthenavigationpropertiesfromtheeventtable : Migration
+    public partial class MigrationAfterVeersaSoftwareInstallation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -1,43 +1,65 @@
-import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from '../../services/events/events.service';
-import { Event } from '../../models/Event';
+import { Event, mapToEvent, TicketType } from '../../models/Event';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BookingService } from '../../services/booking/booking.service';
-import { AddBookingDTO } from '../../models/Booking'; // Import your AddBookingDTO
-import { Router } from '@angular/router'; // Import Router to redirect after booking
+import { AddBookingDTO } from '../../models/Booking';
 import { UserService } from '../../services/user/user.service';
+import { getFormattedTimeWithTimezone } from '../../utils/getFormattedTimeWithTimeZone';
 
 @Component({
   selector: 'app-book-event',
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './book-event.component.html',
-  styleUrl: './book-event.component.css',
+  styleUrls: ['./book-event.component.css'], // Corrected from styleUrl to styleUrls
 })
 export class BookEventComponent {
-  reponseEvent: any;
+  responseEvent: any; // Corrected variable name
   event!: Event;
   numTickets: number = 1;
   totalPrice: number = 0;
   bookingResponse: string | undefined;
+  getFormattedTimeWithTimezone = getFormattedTimeWithTimezone;
+  selectedTicketType: TicketType | null = null;
+  ticketId: string | null = null; // Store ticketId here
 
   constructor(
     private route: ActivatedRoute,
     private eventsService: EventsService,
     private bookingService: BookingService,
     private userService: UserService,
-    private router: Router // To redirect after booking
+    private router: Router
   ) {}
+
+  // Fetch event details when component initializes
+  ngOnInit(): void {
+    const eventId = this.route.snapshot.paramMap.get('eventId')!;
+    this.ticketId = this.route.snapshot.paramMap.get('ticketId');
+    this.fetchEventFromDB(eventId);
+  }
 
   // Fetch event details from the backend
   fetchEventFromDB(eventId: string): void {
     this.eventsService.getEventByID(eventId).subscribe(
       (data) => {
-        this.reponseEvent = data;
-        this.event = this.reponseEvent;
-        this.calculateTotalPrice(); // Calculate the price when the event is loaded
+        this.responseEvent = data;
+        this.event = this.responseEvent;
+        this.event = mapToEvent(this.event);
+
+        // Now that the event is loaded, fetch the selected ticket type
+        if (this.ticketId) {
+          this.selectedTicketType = this.fetchTicketTypeFromEvent(
+            this.ticketId
+          );
+          if (this.selectedTicketType) {
+            this.calculateTotalPrice();
+          } else {
+            alert('Invalid ticket type selected.');
+          }
+        }
       },
       (error) => {
         console.error('Error fetching event:', error);
@@ -45,20 +67,33 @@ export class BookEventComponent {
     );
   }
 
-  // Fetch event details when component initializes
-  ngOnInit(): void {
-    const eventId = this.route.snapshot.paramMap.get('eventId')!;
-    this.fetchEventFromDB(eventId);
+  // Get the ticketType from the event object
+  fetchTicketTypeFromEvent(ticketId: string): TicketType | null {
+    console.log(this.event.ticketTypes);
+
+    if (!this.event || !this.event.ticketTypes) {
+      return null;
+    }
+    const ticket = this.event.ticketTypes.find(
+      (ticket) => ticket.ticketTypeID === ticketId
+    );
+    return ticket ?? null;
   }
 
   // Handle form submission
   onSubmit(): void {
-    const userID = this.userService.getUserID();
+    const userID = this.userService.getUserProfile()?.userID ?? null;
     const eventId = this.event.eventID;
 
+    if (!this.selectedTicketType) {
+      alert('Please select a ticket type.');
+      return;
+    }
+
     const bookingRequest: AddBookingDTO = {
-      userID: userID, // Logged in user ID
-      numberOfTickets: this.numTickets, // Number of tickets from the form
+      userID: userID,
+      numberOfTickets: this.numTickets,
+      ticketTypeID: this.selectedTicketType.ticketTypeID, // Included ticketTypeID
     };
 
     // Call the booking service to book the event
@@ -66,7 +101,7 @@ export class BookEventComponent {
       (response) => {
         // Handle success
         this.bookingResponse = `Successfully booked ${this.numTickets} tickets for ${this.event.name}!`;
-        // Optionally, redirect to a success page or booking details page
+        // Redirect to a success page or booking details page
         this.router.navigate(['/bookings']);
       },
       (error) => {
@@ -87,8 +122,10 @@ export class BookEventComponent {
 
   // Calculate total price based on the number of tickets and event ticket price
   calculateTotalPrice(): void {
-    if (this.event) {
-      this.totalPrice = this.numTickets * this.event.ticketPrice;
+    if (this.selectedTicketType) {
+      this.totalPrice = this.numTickets * this.selectedTicketType.price;
+    } else {
+      this.totalPrice = 0;
     }
   }
 
@@ -102,9 +139,10 @@ export class BookEventComponent {
 
   // Method to increase the number of tickets
   increaseTickets(): void {
-    if (this.numTickets < 8) {
+    if (this.numTickets < (this.selectedTicketType?.quantityAvailable ?? 8)) {
       this.numTickets++;
       this.calculateTotalPrice(); // Recalculate price
     }
+    console.log(this.selectedTicketType);
   }
 }

@@ -2,79 +2,119 @@
   <h1 class="text-3xl font-bold mb-4 text-center">Book Event</h1>
 
   <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
-    @if(event){
-
-    <!-- Event Details -->
-    <div class="mb-6">
-      <h2 class="text-xl font-semibold">{{ event.name }}</h2>
-      <p class="text-gray-600"><strong>Date:</strong> {{ event.date }}</p>
-      <p class="text-gray-600"><strong>Time:</strong> {{ event.time }}</p>
-      <p class="text-gray-600"><strong>Venue:</strong> {{ event.venue }}</p>
-      <p class="text-gray-600">
-        <strong>Ticket Price:</strong> ₹{{ event.ticketPrice }}
-      </p>
-      <p class="text-gray-600">
-        <strong>Available Tickets:</strong> {{ event.availableTickets }}
-      </p>
-    </div>
-
-    <!-- Booking Form -->
-    <form (ngSubmit)="onSubmit()">
-      <!-- Number of Tickets with + and - buttons -->
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="tickets">
-          Select Number of Tickets
-        </label>
-        <div class="flex items-center">
-          <!-- Minus Button -->
-          <button
-            type="button"
-            (click)="decreaseTickets()"
-            class="bg-gray-300 text-gray-700 px-3 py-2 rounded-l hover:bg-gray-400"
-            [disabled]="numTickets <= 1"
-          >
-            -
-          </button>
-
-          <!-- Number of Tickets Input (Two-Way Binding) -->
-          <input
-            type="number"
-            id="tickets"
-            class="text-center w-16 px-3 py-2 border-t border-b border-gray-300 focus:outline-none"
-            [(ngModel)]="numTickets"
-            name="numTickets"
-            min="1"
-            max="8"
-            readonly
-          />
-
-          <!-- Plus Button -->
-          <button
-            type="button"
-            (click)="increaseTickets()"
-            class="bg-gray-300 text-gray-700 px-3 py-2 rounded-r hover:bg-gray-400"
-            [disabled]="numTickets >= 8"
-          >
-            +
-          </button>
+    <!-- Use *ngIf to conditionally display content -->
+    <ng-container *ngIf="event; else noEvent">
+      <!-- Event Details -->
+      <!-- Event Name -->
+      <div>
+        <h3 class="text-xl font-semibold mb-1 text-blue-700 mt-4 w-fit">
+          {{ event.name }}
+        </h3>
+        <!-- Event Category Tags -->
+        <div class="flex flex-wrap gap-2 mb-4">
+          <ng-container *ngFor="let category of event.categories">
+            <span
+              class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full"
+            >
+              {{ category }}
+            </span>
+          </ng-container>
         </div>
       </div>
 
-      <!-- Dynamically Updated Total Price -->
-      <div class="mb-6">
-        <p class="text-lg"><strong>Total Price:</strong> ₹{{ totalPrice }}</p>
+      <!-- Display Selected Ticket Type Details -->
+      <div *ngIf="selectedTicketType" class="mb-6">
+        <h4
+          class="text-xl font-semibold mb-2 text-purple-500 mt-2 cursor-pointer w-full"
+        >
+          🌟 Ticket Type: {{ selectedTicketType.type }} 🌟
+        </h4>
+        <p class="text-gray-600 w-full">
+          <strong>Price per Ticket:</strong> ₹{{ selectedTicketType.price }}
+        </p>
       </div>
 
-      <!-- Submit Button -->
-      <div class="flex items-center justify-between">
-        <button
-          class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full font-semibold hover:bg-blue-600"
-          type="submit"
-        >
-          Confirm Booking
-        </button>
+      <!-- Event Description -->
+      <p class="text-gray-600 w-full">
+        <strong>Description: </strong>
+        {{ event.eventDescription || "No description available" }}
+      </p>
+
+      <!-- Event Date and Time and Venue -->
+      <div class="flex-1">
+        <p class="text-gray-600">
+          <strong>Date:</strong> {{ event.dateAndTime | date : "longDate" }}
+        </p>
+        <p class="text-gray-600">
+          <strong>Time: </strong>
+          {{ getFormattedTimeWithTimezone(event.dateAndTime) }}
+        </p>
       </div>
-    </form>
-    }
+
+      <!-- Booking Form -->
+      <form (ngSubmit)="onSubmit()">
+        <div class="mb-4 mt-6">
+          <label
+            class="block text-gray-700 text-lg font-bold mb-2"
+            for="tickets"
+          >
+            Select Number of Tickets
+          </label>
+          <div class="flex items-center">
+            <button
+              type="button"
+              class="bg-gray-300 text-gray-700 px-3 py-2 rounded-l hover:bg-gray-400"
+              (click)="decreaseTickets()"
+              [disabled]="numTickets <= 1"
+            >
+              -
+            </button>
+
+            <input
+              type="number"
+              id="tickets"
+              class="text-center w-16 px-3 py-2 border-t border-b border-gray-300 focus:outline-none"
+              [(ngModel)]="numTickets"
+              name="numTickets"
+              min="1"
+              max="8"
+              readonly
+            />
+
+            <button
+              type="button"
+              class="bg-gray-300 text-gray-700 px-3 py-2 rounded-r hover:bg-gray-400"
+              (click)="increaseTickets()"
+              [disabled]="numTickets >= 8"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Total Price -->
+        <div class="mb-6">
+          <p class="text-lg">
+            <strong>Total Price:</strong>
+            {{ totalPrice | currency : "INR" : "symbol" : "1.2-2" }}
+          </p>
+        </div>
+
+        <!-- Confirm Booking Button -->
+        <div class="flex items-center justify-between">
+          <button
+            class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full font-semibold hover:bg-blue-600"
+            type="submit"
+          >
+            Confirm Booking
+          </button>
+        </div>
+      </form>
+    </ng-container>
+
+    <!-- No Event Found Message -->
+    <ng-template #noEvent>
+      <h1>No event found</h1>
+    </ng-template>
   </div>
 </div>

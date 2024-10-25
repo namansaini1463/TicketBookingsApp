@@ -1,0 +1,356 @@
+[ 
+    {
+        "name": "Diwali Bash ft. Parmish Verma and Sunanda Sharma",
+        "dateAndTime": "2024-10-25T04:32:11.607370Z",
+        "venue": {
+            "name": "World Street by Omaxe",
+            "address": "Faridabad",
+            "state": "Haryana",
+            "capacity": 1500
+        },
+        "eventDescription": "Celebrating the Pre Diwali Bash with the Iconic Punjabi Singers, renowned DJ & other performances at Omaxe World Street Faridabad.",
+        "categories": [
+            "Music",
+            "Technology"
+        ],
+        "ticketTypes": [
+            {
+                "type": "Early Bird",
+                "price": 500,
+                "quantityAvailable": 195
+            },
+            {
+                "type": "VIP",
+                "price": 1400,
+                "quantityAvailable": 98
+            },
+            {
+                "type": "Regular",
+                "price": 800,
+                "quantityAvailable": 237
+            }
+        ],
+        "images": [
+            
+            {
+                "imageUrl": "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-RnJpLCAyNSBPY3Q%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00414732-vcuaahukdn-portrait.jpg"
+            },{
+                "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-diwali-bash-ft-parmish-verma-and-sunanda-sharma-0-2024-10-15-t-19-19-55.jpg"
+            }
+        ],
+        "organizer": {
+            "name": "Ramesh",
+            "contactEmail": "ramesh@example.com",
+            "phoneNumber": "+1-987-654-3210"
+        }
+    },
+    {
+        "name": "Bismil Ki Mehfil",
+        "dateAndTime": "2024-11-09T04:32:11.607370Z",
+        "venue": {
+            "name": "KD Jadhav Indoor Hall",
+            "address": "Delhi",
+            "state": "Delhi",
+            "capacity": 2000
+        },
+        "eventDescription": "Prepare yourself for an unforgettable evening of soul-stirring Sufi music with Bismil Ki Mehfil - Meri Pehchaan Tour 2024 in Delhi. Bismil, India's biggest Sufi sensation, is set to take the stage and mesmerize the audience with his enchanting voice and magnetic stage presence.",
+        "categories": [
+            "Music",
+            "Literature","Charity"
+
+        ],
+        "ticketTypes": [
+            {
+                "type": "Early Bird",
+                "price": 300,
+                "quantityAvailable": 300
+            },
+            {
+                "type": "VIP",
+                "price": 1000,
+                "quantityAvailable":100
+            },
+            {
+                "type": "Regular",
+                "price": 600,
+                "quantityAvailable": 500
+            }
+        ],
+        "images": [
+            
+            {
+                "imageUrl": "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-U2F0LCA5IE5vdg%3D%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00413359-xpuqurraxr-portrait.jpg"
+            },
+{
+                "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-bismil-ki-mehfil-0-2024-9-25-t-10-32-46.jpg"
+            }
+        ],
+        "organizer": {
+            "name": "Ramesh",
+            "contactEmail": "ramesh@example.com",
+            "phoneNumber": "+1-987-654-3210"
+        }
+    },
+    {
+        "name": "Best of Standup",
+        "dateAndTime": "2024-10-27T04:32:11.607370Z",
+        "venue": {
+            "name": "Laughter Nation Comedy Club",
+            "address": "Hauz Khas Village",
+            "state": "Delhi",
+            "capacity": 1500
+        },
+        "eventDescription": "The Classic Weekends of Best of Standup are back. Come over and enjoy the jokes and be entertained for the weeekend.",
+        "categories": [
+            "Comedy",
+            "FilmAndTheater","Entertainment"
+
+        ],
+        "ticketTypes": [
+            {
+                "type": "Student",
+                "price": 250,
+                "quantityAvailable": 50
+            },
+            {
+                "type": "VIP",
+                "price": 800,
+                "quantityAvailable":100
+            },
+            {
+                "type": "Regular",
+                "price": 500,
+                "quantityAvailable": 250
+            }
+        ],
+        "images": [
+            
+            {
+                "imageUrl": "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-RnJpLCAyNSBPY3Qgb253YXJkcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00358274-dtpweyxkvq-portrait.jpg"
+            },
+{
+                "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-best-of-standup-standup-comedy-show-0-2023-9-2-t-3-56-47.jpg"
+            }
+        ],
+        "organizer": {
+            "name": "Suresh",
+            "contactEmail": "Suresh@example.com",
+            "phoneNumber": "+1-987-654-3210"
+        }
+    },
+    {
+        "name": "PRACTICE - A Standup Comedy Show by Manik Mahna",
+        "dateAndTime": "2024-11-24T04:32:11.607370Z",
+        "venue": {
+            "name": "Laughter Nation Comedy Club",
+            "address": "Hauz Khas Village",
+            "state": "Delhi",
+            "capacity": 1500
+        },
+        "eventDescription": "Watch live stand up comedy by Manik Mahna.",
+        "categories": [
+            "Comedy",
+            "FilmAndTheater","Entertainment","Education"
+
+        ],
+        "ticketTypes": [
+            
+            {
+                "type": "Basic",
+                "price": 500,
+                "quantityAvailable": 500
+            }
+        ],
+        "images": [
+            
+            {
+                "imageUrl": "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-U3VuLCAxMCBOb3Ygb253YXJkcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00400505-clwvtnxqtv-portrait.jpg"
+            },
+{
+                "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-practice-a-standup-comedy-show-by-manik-mahna-0-2024-7-6-t-15-51-8.jpg"
+            }
+        ],
+        "organizer": {
+            "name": "Suresh",
+            "contactEmail": "Suresh@example.com",
+            "phoneNumber": "+1-987-654-3210"
+        }
+    },
+    {
+    "name": "International Clown Festival",
+    "dateAndTime": "2024-11-16T04:32:11.607370Z",
+    "venue": {
+        "name": "Jawaharlal Nehru Indoor Auditorium",
+        "address": "New Delhi",
+        "state": "Delhi",
+        "capacity": 4000
+    },
+    "eventDescription": "Circus",
+    "categories": [
+        "Comedy",
+        "FilmAndTheater",
+        "FoodAndDrink"
+    ],
+    "ticketTypes": [
+        {
+            "type": "First Stand",
+            "price": 1500,
+            "quantityAvailable": 123
+        },
+        {
+            "type": "Second Stand",
+            "price": 1200,
+            "quantityAvailable": 345
+        },
+        {
+            "type": "Third Stand",
+            "price": 950,
+            "quantityAvailable": 669
+        }
+    ],
+    "images": [
+        {
+            "imageUrl": "https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-text,ie-RnJpLCAxNSBOb3Ygb253YXJkcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-24,pa-8_0_0_0,l-end/et00407421-xwlxysxnpd-portrait.jpg"
+        },
+        {
+            "imageUrl": "https://assets-in.bmscdn.com/nmcms/events/banner/desktop/media-desktop-international-clown-festival-india-delhi-0-2024-10-9-t-12-47-19.jpg"
+        }
+    ],
+    "organizer": {
+        "name": "Ramesh",
+        "contactEmail": "ramesh@example.com",
+        "phoneNumber": "+1-987-654-3210"
+        }
+    },
+     {
+        "name": "Startup Conference",
+        "dateAndTime": "2024-12-12T05:12:13.904531Z",
+        "venue": {
+            "name": "National Sports Complex",
+            "address": "Mumbai",
+            "state": "Maharashtra",
+            "capacity": 10000
+        },
+        "eventDescription": "A fun and educational event covering various fields and interests.",
+        "categories": [
+            "Networking",
+            "Music",
+            "Workshop"
+        ],
+        "ticketTypes": [
+            {
+                "type": "Student",
+                "price": 655,
+                "quantityAvailable": 178
+            },
+            {
+                "type": "General Admission",
+                "price": 1412,
+                "quantityAvailable": 339
+            }
+        ],
+        "images": [
+            {
+                "imageUrl": "https://images.pexels.com/photos/2833037/pexels-photo-2833037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            }
+        ],
+        "organizer": {
+            "name": "Ramesh",
+            "contactEmail": "ramesh@example.com",
+            "phoneNumber": "+1-987-654-3210"
+        }
+    },
+    {
+        "name": "Literature Workshop",
+        "dateAndTime": "2024-11-07T05:12:13.904630Z",
+        "venue": {
+            "name": "National Sports Complex",
+            "address": "Mumbai",
+            "state": "Maharashtra",
+            "capacity": 10000
+        },
+        "eventDescription": "A fun and educational event covering various fields and interests.",
+        "categories": [
+            "Networking",
+            "Gaming"
+        ],
+        "ticketTypes": [
+            {
+                "type": "Early Bird",
+                "price": 622,
+                "quantityAvailable": 102
+            },
+            {
+                "type": "General Admission",
+                "price": 1489,
+                "quantityAvailable": 281
+            },
+            {
+                "type": "VIP",
+                "price": 1894,
+                "quantityAvailable": 163
+            }
+        ],
+        "images": [
+            {
+                "imageUrl": "https://images.pexels.com/photos/8501776/pexels-photo-8501776.jpeg?auto=compress&cs=tinysrgb&w=600"
+            }
+        ],
+        "organizer": {
+            "name": "Ankit Patel",
+            "contactEmail": "ankit.patel@example.com",
+            "phoneNumber": "+91-321-654-9870"
+        }
+    },
+    {
+        "name": "Gaming Championship",
+        "dateAndTime": "2024-10-29T05:12:13.904664Z",
+        "venue": {
+            "name": "Chennai Trade Center",
+            "address": "Chennai",
+            "state": "Tamil Nadu",
+            "capacity": 5000
+        },
+        "eventDescription": "A fun and educational event covering various fields and interests.",
+        "categories": [
+            "FoodAndDrink",
+            "Music",
+            "Gaming",
+            "Conference"
+        ],
+        "ticketTypes": [
+            {
+                "type": "Early Bird",
+                "price": 862,
+                "quantityAvailable": 119
+            },
+            {
+                "type": "Student",
+                "price": 306,
+                "quantityAvailable": 275
+            },
+            {
+                "type": "VIP",
+                "price": 1170,
+                "quantityAvailable": 134
+            },
+            {
+                "type": "General Admission",
+                "price": 902,
+                "quantityAvailable": 211
+            }
+        ],
+        "images": [
+            {
+                "imageUrl": "https://images.pexels.com/photos/9072374/pexels-photo-9072374.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            }
+        ],
+        "organizer": {
+            "name": "Ramesh",
+            "contactEmail": "ramesh@example.com",
+            "phoneNumber": "+1-987-654-3210"
+        }
+    }
+
+    
+]

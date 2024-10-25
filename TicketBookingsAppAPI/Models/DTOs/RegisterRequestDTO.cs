@@ -1,25 +1,39 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static System.Net.WebRequestMethods;
 
 namespace TicketBookingsAppAPI.Models.DTOs
 {
-    public class RegisterRequestDTO
+    public class RegisterDTO
     {
-        [Required(ErrorMessage = "Username is required")]
-        [DataType(DataType.Text)]
-        public string Name { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
-        [DataType(DataType.EmailAddress)]
-        public string Username { get; set; }
-
-        [Required(ErrorMessage = "Password is required")]
-        [DataType(DataType.Password)]
+        [Required]
+        [MinLength(8, ErrorMessage = "Password must be at least 8 characters long.")]
         public string Password { get; set; }
 
+        [Required]
+        [MaxLength(50)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string LastName { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Username { get; set; }
 
         [MaxLength(10)]
-        public string? PhoneNumber { get; set; }
+        [MinLength(10)]
+        public string? PhoneNumber { get; set; }  // Optional phone number field
 
-        public string[] Roles { get; set; }
+        public IFormFile? ProfilePicture { get; set; }  // Optional profile picture
+
+        public string? ProfilePictureUrl { get; set; } // Optional profile picture
+
+        public string? PreferredLanguage { get; set; }// Optional preferred language
+
+        public string? PreferredCurrency { get; set; } // Optional preferred currency
     }
 }

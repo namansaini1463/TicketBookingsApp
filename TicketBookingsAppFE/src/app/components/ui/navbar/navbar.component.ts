@@ -5,11 +5,12 @@ import { RouterModule, Router, NavigationEnd } from '@angular/router'; // Import
 import { AuthService } from '../../../services/auth/auth.service';
 import { filter } from 'rxjs/operators'; // Import filter for filtering events
 import { Subscription } from 'rxjs'; // Import Subscription for cleanup
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })

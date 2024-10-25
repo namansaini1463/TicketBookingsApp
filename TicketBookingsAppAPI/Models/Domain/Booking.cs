@@ -1,16 +1,27 @@
-﻿namespace TicketBookingsAppAPI.Models.Domain
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TicketBookingsAppAPI.Models.Domain
 {
     public class Booking
     {
+        [Key]
         public Guid BookingID { get; set; }
-        public string UserID { get; set; }
-        public Guid EventID { get; set; }
-        public int NumberOfTickets { get; set; } 
-        public decimal Amount { get; set; }
-        public DateTime BookingDate { get; set; }
 
-        // Navigation Properties
-        public User BookingUser { get; set; }
-        public Event BookingEvent { get; set; }
+        [Required]
+        public string UserID { get; set; } // Link to the user who made the booking
+        [ForeignKey("UserID")]
+        public User User { get; set; }
+
+        [Required]
+        public DateTime BookingDate { get; set; } = DateTime.UtcNow;
+
+        public string BookingStatus { get; set; }
+
+        // Collection of BookingItems representing each ticket booked
+        public List<BookingItem> BookingItems { get; set; } = new List<BookingItem>();
+
+        [Required]
+        public decimal TotalAmount { get; set; } // Total price for the booking
     }
 }

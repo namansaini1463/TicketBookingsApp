@@ -15,30 +15,31 @@ namespace TicketBookingsAppAPI.Repositories
             this.configuration = configuration;
         }
 
-        public string CreateJWTToken(User user, List<string> roles, string selectedIssuer, string selectedAudience)
+        public string CreateJWTToken(User user, List<string> roles, string issuer, string audience)
         {
-            // Create claims from the roles and other information
+            // Create claims from the user's email and ID
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.NameIdentifier, user.Id), 
             };
 
-            // Add roles to claims
+            // Add roles to claims, if any
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            // Create signing key
+            // Create signing key from the secret key in configuration
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            // Create JWT token
+            // Create the JWT token
             var token = new JwtSecurityToken(
-                issuer: selectedIssuer,      // Use the selected issuer
-                audience: selectedAudience,   // Use the selected audience
+                issuer: issuer,      // Use the selected issuer
+                audience: audience,   // Use the selected audience
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(60), // Consider using UTC for consistency
+                expires: DateTime.UtcNow.AddMinutes(60), // Token expiration set to 60 minutes
                 signingCredentials: credentials
             );
 
