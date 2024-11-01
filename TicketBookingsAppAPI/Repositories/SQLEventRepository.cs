@@ -74,6 +74,9 @@ namespace TicketBookingsAppAPI.Repositories
                         ? query.OrderByDescending(e => e.TicketTypes.Min(t => t.Price)) // Sort by minimum price, descending
                         : query.OrderBy(e => e.TicketTypes.Min(t => t.Price)); // Sort by minimum price, ascending
                     break;
+                case "date":
+                    query = sortOrder == "desc" ? query.OrderByDescending(e => e.DateAndTime) : query.OrderBy(e => e.DateAndTime);
+                    break;
                 default:
                     query = sortOrder == "desc" ? query.OrderByDescending(e => e.Name) : query.OrderBy(e => e.Name); // Default sorting by name
                     break;

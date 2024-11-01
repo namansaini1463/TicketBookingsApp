@@ -18,10 +18,21 @@ namespace TicketBookingsAppAPI.Models.Domain
         public decimal Amount { get; set; }
 
         [Required]
-        public DateTime PaymentDate { get; set; } = DateTime.UtcNow;
+        public DateTime PaymentDate { get; set; } = DateTime.UtcNow; 
+        public DateTime RefundDate { get; set; } = DateTime.UtcNow; 
 
         public string PaymentMethod { get; set; } // E.g., Credit Card, PayPal, etc.
 
+        public PaymentStatus PaymentStatus { get; set; }
+
         public Guid TransactionID { get; set; } // Transaction reference from payment provider
+    }
+
+    public enum PaymentStatus
+    {
+        Pending,
+        Paid,
+        Failed,
+        Refunded
     }
 }

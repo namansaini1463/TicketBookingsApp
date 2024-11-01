@@ -19,7 +19,6 @@ namespace TicketBookingsAppAPI.Controllers
         private readonly SignInManager<User> signInManager;
         private readonly ITokenRepository tokenRepository;
 
-        //private readonly SignInManager<User> signInManager;
 
         public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, ITokenRepository tokenRepository)
         {
@@ -268,7 +267,7 @@ namespace TicketBookingsAppAPI.Controllers
             }
 
             // Update Profile Picture
-            string profilePictureUrl = "https://res.cloudinary.com/dpd6oloy8/image/upload/v1729058704/DefualtProfilePicture_atiafh.png"; // Default image URL
+            string profilePictureUrl = user.ProfilePictureUrl; // Default image URL
 
             // Handle file upload if a profile picture is provided in the DTO
             if (updateUserRequest.ProfilePicture != null && updateUserRequest.ProfilePicture.Length > 0)

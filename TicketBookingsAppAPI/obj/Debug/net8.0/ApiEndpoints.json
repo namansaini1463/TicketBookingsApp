@@ -143,6 +143,70 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
+    "Method": "GetBooking",
+    "RelativePath": "api/Bookings/{bookingId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookingId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
+    "Method": "CancelBooking",
+    "RelativePath": "api/Bookings/Cancel/{bookingId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookingId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
+    "Method": "CreateBooking",
+    "RelativePath": "api/Bookings/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createBookingDTO",
+        "Type": "TicketBookingsAppAPI.Models.DTOs.CreateBookingDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.BookingsController",
+    "Method": "GetUserBookings",
+    "RelativePath": "api/Bookings/User/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TicketBookingsAppAPI.Controllers.CartController",
     "Method": "GetCart",
     "RelativePath": "api/Cart/{userId}",
@@ -201,6 +265,22 @@
       {
         "Name": "updateCartItemDTO",
         "Type": "TicketBookingsAppAPI.Models.DTOs.UpdateCartItemDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.CouponController",
+    "Method": "AddCoupon",
+    "RelativePath": "api/Coupon/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newCoupon",
+        "Type": "TicketBookingsAppAPI.Models.Domain.Coupon",
         "IsRequired": true
       }
     ],

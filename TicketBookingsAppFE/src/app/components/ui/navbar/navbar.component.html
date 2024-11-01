@@ -1,66 +1,158 @@
-<nav class="bg-stone-800 p-4">
-  <div class="container mx-auto flex justify-between items-center">
-    <div class="flex flex-row justify-center items-center gap-2 cursor-pointer">
-      <img src="Icon.png" alt="Icon" class="h-10 w-10 rounded-full" />
-      <a class="text-white text-lg font-exo" routerLink="/">Ticket Booking</a>
+<nav class="bg-stone-800 p-4 fixed w-full top-0 z-50">
+  <div class="container mx-auto">
+    <!-- Main Navbar Content -->
+    <div class="flex justify-between items-center">
+      <!-- Logo Section -->
+      <div
+        class="flex flex-row justify-center items-center gap-2 cursor-pointer"
+      >
+        <img src="Icon.png" alt="Icon" class="h-10 w-10 rounded-full" />
+        <a class="text-white text-lg font-exo" routerLink="/">Ticket Booking</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="md:hidden text-white hover:text-blue-400 transition-duration-200 focus:outline-none"
+        (click)="toggleMenu()"
+      >
+        <mat-icon>{{ isMenuOpen ? "close" : "menu" }}</mat-icon>
+      </button>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center">
+        <ul class="flex space-x-6">
+          <li class="flex justify-center items-center">
+            <a
+              class="text-white font-exo hover:text-blue-400 transition-colors duration-200"
+              routerLink="/events"
+              routerLinkActive="text-blue-400"
+              >Events</a
+            >
+          </li>
+
+          @if (isLoggedIn) {
+          <li class="flex justify-center items-center">
+            <a
+              class="text-white font-exo hover:text-blue-400 transition-colors duration-200"
+              routerLink="/bookings"
+              routerLinkActive="text-blue-400"
+              >Bookings</a
+            >
+          </li>
+
+          <li class="flex justify-center items-center">
+            <a
+              class="flex items-center justify-center text-white font-exo gap-2 hover:text-blue-400 transition-colors duration-200"
+              routerLink="/cart"
+              routerLinkActive="text-blue-400"
+            >
+              <mat-icon>shopping_cart</mat-icon>
+              <span>Cart</span>
+            </a>
+          </li>
+
+          <!-- User Profile Dropdown -->
+          <li class="relative group">
+            <button
+              class="flex items-center gap-2 text-white font-exo hover:text-blue-400 transition-colors duration-200"
+              (click)="toggleProfileMenu()"
+            >
+              <mat-icon>person</mat-icon>
+              <span>{{ username }}</span>
+              <mat-icon [class.rotate-180]="isProfileMenuOpen"
+                >expand_more</mat-icon
+              >
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div
+              class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
+              [class.hidden]="!isProfileMenuOpen"
+            >
+              <a
+                routerLink="/profile"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >Profile</a
+              >
+              <button
+                (click)="logout()"
+                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+              >
+                <mat-icon class="text-gray-500">logout</mat-icon>
+                <span>Logout</span>
+              </button>
+            </div>
+          </li>
+          } @else {
+          <li class="flex justify-center items-center">
+            <a
+              class="text-white font-exo hover:text-blue-400 transition-colors duration-200"
+              routerLink="/login"
+              routerLinkActive="text-blue-400"
+              >Login</a
+            >
+          </li>
+          }
+        </ul>
+      </div>
     </div>
-    <div class="flex items-center">
-      <ul class="flex space-x-4">
-        <li>
-          <a
-            class="text-white font-exo"
-            routerLink="/home"
-            routerLinkActive="text-blue-400 "
-            >Home</a
-          >
-        </li>
-        <li>
-          <a
-            class="text-white font-exo"
-            routerLink="/events"
-            routerLinkActive="text-blue-400"
-            >Events</a
-          >
-        </li>
-        <!-- Show 'My Bookings' and 'Logout' if logged in -->
-        @if(isLoggedIn){
-        <li>
-          <a
-            class="text-white font-exo"
-            routerLink="/bookings"
-            routerLinkActive="text-blue-400"
-            >My Bookings</a
-          >
-        </li>
-        <li>
-          <a
-            class="text-white font-exo"
-            routerLink="/profile"
-            routerLinkActive="text-blue-400"
-            >{{ username }}</a
-          >
-        </li>
-        <li>
-          <a class="text-white font-exo cursor-pointer" (click)="logout()">
-            <mat-icon>logout</mat-icon>
-          </a>
-        </li>
 
+    <!-- Mobile Menu -->
+    <div class="md:hidden" [class.hidden]="!isMenuOpen">
+      <div class="mt-4 bg-stone-700 rounded-lg p-4 space-y-4">
+        <a
+          routerLink="/events"
+          routerLinkActive="text-blue-400"
+          class="block text-white font-exo hover:text-blue-400 transition-colors duration-200"
+          >Events</a
+        >
+
+        @if (isLoggedIn) {
+        <a
+          routerLink="/bookings"
+          routerLinkActive="text-blue-400"
+          class="block text-white font-exo hover:text-blue-400 transition-colors duration-200"
+          >Bookings</a
+        >
+
+        <a
+          routerLink="/cart"
+          routerLinkActive="text-blue-400"
+          class="flex items-center gap-2 text-white font-exo hover:text-blue-400 transition-colors duration-200"
+        >
+          <mat-icon>shopping_cart</mat-icon>
+          <span>Cart</span>
+        </a>
+
+        <a
+          routerLink="/profile"
+          routerLinkActive="text-blue-400"
+          class="flex items-center gap-2 text-white font-exo hover:text-blue-400 transition-colors duration-200"
+        >
+          <mat-icon>person</mat-icon>
+          <span>{{ username }}</span>
+        </a>
+
+        <button
+          (click)="logout()"
+          class="flex items-center gap-2 text-white font-exo hover:text-blue-400 transition-colors duration-200 w-full"
+        >
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+        } @else {
+        <a
+          routerLink="/login"
+          routerLinkActive="text-blue-400"
+          class="block text-white font-exo hover:text-blue-400 transition-colors duration-200"
+          >Login</a
+        >
         }
-
-        <!-- Show 'Login' if not logged in -->
-        @if(!isLoggedIn){
-
-        <li>
-          <a
-            class="text-white font-exo"
-            routerLink="/login"
-            routerLinkActive="text-blue-400"
-            >Login</a
-          >
-        </li>
-        }
-      </ul>
+      </div>
     </div>
   </div>
 </nav>
+
+<!-- Spacer to prevent content from hiding behind fixed navbar -->
+<div class="h-20"></div>
+`

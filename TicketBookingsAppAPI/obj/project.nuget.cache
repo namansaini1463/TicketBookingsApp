@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7ouaQWDCHZY=",
+  "dgSpecHash": "5t96w+nfzGo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\NamanSaini\\Downloads\\TicketBookingsApp-third_requirements_events\\TicketBookingsApp-third_requirements_events\\TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj",
+  "projectFilePath": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\NamanSaini\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\NamanSaini\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

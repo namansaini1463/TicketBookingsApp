@@ -1,77 +1,79 @@
 <div class="bg-white mt-4 w-full font-exo">
   @if(event){
   <ng-container>
-    <div class="p-4 flex flex-col flex-1 w-1/2 mx-auto shadow-2xl">
+    <div class="p-6 flex flex-col flex-1 w-3/4 lg:w-1/2 mx-auto shadow-2xl rounded-xl">
       <!-- Images Carousel -->
-      <app-carousel [images]="event.images"></app-carousel>
+      <app-carousel [images]="event.images" class="rounded-lg mb-4 overflow-hidden"></app-carousel>
 
       <!-- Event Name -->
       <p
-        class="text-xl font-semibold mb-6 text-blue-700 mt-4 cursor-pointer w-fit hover:underline"
+        class="text-3xl font-bold mb-4 text-blue-700 mt-2 cursor-pointer hover:underline w-fit"
       >
         {{ event.name }}
       </p>
 
-      <!-- To show event category tags -->
-      <div class="flex flex-wrap gap-2 mb-4">
+      <!-- Event Category Tags -->
+      <div class="flex flex-wrap gap-3 mb-6">
         <ng-container *ngFor="let category of event.categories">
           <span
-            class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full"
+            class="bg-blue-200 text-blue-900 text-sm font-semibold px-3 py-1 rounded-full shadow-sm"
           >
             {{ category }}
           </span>
         </ng-container>
       </div>
 
-      <p class="text-gray-600 w-full">
+      <!-- Description -->
+      <p class="text-gray-700 mb-6 leading-relaxed">
         <strong>Description: </strong>
         {{ event.eventDescription || "No description available" }}
       </p>
 
-      <div class="flex-1">
-        <p class="text-gray-600">
-          <strong>Date:</strong> {{ event.dateAndTime | date : "longDate" }}
+      <!-- Date and Time Details -->
+      <div class="text-gray-700 mb-6">
+        <p class="flex items-center mb-2">
+          <strong class="mr-2">Date:</strong> {{ event.dateAndTime | date : "longDate" }}
         </p>
-        <p class="text-gray-600">
-          <strong>Time: </strong>
+        <p class="flex items-center">
+          <strong class="mr-2">Time: </strong>
           {{ getFormattedTimeWithTimezone(event.dateAndTime) }}
         </p>
+      </div>
 
-        <!-- Venue Details in a Card-like Format -->
-        <div class="bg-gray-100 p-4 rounded-lg mt-4">
-          <p class="text-lg font-semibold text-blue-600 mb-2">
-            Venue Details
-          </p>
-          <p class="text-gray-800">
-            <strong>Name:</strong>
-            {{ event.venue.name || "Venue name unavailable" }}
-          </p>
-          <p class="text-gray-800">
-            <strong>Address:</strong>
-            {{ event.venue.address || "Address unavailable" }}
-          </p>
-          <p class="text-gray-800">
-            <strong>State:</strong>
-            {{ event.venue.state || "State unavailable" }}
-          </p>
-          <p class="text-gray-800">
-            <strong>Capacity:</strong>
-            {{ event.venue.capacity || "Capacity not specified" }} people
-          </p>
-        </div>
+      <!-- Venue Details in a Card-like Format -->
+      <div class="bg-gray-100 p-5 rounded-lg shadow-inner mt-6 mb-6">
+        <p class="text-lg font-semibold text-blue-600 mb-3">
+          Venue Details
+        </p>
+        <p class="text-gray-800 mb-1">
+          <strong>Name:</strong>
+          {{ event.venue.name || "Venue name unavailable" }}
+        </p>
+        <p class="text-gray-800 mb-1">
+          <strong>Address:</strong>
+          {{ event.venue.address || "Address unavailable" }}
+        </p>
+        <p class="text-gray-800 mb-1">
+          <strong>State:</strong>
+          {{ event.venue.state || "State unavailable" }}
+        </p>
+        <p class="text-gray-800">
+          <strong>Capacity:</strong>
+          {{ event.venue.capacity || "Capacity not specified" }} people
+        </p>
       </div>
 
       <!-- Event Ticket Types -->
-      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
         <ng-container *ngFor="let ticket of event.ticketTypes">
           <!-- Ticket Card -->
           <div
-            class="relative p-4 border border-gray-200 rounded-lg shadow-lg w-full flex flex-col flex-1 justify-between"
+            class="relative p-5 border border-gray-200 rounded-lg shadow-lg flex flex-col justify-between"
           >
             <!-- Sold Out Overlay -->
             <div
               *ngIf="ticket.quantityAvailable === 0"
-              class="absolute inset-0 bg-red-600 text-white font-bold text-lg flex justify-center items-center opacity-85 rounded-lg cursor-not-allowed"
+              class="absolute inset-0 bg-red-500 text-white font-bold text-lg flex justify-center items-center opacity-80 rounded-lg cursor-not-allowed"
               style="z-index: 10"
             >
               Sold Out
@@ -80,17 +82,16 @@
             <!-- Ticket Info -->
             <div [class.opacity-50]="ticket.quantityAvailable === 0">
               <p class="text-xl font-semibold mb-2">{{ ticket.type }}</p>
-              <p class="text-gray-700">
+              <p class="text-gray-800 mb-1">
                 <strong>Price:</strong> ₹ {{ ticket.price }}
               </p>
-              <p class="text-gray-700">
+              <p class="text-gray-800">
                 <strong>Available:</strong> {{ ticket.quantityAvailable }}
               </p>
             </div>
             <!-- Book Now Button -->
-            <!-- (click)="bookEvent(event.eventID, ticket.type)" -->
             <button
-              class="bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full hover:bg-blue-600"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 w-full hover:bg-blue-600 transition"
               [disabled]="ticket.quantityAvailable === 0"
               (click)="bookEvent(ticket.ticketTypeID)"
             >
@@ -101,15 +102,15 @@
       </div>
 
       <!-- Organizer Details -->
-      <div class="bg-gray-100 p-4 rounded-lg mt-4">
-        <p class="text-lg font-semibold text-blue-600 mb-2">
+      <div class="bg-gray-100 p-5 rounded-lg shadow-inner mt-6">
+        <p class="text-lg font-semibold text-blue-600 mb-3">
           Organizer Information
         </p>
-        <p class="text-gray-800">
+        <p class="text-gray-800 mb-1">
           <strong>Name:</strong>
           {{ event.organizer.name || "Organizer name unavailable" }}
         </p>
-        <p class="text-gray-800">
+        <p class="text-gray-800 mb-1">
           <strong>Email:</strong>
           {{ event.organizer.contactEmail || "Email unavailable" }}
         </p>
@@ -121,6 +122,6 @@
     </div>
   </ng-container>
   } @else {
-  <h1>Event not found</h1>
+  <h1 class="text-center text-gray-700 mt-10">Event not found</h1>
   }
 </div>

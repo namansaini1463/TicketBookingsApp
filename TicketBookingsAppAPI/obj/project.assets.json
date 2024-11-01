@@ -4504,11 +4504,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\NamanSaini\\Downloads\\TicketBookingsApp-third_requirements_events\\TicketBookingsApp-third_requirements_events\\TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj",
+      "projectUniqueName": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj",
       "projectName": "TicketBookingsAppAPI",
-      "projectPath": "C:\\Users\\NamanSaini\\Downloads\\TicketBookingsApp-third_requirements_events\\TicketBookingsApp-third_requirements_events\\TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj",
+      "projectPath": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj",
       "packagesPath": "C:\\Users\\NamanSaini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\NamanSaini\\Downloads\\TicketBookingsApp-third_requirements_events\\TicketBookingsApp-third_requirements_events\\TicketBookingsAppAPI\\obj\\",
+      "outputPath": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\NamanSaini\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,82 +1,105 @@
+@if(event){
 <div
-  class="bg-white shadow-lg rounded-lg overflow-hidden mt-4 w-full h-full hover:scale-105 transition-all duration-150"
+  class="group bg-white rounded-3xl shadow-lg overflow-hidden transition-transform duration-300 hover:shadow-2xl h-full flex flex-col transform hover:-translate-y-1"
 >
-  @if(event){
-  <ng-container>
-    <div class="p-4 flex flex-col flex-1 h-full">
-      <!-- Images Carousel -->
-      <app-carousel [images]="event.images"></app-carousel>
-
-      <div
-        class="cursor-pointer flex flex-1 flex-col"
-        (click)="goToEvent(event.eventID)"
-      >
-        <!-- Event Name -->
-        <p
-          class="text-2xl font-semibold mb-6 text-blue-700 mt-4 cursor-pointer w-fit hover:underline font-exo"
-          (click)="goToEvent(event.eventID)"
+  <div class="flex-1 flex flex-col">
+    <!-- Images Carousel with overlay gradient -->
+    <div class="relative">
+      <app-carousel
+        [images]="event.images"
+        class="aspect-[16/9] w-full overflow-hidden rounded-t-3xl"
+      ></app-carousel>
+      <!-- Category Tags - Overlayed on image -->
+      <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+        @for(category of event.categories; track category){
+        <span
+          class="inline-flex items-center bg-green-600 bg-opacity-80 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm"
         >
-          {{ event.name }}
-        </p>
+          {{ category }}
+        </span>
+        }
+      </div>
+    </div>
 
-        <!-- To show event category tags -->
-        <div class="flex flex-wrap gap-2 mb-4">
-          <ng-container *ngFor="let category of event.categories">
-            <span
-              class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full"
-            >
-              {{ category }}
-            </span>
-          </ng-container>
+    <!-- Content Section -->
+    <div
+      class="p-6 flex-1 flex flex-col cursor-pointer"
+      (click)="goToEvent(event.eventID)"
+    >
+      <!-- Event Name -->
+      <h3
+        class="text-2xl sm:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200 font-exo line-clamp-2"
+      >
+        {{ event.name }}
+      </h3>
+
+      <!-- Quick Info Pills -->
+      <div class="flex flex-wrap gap-3 mt-3 text-sm text-gray-700">
+        <div
+          class="inline-flex items-center bg-blue-50 text-blue-700 px-3 py-1 rounded-full shadow-sm"
+        >
+          <mat-icon class="text-base mr-1">calendar_month</mat-icon>
+          {{ event.dateAndTime | date : "MMM d, y" }}
         </div>
-
-        <p class="text-gray-600 w-full mb-3">
-          <strong>Description: </strong>
-          {{ event.eventDescription || "No description available" }}
-        </p>
-
-        <div class="flex-1">
-          <p class="text-gray-600 w-full my-2">
-            <mat-icon class="align-middle">location_on</mat-icon>
-            <strong class="align-middle">Location: </strong>
-            {{ event.venue.state || "Location unavailable" }}
-          </p>
-
-          <p class="text-gray-600 my-2">
-            <mat-icon class="align-middle">calendar_month</mat-icon>
-            <strong class="align-middle">Date:</strong>
-            {{ event.dateAndTime | date : "longDate" }}
-          </p>
-          <p class="text-gray-600 my-2">
-            <mat-icon class="align-middle">schedule</mat-icon>
-            <strong class="align-middle">Time: </strong>
-            {{ getFormattedTimeWithTimezone(event.dateAndTime) }}
-          </p>
+        <div
+          class="inline-flex items-center bg-blue-50 text-blue-700 px-3 py-1 rounded-full shadow-sm"
+        >
+          <mat-icon class="text-base mr-1">schedule</mat-icon>
+          {{ getFormattedTimeWithTimezone(event.dateAndTime) }}
         </div>
-
-        <!-- Event Ticket Types -->
-        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <p class="text-gray-600 w-full">
-            <strong>Tickets Available: </strong>
-            {{ getTotalTicketsAvailable() }}
-          </p>
+        <div
+          class="inline-flex items-center bg-blue-50 text-blue-700 px-3 py-1 rounded-full shadow-sm"
+        >
+          <mat-icon class="text-base mr-1">location_on</mat-icon>
+          {{ event.venue.state || "Location unavailable" }}
         </div>
       </div>
 
+      <!-- Description -->
+      <p
+        class="mt-4 pt-4 text-gray-600 line-clamp-3 text-sm sm:text-base leading-relaxed"
+      >
+        {{ event.eventDescription || "No description available" }}
+      </p>
+
+      <!-- Availability Section -->
+      <div class="mt-6 flex items-center justify-between">
+        <div class="flex flex-col">
+          <span class="text-sm text-gray-500">Availability</span>
+          <div class="flex items-center gap-2 mt-1">
+            @if(getTotalTicketsAvailable() > 0) {
+            <span class="flex h-2 w-2 rounded-full bg-green-500"></span>
+            <span class="font-medium text-green-700">
+              {{ getTotalTicketsAvailable() }} tickets left
+            </span>
+            } @else {
+            <span class="flex h-2 w-2 rounded-full bg-red-500"></span>
+            <span class="font-medium text-red-600">Sold Out</span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Button -->
+    <div class="p-6 pt-0">
       <button
-        class="px-4 py-2 rounded mt-6 w-full"
-        [ngClass]="{
-          'bg-blue-500 text-white hover:bg-blue-600':
-            getTotalTicketsAvailable() > 0,
-          'bg-gray-400 text-gray-700 cursor-not-allowed':
-            getTotalTicketsAvailable() === 0
-        }"
         (click)="bookEvent(event.eventID)"
         [disabled]="getTotalTicketsAvailable() === 0"
+        class="w-full rounded-2xl font-medium transition-all duration-200 flex items-center justify-center gap-2 py-3 px-6 shadow-lg"
+        [class]="
+          getTotalTicketsAvailable() > 0
+            ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-blue-300'
+            : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+        "
       >
-        {{ getTotalTicketsAvailable() > 0 ? "Book Now" : "Sold Out" }}
+        @if(getTotalTicketsAvailable() > 0) {
+        <span class="material-icons text-xl">confirmation_number</span>
+        Book Now } @else {
+        <span class="material-icons text-xl">block</span>
+        Sold Out }
       </button>
     </div>
-  </ng-container>
-  }
+  </div>
 </div>
+}

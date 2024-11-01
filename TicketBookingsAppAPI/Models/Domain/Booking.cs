@@ -16,12 +16,26 @@ namespace TicketBookingsAppAPI.Models.Domain
         [Required]
         public DateTime BookingDate { get; set; } = DateTime.UtcNow;
 
-        public string BookingStatus { get; set; }
+        public BookingStatus BookingStatus { get; set; }
 
         // Collection of BookingItems representing each ticket booked
         public List<BookingItem> BookingItems { get; set; } = new List<BookingItem>();
 
         [Required]
         public decimal TotalAmount { get; set; } // Total price for the booking
+
+        // Coupon reference
+        public Guid? CouponID { get; set; } // Nullable foreign key for Coupon
+        [ForeignKey("CouponID")]
+        public Coupon Coupon { get; set; }
+
+        public decimal DiscountApplied { get; set; } // Discount amount applied
+    }
+
+    public enum BookingStatus
+    {
+        Pending,
+        Confirmed,
+        Cancelled
     }
 }

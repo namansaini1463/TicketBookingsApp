@@ -1,14 +1,14 @@
 ﻿using System.Runtime.CompilerServices;
 using TicketBookingsAppAPI.Models.Domain;
+using TicketBookingsAppAPI.Models.DTOs;
 
 namespace TicketBookingsAppAPI.Repositories
 {
     public interface IBookingRepository
     {
-        //Task<List<Booking>> GetAllBookings();
-        //Task<Booking> BookEvent(Booking bookingDM);
-        //Task<Booking?> DeleteBooking(Guid bookingID);
-        //Task<Booking?> GetBookingById(Guid bookingID);
-        //Task<List<Booking>?> GetUserBookings(string userID);
+        Task<Booking> CreateBookingFromCartAsync(string userId, PaymentDTO paymentDTO, string couponCode);
+        Task<Booking> GetBookingByIdAsync(Guid bookingId);
+        Task<List<Booking>> GetBookingsByUserIdAsync(string userId);
+        Task CancelBookingAsync(Guid bookingId);
     }
 }

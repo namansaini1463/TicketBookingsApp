@@ -60,7 +60,6 @@ namespace TicketBookingsAppAPI.Repositories
         public async Task<ShoppingCart?> GetCartByUserIdAsync(string userId)
         {
             return await ticketBookingsAppDBContext.ShoppingCarts
-                .Include(ci => ci.User)
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.TicketType)
                 .FirstOrDefaultAsync(c => c.UserID == userId);

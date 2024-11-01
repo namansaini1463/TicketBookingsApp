@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using TicketBookingsAppAPI.Models.Domain;
+﻿using Microsoft.AspNetCore.Mvc;
 using TicketBookingsAppAPI.Models.DTOs;
 using TicketBookingsAppAPI.Repositories;
 
@@ -10,93 +8,73 @@ namespace TicketBookingsAppAPI.Controllers
     [ApiController]
     public class BookingsController : ControllerBase
     {
-        //    private readonly IBookingRepository bookingRepository;
-        //    private readonly IMapper mapper;
-        //    private readonly IEventRepository eventRepository;
+        private readonly IBookingRepository bookingRepository;
 
-        //    public BookingsController(IBookingRepository bookingRepository, IMapper mapper, IEventRepository eventRepository)
-        //    {
-        //        this.bookingRepository = bookingRepository;
-        //        this.mapper = mapper;
-        //        this.eventRepository = eventRepository;
-        //    }
+        public BookingsController(IBookingRepository bookingRepository)
+        {
+            this.bookingRepository = bookingRepository;
+        }
+        // POST: api/Booking/Create
+        [HttpPost("Create")]
+        public async Task<IActionResult> CreateBooking([FromBody] CreateBookingDTO createBookingDTO)
+        {
+    
+            try
+            {
+                var paymentDetails = new PaymentDTO
+                {
+                    paymentMethod = createBookingDTO.paymentMethod,
+                    paymentStatus = createBookingDTO.paymentStatus,
+                    transactionId = createBookingDTO.transactionId
+                };
+                var booking = await bookingRepository.CreateBookingFromCartAsync(createBookingDTO.UserID, paymentDetails, createBookingDTO.CouponCode);
+                return Ok(new { Message = "Booking created successfully", Booking = booking });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
 
-        //    // POST: BOOK AN EVENT BY ID
-        //    [HttpPost]
-        //    [Route("Book/{EventId}")]
-        //    public async Task<IActionResult> BookEventById([FromRoute] Guid EventId, [FromBody] AddBookingDTO addBookingDTO)
-        //    {
-        //        var eventToBeBooked = await eventRepository.GetEvent(EventId);
 
-        //        if (eventToBeBooked == null)
-        //        {
-        //            return NotFound("No event was found! Booking was uncessful!");
-        //        }
+        [HttpPut("Cancel/{bookingId}")]
+        public async Task<IActionResult> CancelBooking(Guid bookingId)
+        {
+            try
+            {
+                await bookingRepository.CancelBookingAsync(bookingId);
+                return Ok(new { Message = "Booking cancelled successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
 
-        //        var bookingDM = new Booking
-        //        {
-        //            BookingID = Guid.NewGuid(),
-        //            EventID = eventToBeBooked.EventID,
-        //            UserID = addBookingDTO.UserID,
-        //            BookingDate = DateTime.Now,
-        //            NumberOfTickets = addBookingDTO.NumberOfTickets,
-        //            Amount = addBookingDTO.NumberOfTickets * eventToBeBooked.TicketPrice,
-        //        };
+        [HttpGet("{bookingId}")]
+        public async Task<IActionResult> GetBooking(Guid bookingId)
+        {
+            var booking = await bookingRepository.GetBookingByIdAsync(bookingId);
+            if (booking == null)
+            {
+                return NotFound(new { Message = "Booking not found." });
+            }
 
-        //        var bookingResult = await bookingRepository.BookEvent(bookingDM);
+            return Ok(booking);
+        }
 
-        //        // Check if bookingResult is null (error such as not enough tickets)
-        //        if (bookingResult == null)
-        //        {
-        //            return BadRequest("Unable to book the event. Not enough tickets or event not found.");
-        //        }
+        // GET: api/Bookings/User/{userId}
+        [HttpGet("User/{userId}")]
+        public async Task<IActionResult> GetUserBookings([FromRoute] string userId)
+        {
+            var bookings = await bookingRepository.GetBookingsByUserIdAsync(userId);
 
-        //        var bookingDTO = mapper.Map<BookingDTO>(bookingResult);
-        //        return CreatedAtAction(nameof(BookEventById), new { id = bookingDTO.EventID }, bookingDTO);
-        //    }
+            if (bookings == null || bookings.Count == 0)
+            {
+                return NotFound(new { Message = "No bookings found for this user." });
+            }
 
-        //    // GET : GET ALL BOOKED EVENTS 
-        //    [HttpGet]
-        //    [Route("All")]
-        //    //[Authorize(Roles = "Event Manager")]
-        //    public async Task<IActionResult> GetAllBookings()
-        //    {
-        //        var allBookings = await bookingRepository.GetAllBookings();
-
-        //        var allBookingsDTO = mapper.Map<List<BookingDTO>>(allBookings); // Correct mapping
-        //        return Ok(allBookingsDTO); // Return DTO, not domain model
-        //    }
-
-        //    // GET : GET ALL THE EVENTS BOOKED BY A USER
-        //    [HttpGet]
-        //    [Route("{userId}")]
-        //    public async Task<IActionResult> GetUserBookings([FromRoute] string userId)
-        //    {
-        //        var userBookings = await bookingRepository.GetUserBookings(userId);
-
-        //        if (userBookings == null)
-        //        {
-        //            return NotFound($"No bookings found for user {userId}.");
-        //        }
-
-        //        var userBookingsDTO = mapper.Map<List<BookingDTO>>(userBookings);
-
-        //        return Ok(userBookingsDTO);
-        //    }
-
-        //    // DELETE : DELETE A BOOKING
-        //    [HttpDelete]
-        //    [Route("Delete/{BookingId}")]
-        //    public async Task<IActionResult> DeleteEvent([FromRoute] Guid BookingId)
-        //    {
-        //        var bookingToBeDeleted = await bookingRepository.DeleteBooking(BookingId);
-
-        //        if (bookingToBeDeleted == null)
-        //        {
-        //            return NotFound($"Booking with ID {BookingId} not found.");
-        //        }
-
-        //        return Ok(mapper.Map<BookingDTO>(bookingToBeDeleted)); // Map deleted booking to DTO and return
-        //    }
+            return Ok(bookings);
+        }
     }
 }

@@ -180,9 +180,14 @@ namespace TicketBookingsAppAPI.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("BookingStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BookingStatus")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("CouponID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("DiscountApplied")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
@@ -192,6 +197,8 @@ namespace TicketBookingsAppAPI.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("BookingID");
+
+                    b.HasIndex("CouponID");
 
                     b.HasIndex("UserID");
 
@@ -247,6 +254,36 @@ namespace TicketBookingsAppAPI.Migrations
                     b.HasIndex("TicketTypeID");
 
                     b.ToTable("CartItems");
+                });
+
+            modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Coupon", b =>
+                {
+                    b.Property<Guid>("CouponID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CurrentUses")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("DiscountValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPercentage")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MaxUses")
+                        .HasColumnType("int");
+
+                    b.HasKey("CouponID");
+
+                    b.ToTable("Coupons");
                 });
 
             modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Event", b =>
@@ -317,6 +354,12 @@ namespace TicketBookingsAppAPI.Migrations
                     b.Property<string>("PaymentMethod")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RefundDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("TransactionID")
                         .HasColumnType("uniqueidentifier");
@@ -513,11 +556,18 @@ namespace TicketBookingsAppAPI.Migrations
 
             modelBuilder.Entity("TicketBookingsAppAPI.Models.Domain.Booking", b =>
                 {
+                    b.HasOne("TicketBookingsAppAPI.Models.Domain.Coupon", "Coupon")
+                        .WithMany()
+                        .HasForeignKey("CouponID")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("TicketBookingsAppAPI.Models.Domain.User", "User")
                         .WithMany("Bookings")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Coupon");
 
                     b.Navigation("User");
                 });

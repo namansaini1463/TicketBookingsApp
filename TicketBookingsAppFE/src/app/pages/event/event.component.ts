@@ -58,8 +58,6 @@ export class EventComponent {
   }
 
   loadEventData(eventID: string): void {
-    console.log(eventID);
-
     this.eventsService.getEventByID(eventID).subscribe(
       (data: any) => {
         console.log('API Response:', data);

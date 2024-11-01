@@ -9,6 +9,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EventComponent } from './pages/event/event.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,6 +33,12 @@ export const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'cart',
+    component: CartComponent,
+    canActivate: [AuthGuard],
+  },
+
   //Wildcard route to handle invalid URLs
   { path: '**', redirectTo: '' },
 ];

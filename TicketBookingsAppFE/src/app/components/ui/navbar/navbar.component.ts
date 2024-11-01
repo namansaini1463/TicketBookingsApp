@@ -6,6 +6,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { filter } from 'rxjs/operators'; // Import filter for filtering events
 import { Subscription } from 'rxjs'; // Import Subscription for cleanup
 import { MatIconModule } from '@angular/material/icon';
+import { UserProfile } from '../../../models/Auth';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +18,9 @@ import { MatIconModule } from '@angular/material/icon';
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false; // Variable to track login state
   username: string | null = null; // Variable to store the username
+  userID: string | null = null;
+  isMenuOpen = false;
+  isProfileMenuOpen = false;
 
   private usernameSubscription!: Subscription; // Subscription for username observable
   private loggedInSubscription!: Subscription; // Subscription for login observable
@@ -54,5 +58,16 @@ export class NavbarComponent implements OnInit {
       this.router.navigate(['/login']); // Optionally navigate to login page after logging out
       alert('You were logged out!');
     }
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    if (this.isMenuOpen) {
+      this.isProfileMenuOpen = false;
+    }
+  }
+
+  toggleProfileMenu() {
+    this.isProfileMenuOpen = !this.isProfileMenuOpen;
   }
 }

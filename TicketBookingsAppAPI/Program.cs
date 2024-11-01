@@ -59,6 +59,7 @@ builder.Services.AddScoped<IEventRepository, SQLEventRepository>();
 builder.Services.AddScoped<IBookingRepository, SQLBookingRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IShoppingCartRepository, SQLShoppingCartRepository>();
+builder.Services.AddScoped<ICouponRepository, SQLCouponRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMappings));
 

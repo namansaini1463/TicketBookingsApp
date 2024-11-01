@@ -19,6 +19,7 @@ namespace TicketBookingsAppAPI.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<BookingItem> BookingItems { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -86,6 +87,13 @@ namespace TicketBookingsAppAPI.Data
                 .HasMany(b => b.BookingItems)
                 .WithOne(i => i.Booking) // Assuming BookingItem has a navigation property `Booking`
                 .HasForeignKey(i => i.BookingID); // Use BookingItem's BookingID as foreign key
+
+            // Configure the foreign key relationship between Booking and Coupon
+            builder.Entity<Booking>()
+               .HasOne(b => b.Coupon)
+               .WithMany()
+               .HasForeignKey(b => b.CouponID)
+               .OnDelete(DeleteBehavior.SetNull); // Allow null values if no coupon is used
         }
     }
 }

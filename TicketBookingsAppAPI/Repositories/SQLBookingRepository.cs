@@ -8,109 +8,179 @@ namespace TicketBookingsAppAPI.Repositories
 {
     public class SQLBookingRepository : IBookingRepository
     {
-        //private readonly TicketBookingsAppDBContext ticketBookingsAppDBContext;
-        //private readonly IEventRepository eventRepository;
+        private readonly TicketBookingsAppDBContext ticketBookingsAppDBContext;
+        private readonly ICouponRepository couponRepository;
 
-        //public SQLBookingRepository(TicketBookingsAppDBContext ticketBookingsAppDBContext, IEventRepository eventRepository)
-        //{
-        //    this.ticketBookingsAppDBContext = ticketBookingsAppDBContext;
-        //    this.eventRepository = eventRepository;
-        //}
-        //public async Task<List<Booking>> GetAllBookings()
-        //{
-        //    return await ticketBookingsAppDBContext.Bookings
-        //                                .Include(b => b.BookingUser) 
-        //                                .Include(b => b.BookingEvent)
-        //                                .ToListAsync();
-        //}
+        public SQLBookingRepository(TicketBookingsAppDBContext ticketBookingsAppDBContext, ICouponRepository couponRepository)
+        {
+            this.ticketBookingsAppDBContext = ticketBookingsAppDBContext;
+            this.couponRepository = couponRepository;
+        }
 
-        //public async Task<Booking> BookEvent(Booking bookingDM)
-        //{
-        //    var eventData = await eventRepository.GetEvent(bookingDM.EventID);
+        public async Task CancelBookingAsync(Guid bookingId)
+        {
+            var booking = await ticketBookingsAppDBContext.Bookings
+                .Include(b => b.BookingItems)
+                .ThenInclude(bi => bi.TicketType)
+                .FirstOrDefaultAsync(b => b.BookingID == bookingId);
 
-        //    if (eventData == null)
-        //    {
-        //        return null; // Return null if event not found
-        //    }
+            if (booking == null)
+            {
+                throw new Exception("Booking not found.");
+            }
 
-        //    if (bookingDM.NumberOfTickets > eventData.AvailableTickets)
-        //    {
-        //        return null; // Return null if not enough tickets
-        //    }
+            // Check if the booking is already cancelled
+            if (booking.BookingStatus == BookingStatus.Cancelled)
+            {
+                throw new Exception("Booking is already cancelled.");
+            }
 
-        //    // Adjust available tickets for the event
-        //    eventData.AvailableTickets -= bookingDM.NumberOfTickets;
+            // Restore the ticket quantities for each booking item
+            foreach (var bookingItem in booking.BookingItems)
+            {
+                var ticketType = await ticketBookingsAppDBContext.TicketTypes.FindAsync(bookingItem.TicketTypeID);
+                if (ticketType != null)
+                {
+                    ticketType.QuantityAvailable += bookingItem.Quantity; // Restore the available quantity
+                }
+            }
 
-        //    // Add the booking to the database
-        //    await ticketBookingsAppDBContext.Bookings.AddAsync(bookingDM);
-        //    await ticketBookingsAppDBContext.SaveChangesAsync();
+            // Update the booking status to Cancelled
+            booking.BookingStatus = BookingStatus.Cancelled;
 
-        //    // Fetch the created booking with related entities
-        //    var result = await ticketBookingsAppDBContext.Bookings
-        //                    .Include(b => b.BookingUser)
-        //                    .Include(b => b.BookingEvent)
-        //                    .FirstOrDefaultAsync(b => b.BookingID == bookingDM.BookingID);
+            // Update the payment status to Refunded
+            var payment = await ticketBookingsAppDBContext.Payments.FirstOrDefaultAsync(p => p.BookingID == bookingId);
+            if (payment != null)
+            {
+                payment.PaymentStatus = PaymentStatus.Refunded;
+                payment.RefundDate = DateTime.UtcNow; // Optional: Track the refund date
+            }
 
-        //    return result;
+            // Save the changes
+            await ticketBookingsAppDBContext.SaveChangesAsync();
+        }
 
-        //}
+        public async Task<Booking> CreateBookingFromCartAsync(string userId, PaymentDTO paymentDTO, string couponCode = null)
+        {
+            // Fetch the user's cart with items
+            var cart = await ticketBookingsAppDBContext.ShoppingCarts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.TicketType)
+                .FirstOrDefaultAsync(c => c.UserID == userId);
 
-        //public async Task<Booking?> DeleteBooking(Guid bookingID)
-        //{
-        //    // Find the booking to be deleted
-        //    var existingBooking = await ticketBookingsAppDBContext.Bookings
-        //                            .Include(b => b.BookingEvent) // Ensure the event is included
-        //                            .FirstOrDefaultAsync(b => b.BookingID == bookingID);
+            if (cart == null || !cart.CartItems.Any())
+            {
+                throw new Exception("Cart is empty or does not exist.");
+            }
 
-        //    if (existingBooking == null)
-        //    {
-        //        return null; // Return null if booking not found
-        //    }
+            decimal totalAmount = cart.CartItems.Sum(ci => ci.TicketType.Price * ci.Quantity);
+            decimal discountAmount = 0;
+            Coupon coupon = null;
 
-        //    // Fetch the associated event
-        //    var eventData = await eventRepository.GetEvent(existingBooking.EventID);
+            // Validate and apply coupon if provided
+            if (!string.IsNullOrEmpty(couponCode))
+            {
+                coupon = await couponRepository.GetCouponByCodeAsync(couponCode);
+                if (coupon == null || !await couponRepository.ValidateCouponAsync(couponCode))
+                {
+                    throw new Exception("Invalid or expired coupon code.");
+                }
 
-        //    if (eventData != null)
-        //    {
-        //        // Increase the available tickets by the number of tickets in the booking
-        //        eventData.AvailableTickets += existingBooking.NumberOfTickets;
+                // Calculate discount
+                discountAmount = coupon.IsPercentage ? (totalAmount * (coupon.DiscountValue / 100)) : coupon.DiscountValue;
+                totalAmount -= discountAmount; // Apply discount to total amount
+            }
 
-        //        // Save the changes to the event
-        //        ticketBookingsAppDBContext.Events.Update(eventData);
-        //    }
+            // Determine booking status based on payment status
+            var bookingStatus = paymentDTO.paymentStatus == PaymentStatus.Paid ? BookingStatus.Confirmed : BookingStatus.Pending;
 
-        //    // Delete the booking
-        //    await ticketBookingsAppDBContext.Bookings.Where(b => b.BookingID == bookingID).ExecuteDeleteAsync();
-        //    await ticketBookingsAppDBContext.SaveChangesAsync();
+            // Create a new booking
+            var booking = new Booking
+            {
+                BookingID = Guid.NewGuid(),
+                UserID = userId,
+                BookingDate = DateTime.UtcNow,
+                BookingStatus = bookingStatus,
+                TotalAmount = totalAmount,
+                DiscountApplied = discountAmount,
+                CouponID = coupon?.CouponID
+            };
 
-        //    return existingBooking; // Return the deleted booking
-        //}
+            // Add booking items from the cart
+            foreach (var cartItem in cart.CartItems)
+            {
+                var ticketType = cartItem.TicketType;
+                if (ticketType.QuantityAvailable < cartItem.Quantity)
+                {
+                    throw new Exception($"Not enough tickets available for {ticketType.Type}.");
+                }
+
+                // Update available tickets only if the booking is confirmed
+                if (bookingStatus == BookingStatus.Confirmed)
+                {
+                    ticketType.QuantityAvailable -= cartItem.Quantity;
+                }
+
+                var bookingItem = new BookingItem
+                {
+                    BookingItemID = Guid.NewGuid(),
+                    BookingID = booking.BookingID,
+                    TicketTypeID = cartItem.TicketTypeID,
+                    Quantity = cartItem.Quantity
+                };
+
+                booking.BookingItems.Add(bookingItem);
+            }
+
+            // Add the booking to the database
+            await ticketBookingsAppDBContext.Bookings.AddAsync(booking);
+
+            // Remove cart items and clear the cart
+            ticketBookingsAppDBContext.CartItems.RemoveRange(cart.CartItems);
+
+            // Update coupon usage if applied
+            if (coupon != null)
+            {
+                await couponRepository.ApplyCouponAsync(coupon);
+            }
+
+            // Create and add the payment details for the booking
+            var payment = new Payment
+            {
+                PaymentID = Guid.NewGuid(),
+                BookingID = booking.BookingID,
+                Amount = totalAmount,
+                PaymentDate = DateTime.UtcNow,
+                PaymentMethod = paymentDTO.paymentMethod,
+                TransactionID = paymentDTO.transactionId ?? Guid.NewGuid(),
+                PaymentStatus = paymentDTO.paymentStatus // Set based on passed parameter
+            };
+            await ticketBookingsAppDBContext.Payments.AddAsync(payment);
+
+            // Save all changes to the database
+            await ticketBookingsAppDBContext.SaveChangesAsync();
+
+            return booking;
+        }
 
 
-        //public async Task<Booking?> GetBookingById(Guid bookingID)
-        //{
-        //    var booking = await ticketBookingsAppDBContext.Bookings
-        //                        .Include(b => b.BookingUser)
-        //                        .Include(b => b.BookingEvent)
-        //                        .FirstOrDefaultAsync(b => b.BookingID == bookingID);
+        public async Task<Booking> GetBookingByIdAsync(Guid bookingId)
+        {
+            return await ticketBookingsAppDBContext.Bookings
+                .Include(b => b.BookingItems)
+                .ThenInclude(bi => bi.TicketType)
+                .FirstOrDefaultAsync(b => b.BookingID == bookingId);
+        }
 
-        //    return booking; // Return booking or null if not found
-        //}
-
-        //public async Task<List<Booking>?> GetUserBookings(string userID)
-        //{
-        //    var bookings = await ticketBookingsAppDBContext.Bookings
-        //                         .Include(b => b.BookingUser)
-        //                         .Include(b => b.BookingEvent)
-        //                         .Where(b => b.BookingUser.Id == userID)
-        //                         .ToListAsync();
-
-        //    if (bookings == null || bookings.Count == 0)
-        //    {
-        //        return null; // Return null if no bookings found for the user
-        //    }
-
-        //    return bookings;
-        //}
+        public async Task<List<Booking>> GetBookingsByUserIdAsync(string userId)
+        {
+            {
+                return await ticketBookingsAppDBContext.Bookings
+                    .Include(b => b.BookingItems) // Include associated booking items
+                    .ThenInclude(bi => bi.TicketType) // Include associated ticket types for each booking item
+                    .Where(b => b.UserID == userId)
+                    .ToListAsync();
+            }
+        }
     }
 }
