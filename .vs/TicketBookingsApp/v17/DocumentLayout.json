@@ -64,7 +64,7 @@
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Repositories\\SQLEventRepository.cs",
               "ToolTip": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Repositories\\SQLEventRepository.cs",
               "RelativeToolTip": "TicketBookingsAppAPI\\Repositories\\SQLEventRepository.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAuwE4AAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAuwEMAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-01T04:34:43.543Z",
               "EditorCaption": ""
@@ -79,8 +79,7 @@
               "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAEBAAAAAAAAAAAYwA0BAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T06:46:04.247Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T06:46:04.247Z"
             },
             {
               "$type": "Document",
@@ -152,8 +151,7 @@
               "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAkwCAAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T09:26:44.698Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T09:26:44.698Z"
             },
             {
               "$type": "Document",
@@ -189,8 +187,7 @@
               "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\CouponsController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAA0wCEAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T09:11:49.636Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T09:11:49.636Z"
             }
           ]
         }

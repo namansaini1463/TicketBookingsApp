@@ -66,9 +66,6 @@ namespace TicketBookingsAppAPI.Repositories
                 case "venue":
                     query = sortOrder == "desc" ? query.OrderByDescending(e => e.Venue.Name) : query.OrderBy(e => e.Venue.Name);
                     break;
-                case "organizer":
-                    query = sortOrder == "desc" ? query.OrderByDescending(e => e.Organizer.Name) : query.OrderBy(e => e.Organizer.Name);
-                    break;
                 case "price":
                     query = sortOrder == "desc"
                         ? query.OrderByDescending(e => e.TicketTypes.Min(t => t.Price)) // Sort by minimum price, descending
