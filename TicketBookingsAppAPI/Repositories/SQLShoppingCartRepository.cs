@@ -62,6 +62,8 @@ namespace TicketBookingsAppAPI.Repositories
             return await ticketBookingsAppDBContext.ShoppingCarts
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.TicketType)
+                .ThenInclude(ci => ci.Event)
+                .ThenInclude(ci => ci.Images)
                 .FirstOrDefaultAsync(c => c.UserID == userId);
         }
     }

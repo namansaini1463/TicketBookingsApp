@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\namansaini\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\repositories\\sqlshoppingcartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\repositories\\sqlshoppingcartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|c:\\users\\namansaini\\desktop\\ticketbookingsapp\\ticketbookingsappapi\\repositories\\sqleventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{489B0A3A-810E-4DFB-B571-D800313A1626}|TicketBookingsAppAPI\\TicketBookingsAppAPI.csproj|solutionrelative:ticketbookingsappapi\\repositories\\sqleventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -59,19 +63,31 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "SQLShoppingCartRepository.cs",
+              "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Repositories\\SQLShoppingCartRepository.cs",
+              "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Repositories\\SQLShoppingCartRepository.cs",
+              "ToolTip": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Repositories\\SQLShoppingCartRepository.cs",
+              "RelativeToolTip": "TicketBookingsAppAPI\\Repositories\\SQLShoppingCartRepository.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAzwEEAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-01T06:45:52.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "SQLEventRepository.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Repositories\\SQLEventRepository.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Repositories\\SQLEventRepository.cs",
               "ToolTip": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Repositories\\SQLEventRepository.cs",
               "RelativeToolTip": "TicketBookingsAppAPI\\Repositories\\SQLEventRepository.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAuwE4AAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAuwEMAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-01T04:34:43.543Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-01T04:34:43.543Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Controllers\\AuthController.cs",
@@ -79,12 +95,11 @@
               "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAEBAAAAAAAAAAAYwA0BAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T06:46:04.247Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T06:46:04.247Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "CreateBookingDTO.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\CreateBookingDTO.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\DTOs\\CreateBookingDTO.cs",
@@ -96,7 +111,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "PaymentDTO.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\DTOs\\PaymentDTO.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\DTOs\\PaymentDTO.cs",
@@ -108,7 +123,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Payment.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\Payment.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\Domain\\Payment.cs",
@@ -120,7 +135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "IBookingRepository.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Repositories\\IBookingRepository.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Repositories\\IBookingRepository.cs",
@@ -132,7 +147,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "SQLBookingRepository.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Repositories\\SQLBookingRepository.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Repositories\\SQLBookingRepository.cs",
@@ -144,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "BookingsController.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
@@ -152,12 +167,11 @@
               "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\BookingsController.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAkwCAAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T09:26:44.698Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T09:26:44.698Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Booking.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Models\\Domain\\Booking.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Models\\Domain\\Booking.cs",
@@ -169,7 +183,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "ICouponRepository.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Repositories\\ICouponRepository.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Repositories\\ICouponRepository.cs",
@@ -181,7 +195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CouponsController.cs",
               "DocumentMoniker": "C:\\Users\\NamanSaini\\Desktop\\TicketBookingsApp\\TicketBookingsAppAPI\\Controllers\\CouponsController.cs",
               "RelativeDocumentMoniker": "TicketBookingsAppAPI\\Controllers\\CouponsController.cs",
@@ -189,8 +203,7 @@
               "RelativeToolTip": "TicketBookingsAppAPI\\Controllers\\CouponsController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAA0wCEAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T09:11:49.636Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T09:11:49.636Z"
             }
           ]
         }
