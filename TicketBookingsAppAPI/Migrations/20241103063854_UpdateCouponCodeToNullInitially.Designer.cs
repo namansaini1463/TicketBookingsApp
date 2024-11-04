@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketBookingsAppAPI.Data;
 
@@ -11,9 +12,11 @@ using TicketBookingsAppAPI.Data;
 namespace TicketBookingsAppAPI.Migrations
 {
     [DbContext(typeof(TicketBookingsAppDBContext))]
-    partial class TicketBookingsAppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20241103063854_UpdateCouponCodeToNullInitially")]
+    partial class UpdateCouponCodeToNullInitially
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

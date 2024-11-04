@@ -287,6 +287,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TicketBookingsAppAPI.Controllers.CouponController",
+    "Method": "GetCoupon",
+    "RelativePath": "api/Coupon/Get/{couponCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "couponCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TicketBookingsAppAPI.Controllers.EventsController",
     "Method": "PostEvent",
     "RelativePath": "api/Events",

@@ -23,21 +23,25 @@
         <ul class="flex space-x-6">
           <li class="flex justify-center items-center">
             <a
-              class="text-white font-exo hover:text-blue-400 transition-colors duration-200"
+              class="flex items-center justify-center text-white font-exo gap-2 hover:text-blue-400 transition-colors duration-200"
               routerLink="/events"
               routerLinkActive="text-blue-400"
-              >Events</a
             >
+              <mat-icon>web</mat-icon>
+              <span>Events</span>
+            </a>
           </li>
 
           @if (isLoggedIn) {
           <li class="flex justify-center items-center">
             <a
-              class="text-white font-exo hover:text-blue-400 transition-colors duration-200"
+              class="flex items-center justify-center text-white font-exo gap-2 hover:text-blue-400 transition-colors duration-200"
               routerLink="/bookings"
               routerLinkActive="text-blue-400"
-              >Bookings</a
             >
+              <mat-icon>confirmation_number</mat-icon>
+              <span>Bookings</span>
+            </a>
           </li>
 
           <li class="flex justify-center items-center">
@@ -71,9 +75,11 @@
             >
               <a
                 routerLink="/profile"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >Profile</a
+                class="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
               >
+                <mat-icon>person</mat-icon>
+                <span> My Profile </span>
+              </a>
               <button
                 (click)="logout()"
                 class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
@@ -84,14 +90,14 @@
             </div>
           </li>
           } @else {
-          <li class="flex justify-center items-center">
-            <a
-              class="text-white font-exo hover:text-blue-400 transition-colors duration-200"
-              routerLink="/login"
-              routerLinkActive="text-blue-400"
-              >Login</a
-            >
-          </li>
+          <a
+            routerLink="/profile"
+            routerLinkActive="text-blue-400"
+            class="flex items-center gap-2 text-white font-exo hover:text-blue-400 transition-colors duration-200"
+          >
+            <mat-icon>person</mat-icon>
+            <span>Login </span>
+          </a>
           }
         </ul>
       </div>
@@ -104,7 +110,8 @@
           routerLink="/events"
           routerLinkActive="text-blue-400"
           class="block text-white font-exo hover:text-blue-400 transition-colors duration-200"
-          >Events</a
+        >
+          Events</a
         >
 
         @if (isLoggedIn) {

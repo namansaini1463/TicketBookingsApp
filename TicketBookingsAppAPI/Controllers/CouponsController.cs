@@ -34,5 +34,26 @@ namespace TicketBookingsAppAPI.Controllers
             await couponRepository.AddCouponAsync(newCoupon);
             return Ok(new { message = "Coupon added successfully.", newCoupon });
         }
+
+        [HttpGet]
+        [Route("Get/{couponCode}")]
+        public async Task<IActionResult> GetCoupon(string couponCode)
+        {
+            var coupon = await couponRepository.GetCouponByCodeAsync(couponCode);
+
+            if (coupon == null)
+            {
+                return NotFound(new { message = "Coupon not found or invalid." });
+            }
+
+            // Optionally, check if the coupon is expired or has exceeded its maximum uses
+            if (coupon.ExpiryDate < DateTime.UtcNow || coupon.CurrentUses >= coupon.MaxUses)
+            {
+                return BadRequest(new { message = "Coupon is expired or has reached its usage limit." });
+            }
+
+            return Ok(coupon);
+        }
     }
 }
+

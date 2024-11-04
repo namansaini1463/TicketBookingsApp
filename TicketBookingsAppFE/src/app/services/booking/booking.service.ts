@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AddBookingDTO, BookingDTO } from '../../models/Booking';
+import { CreateBookingDTO } from '../../models/Booking';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,33 +12,29 @@ export class BookingService {
 
   constructor(private http: HttpClient) {}
 
-  // Book an event by ID
-  bookEvent(
-    eventId: string,
-    addBookingDTO: AddBookingDTO
-  ): Observable<BookingDTO> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<BookingDTO>(
-      `${this.baseRequestUrlHttp}/book/${eventId}`,
-      addBookingDTO,
-      { headers }
+  // Create a booking from the cart
+  createBooking(createBookingDTO: CreateBookingDTO): Observable<any> {
+    return this.http.post(
+      `${this.baseRequestUrlHttp}/Create`,
+      createBookingDTO
     );
   }
 
-  // Get all bookings
-  getAllBookings(): Observable<BookingDTO[]> {
-    return this.http.get<BookingDTO[]>(`${this.baseRequestUrlHttp}/all`);
-  }
-
-  // Get all bookings by a user
-  getUserBookings(userId: string): Observable<BookingDTO[]> {
-    return this.http.get<BookingDTO[]>(`${this.baseRequestUrlHttp}/${userId}`);
-  }
-
-  // Delete a booking by booking ID
-  deleteBooking(bookingId: string): Observable<BookingDTO> {
-    return this.http.delete<BookingDTO>(
-      `${this.baseRequestUrlHttp}/delete/${bookingId}`
+  // Cancel an existing booking
+  cancelBooking(bookingId: string): Observable<any> {
+    return this.http.put(
+      `${this.baseRequestUrlHttp}/Cancel/${bookingId}`,
+      null
     );
+  }
+
+  // Get a specific booking by its ID
+  getBookingById(bookingId: string): Observable<any> {
+    return this.http.get(`${this.baseRequestUrlHttp}/${bookingId}`);
+  }
+
+  // Get all bookings for a specific user
+  getUserBookings(userId: string): Observable<any> {
+    return this.http.get(`${this.baseRequestUrlHttp}/User/${userId}`);
   }
 }

@@ -37,4 +37,13 @@ export class CartService {
       `${this.baseRequestUrlHttp}/RemoveItem/${cartItemId}`
     );
   }
+
+  //` Validate Coupon
+  validateCoupon(
+    couponCode: string
+  ): Observable<{ discountValue: number; isPercentage: boolean }> {
+    return this.http.get<{ discountValue: number; isPercentage: boolean }>(
+      `http://localhost:5027/api/Coupon/Get/${couponCode}`
+    );
+  }
 }
