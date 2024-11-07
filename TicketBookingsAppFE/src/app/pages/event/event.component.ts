@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Event } from '../../models/Event';
+import { BookingEvent } from '../../models/Event';
 import { ActivatedRoute } from '@angular/router';
 import { EventsService } from '../../services/events/events.service';
 import { CommonModule } from '@angular/common';
@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class EventComponent {
   eventID: string | null = null;
-  event!: Event | null;
+  event!: BookingEvent | null;
 
   constructor(
     private route: ActivatedRoute,

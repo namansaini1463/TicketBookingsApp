@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TicketBookingsAppAPI.Models.DTOs;
 using TicketBookingsAppAPI.Repositories;
 
@@ -6,6 +7,7 @@ namespace TicketBookingsAppAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class BookingsController : ControllerBase
     {
         private readonly IBookingRepository bookingRepository;

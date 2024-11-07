@@ -1,56 +1,153 @@
-<!-- <div
-  class="my-userBookings-container max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg"
->
-  <h1 class="text-center text-4xl font-bold font-exo mb-8 text-gray-800">
-    My Bookings
-  </h1>
+<div class="min-h-screen bg-gray-50">
+  <div class="container mx-auto px-4 py-8 max-w-7xl">
+    <!-- Header Section -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-2">
+        Your Bookings
+      </h1>
+    </div>
 
-   Display booked events
-  @if (userBookings.length > 0) {
-  <div>
-    <div class="space-y-6">
-      <div
-        class="p-6 bg-white rounded-lg shadow-md"
-        *ngFor="let booking of userBookings"
-      >
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-xl font-exo text-blue-600">
-            {{ booking.bookingEvent.name }}
-          </h3>
-          <div>
-            <b>Booked On</b>
-            <p class="text-sm text-gray-500">
-              {{ booking.bookingDate | date : "medium" }}
-            </p>
-          </div>
-        </div>
-        <div class="flex items-center justify-between">
-          <div class="text-gray-700">
-            <p><strong>Tickets:</strong> {{ booking.numberOfTickets }}</p>
-            <p><strong>Total Price:</strong> ₹ {{ booking.amount }}</p>
-          </div>
-          Delete button
-          <button
-            class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded"
-            (click)="onDeleteBooking(booking.bookingID)"
+    <!-- Error Message -->
+    <div
+      *ngIf="errorMessage"
+      class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg flex items-center"
+    >
+      <span class="material-icons text-red-500 mr-2">error_outline</span>
+      <p class="text-red-700">{{ errorMessage }}</p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="mb-8 border-b border-gray-200">
+      <nav class="flex space-x-8">
+        <button
+          (click)="showActiveBookings = true"
+          [class.border-blue-500]="showActiveBookings"
+          [class.text-blue-600]="showActiveBookings"
+          class="group inline-flex items-center py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200"
+          [class.border-transparent]="!showActiveBookings"
+          [class.text-gray-500]="!showActiveBookings"
+          [class.hover:text-gray-700]="!showActiveBookings"
+          [class.hover:border-gray-300]="!showActiveBookings"
+        >
+          <span class="material-icons mr-2 text-base">event_available</span>
+          Active Bookings
+          <span
+            *ngIf="activeBookings.length > 0"
+            class="ml-2 bg-blue-100 text-blue-600 py-0.5 px-2.5 rounded-full text-xs font-medium"
           >
-            Delete Booking
-          </button>
+            {{ activeBookings.length }}
+          </span>
+        </button>
+
+        <button
+          (click)="showActiveBookings = false"
+          [class.border-blue-500]="!showActiveBookings"
+          [class.text-blue-600]="!showActiveBookings"
+          class="group inline-flex items-center py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200"
+          [class.border-transparent]="showActiveBookings"
+          [class.text-gray-500]="showActiveBookings"
+          [class.hover:text-gray-700]="showActiveBookings"
+          [class.hover:border-gray-300]="showActiveBookings"
+        >
+          <span class="material-icons mr-2 text-base">history</span>
+          All Bookings
+          <span
+            *ngIf="bookings.length > 0"
+            class="ml-2 bg-gray-100 text-gray-600 py-0.5 px-2.5 rounded-full text-xs font-medium"
+          >
+            {{ bookings.length }}
+          </span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Content Sections with Animation -->
+    <div class="relative" style="min-height: 200px">
+      <!-- Active Bookings Section -->
+      <div
+        *ngIf="showActiveBookings"
+        class="transition-opacity duration-300"
+        [class.opacity-100]="showActiveBookings"
+        [class.opacity-0]="!showActiveBookings"
+      >
+        <div
+          *ngIf="activeBookings.length > 0; else noActiveBookings"
+          class="grid gap-6 grid-cols-1"
+        >
+          <div
+            *ngFor="let booking of activeBookings; let i = index"
+            class="transform hover:-translate-y-1 transition-all duration-200"
+          >
+            <app-booking
+              [booking]="booking"
+              (bookingCancelled)="handleBookingCancelled($event)"
+            ></app-booking>
+          </div>
         </div>
+
+        <ng-template #noActiveBookings>
+          <div class="text-center py-12 bg-white rounded-xl shadow-sm">
+            <span class="material-icons text-gray-400 text-5xl mb-4"
+              >event_busy</span
+            >
+            <h3 class="text-lg font-medium text-gray-900 mb-2">
+              No Upcoming Bookings
+            </h3>
+            <p class="text-gray-500 mb-6">
+              You don't have any active event bookings at the moment.
+            </p>
+            <button
+              routerLink="/events"
+              class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              <span class="material-icons mr-2 text-base">add</span>
+              Browse Events
+            </button>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- All Bookings Section -->
+      <div
+        *ngIf="!showActiveBookings"
+        class="transition-opacity duration-300"
+        [class.opacity-100]="!showActiveBookings"
+        [class.opacity-0]="showActiveBookings"
+      >
+        <div
+          *ngIf="bookings.length > 0; else noBookings"
+          class="grid gap-6 grid-cols-1"
+        >
+          <div
+            *ngFor="let booking of bookings; let i = index"
+            class="transform hover:-translate-y-1 transition-all duration-200"
+          >
+            <app-booking
+              [booking]="booking"
+              (bookingCancelled)="handleBookingCancelled($event)"
+            ></app-booking>
+          </div>
+        </div>
+
+        <ng-template #noBookings>
+          <div class="text-center py-12 bg-white rounded-xl shadow-sm">
+            <span class="material-icons text-gray-400 text-5xl mb-4"
+              >history_toggle_off</span
+            >
+            <h3 class="text-lg font-medium text-gray-900 mb-2">
+              No Booking History
+            </h3>
+            <p class="text-gray-500 mb-6">You haven't made any bookings yet.</p>
+            <button
+              routerLink="/events"
+              class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              <span class="material-icons mr-2 text-base">add</span>
+              Browse Events
+            </button>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
-  } @else {
-  <div class="flex flex-col justify-center items-center">
-    <p class="text-center text-gray-500">You have no bookings at the moment.</p>
-    <button
-      class="bg-blue-500 text-white px-4 py-2 rounded mt-6 w-1/6 hover:bg-blue-600"
-      (click)="onClick()"
-    >
-      Book Now
-    </button>
-  </div>
-  }
-</div> -->
-
-<p>bookings</p>
+</div>

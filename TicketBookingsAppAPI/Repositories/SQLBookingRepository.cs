@@ -169,6 +169,8 @@ namespace TicketBookingsAppAPI.Repositories
             return await ticketBookingsAppDBContext.Bookings
                 .Include(b => b.BookingItems)
                 .ThenInclude(bi => bi.TicketType)
+                .ThenInclude(bi => bi.Event)
+                .ThenInclude(bi => bi.Images)
                 .FirstOrDefaultAsync(b => b.BookingID == bookingId);
         }
 
@@ -178,6 +180,8 @@ namespace TicketBookingsAppAPI.Repositories
                 return await ticketBookingsAppDBContext.Bookings
                     .Include(b => b.BookingItems) // Include associated booking items
                     .ThenInclude(bi => bi.TicketType) // Include associated ticket types for each booking item
+                    .ThenInclude(bi => bi.Event)
+                    .ThenInclude(bi => bi.Images)
                     .Where(b => b.UserID == userId)
                     .ToListAsync();
             }

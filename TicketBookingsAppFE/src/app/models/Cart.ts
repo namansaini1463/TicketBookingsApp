@@ -1,5 +1,5 @@
 import { TicketType } from './Event';
-import { Event } from './Event';
+import { BookingEvent } from './Event';
 
 export interface CartItem {
   userID: string;
@@ -11,7 +11,7 @@ export interface CartItemDTO {
   cartID: string;
   cartItemID: string;
   ticketType: TicketType;
-  event: Event;
+  event: BookingEvent;
   quantity: number;
   dateAdded: string;
 }

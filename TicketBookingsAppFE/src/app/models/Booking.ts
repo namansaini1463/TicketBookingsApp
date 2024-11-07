@@ -1,4 +1,5 @@
-import { Event } from './Event';
+import { CartItem, CartItemDTO } from './Cart';
+import { BookingEvent } from './Event';
 
 export enum PaymentStatus {
   Pending = 'Pending',
@@ -16,11 +17,9 @@ export interface CreateBookingDTO {
 
 export interface BookingDTO {
   bookingID: string;
-  eventID: string;
-  userID: string | null;
   bookingDate: string;
-  numberOfTickets: number;
-  amount: number;
-
-  bookingEvent: Event;
+  bookingStatus: string;
+  totalAmount: number;
+  bookingItems: CartItemDTO[];
+  bookingEvent: BookingEvent;
 }

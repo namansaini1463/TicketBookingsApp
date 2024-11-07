@@ -1,4 +1,4 @@
-export interface Event {
+export interface BookingEvent {
   eventID: string; // Guid in the backend is mapped to a string in TypeScript
   name: string;
   dateAndTime: string; // DateTimeOffset maps to string (ISO 8601 format)
@@ -73,8 +73,8 @@ export enum EventCategory {
   PetsAndAnimals = 'PetsAndAnimals',
 }
 
-//` Function to map the API response to Event model
-export function mapToEvent(item: any): Event {
+//` Function to map the API response to BookingEvent model
+export function mapToEvent(item: any): BookingEvent {
   return {
     eventID: item.eventID,
     name: item.name,

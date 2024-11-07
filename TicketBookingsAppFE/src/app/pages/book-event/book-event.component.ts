@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from '../../services/events/events.service';
-import { Event, mapToEvent, TicketType } from '../../models/Event';
+import { BookingEvent, mapToEvent, TicketType } from '../../models/Event';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user/user.service';
@@ -17,7 +17,7 @@ import { getFormattedTimeWithTimezone } from '../../utils/getFormattedTimeWithTi
   styleUrls: ['./book-event.component.css'],
 })
 export class BookEventComponent implements OnInit {
-  event!: Event;
+  event!: BookingEvent;
   numTickets: number = 1;
   totalPrice: number = 0;
   selectedTicketType: TicketType | null = null;

@@ -1,0 +1,131 @@
+<ng-container *ngIf="bookingItem">
+  <div
+    class="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+  >
+    <!-- Booking Header -->
+    <div class="flex justify-between items-start mb-6">
+      <div class="flex flex-col">
+        <h3 class="text-2xl font-bold text-gray-900 mb-2 tracking-tight">
+          {{ bookingItem.event.name }}
+        </h3>
+        <div class="flex items-center">
+          <span class="text-sm text-gray-500 font-medium">Booking ID:</span>
+          <span class="text-sm text-gray-700 ml-2 font-mono"
+            >#{{ bookingItem.bookingID }}</span
+          >
+        </div>
+      </div>
+      <div class="flex items-center">
+        <span
+          [ngClass]="{
+            'bg-green-100 text-green-800 border-green-200':
+              bookingItem.bookingStatus === 'Confirmed',
+            'bg-yellow-100 text-yellow-800 border-yellow-200':
+              bookingItem.bookingStatus === 'Pending',
+            'bg-red-100 text-red-800 border-red-200':
+              bookingItem.bookingStatus === 'Cancelled'
+          }"
+          class="px-4 py-2 rounded-full text-sm font-medium border flex items-center gap-2"
+        >
+          <span class="material-icons text-base">
+            {{
+              bookingItem.bookingStatus === "Confirmed"
+                ? "check_circle"
+                : bookingItem.bookingStatus === "Pending"
+                ? "pending"
+                : "cancel"
+            }}
+          </span>
+          {{ bookingItem.bookingStatus }}
+        </span>
+      </div>
+      @if(booking.bookingStatus === "Confirmed"){
+
+      <button (click)="deleteBooking()" class="text-red-500 hover:text-red-700">
+        <mat-icon>delete</mat-icon>
+        Delete Booking
+      </button>
+      }
+    </div>
+
+    <!-- Event Details -->
+    <div class="flex gap-6 mb-8">
+      <div class="w-1/3">
+        <div class="relative group">
+          <img
+            [src]="bookingItem.eventImage"
+            [alt]="bookingItem.event.name"
+            class="w-full h-48 object-cover rounded-xl shadow-md group-hover:shadow-lg transition-shadow duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-xl"
+          ></div>
+        </div>
+      </div>
+      <div class="w-2/3 flex flex-col justify-center space-y-4">
+        <div
+          class="flex items-center text-gray-700 hover:text-gray-900 transition-colors group"
+        >
+          <span
+            class="material-icons mr-3 text-gray-500 group-hover:text-gray-700"
+            >event</span
+          >
+          <span class="text-base">{{
+            bookingItem.event.dateAndTime | date : "EEEE, MMMM d, y 'at' h:mm a"
+          }}</span>
+        </div>
+        <div
+          class="flex items-center text-gray-700 hover:text-gray-900 transition-colors group"
+        >
+          <span
+            class="material-icons mr-3 text-gray-500 group-hover:text-gray-700"
+            >location_on</span
+          >
+          <span class="text-base">
+            {{ bookingItem.event.venue.name }}
+            <span class="text-gray-500 mx-2">|</span>
+            {{ bookingItem.event.venue.state }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ticket Details -->
+    <div
+      class="bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors duration-300"
+    >
+      <div class="flex items-center mb-4">
+        <span class="material-icons mr-2 text-gray-600"
+          >confirmation_number</span
+        >
+        <h4 class="text-lg font-semibold text-gray-800">Ticket Details</h4>
+      </div>
+      <div class="grid grid-cols-4 gap-6">
+        <div class="p-4 bg-white rounded-lg shadow-sm">
+          <p class="text-sm text-gray-500 mb-1">Ticket Type</p>
+          <p class="font-medium text-gray-900">
+            {{ bookingItem.ticketType.type }}
+          </p>
+        </div>
+        <div class="p-4 bg-white rounded-lg shadow-sm">
+          <p class="text-sm text-gray-500 mb-1">Quantity</p>
+          <p class="font-medium text-gray-900">
+            {{ bookingItem.ticketQuantity }}
+          </p>
+        </div>
+        <div class="p-4 bg-white rounded-lg shadow-sm">
+          <p class="text-sm text-gray-500 mb-1">Price per Ticket</p>
+          <p class="font-medium text-gray-900">
+            {{ bookingItem.ticketType.price | currency }}
+          </p>
+        </div>
+        <div class="p-4 bg-white rounded-lg shadow-sm">
+          <p class="text-sm text-gray-500 mb-1">Total Amount</p>
+          <p class="font-medium text-gray-900">
+            {{ bookingItem.bookingValue | currency }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
