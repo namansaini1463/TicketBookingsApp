@@ -27,7 +27,7 @@ namespace TicketBookingsAppAPI.Models.Domain
         // Coupon reference
         public Guid? CouponID { get; set; } // Nullable foreign key for Coupon
         [ForeignKey("CouponID")]
-        public Coupon Coupon { get; set; }
+        public Coupon? Coupon { get; set; }
 
         public decimal DiscountApplied { get; set; } // Discount amount applied
     }

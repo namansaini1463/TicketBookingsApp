@@ -358,7 +358,7 @@ namespace TicketBookingsAppAPI.Migrations
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RefundDate")
+                    b.Property<DateTime?>("RefundDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("TransactionID")

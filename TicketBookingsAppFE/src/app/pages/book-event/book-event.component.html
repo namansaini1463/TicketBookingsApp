@@ -1,120 +1,166 @@
-<div class="container mx-auto p-4 font-exo">
-  <h1 class="text-3xl font-bold mb-4 text-center">Book Event</h1>
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-8 px-4">
+  <div class="max-w-2xl mx-auto">
+    <!-- Main Card -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+      <ng-container *ngIf="event; else noEvent">
+        <!-- Event Header -->
+        <div class="relative">
+          <!-- Hero Background -->
+          <div class="h-48 bg-gradient-to-r from-blue-600 to-indigo-600"></div>
 
-  <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
-    <!-- Use *ngIf to conditionally display content -->
-    <ng-container *ngIf="event; else noEvent">
-      <!-- Event Details -->
-      <!-- Event Name -->
-      <div>
-        <h3 class="text-xl font-semibold mb-1 text-blue-700 mt-4 w-fit">
-          {{ event.name }}
-        </h3>
-        <!-- Event Category Tags -->
-        <div class="flex flex-wrap gap-2 mb-4">
-          <ng-container *ngFor="let category of event.categories">
-            <span
-              class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full"
-            >
-              {{ category }}
-            </span>
-          </ng-container>
-        </div>
-      </div>
-
-      <!-- Display Selected Ticket Type Details -->
-      <div *ngIf="selectedTicketType" class="mb-6">
-        <h4
-          class="text-xl font-semibold mb-2 text-purple-500 mt-2 cursor-pointer w-full"
-        >
-          🌟 Ticket Type: {{ selectedTicketType.type }} 🌟
-        </h4>
-        <p class="text-gray-600 w-full">
-          <strong>Price per Ticket:</strong> ₹{{ selectedTicketType.price }}
-        </p>
-      </div>
-
-      <!-- Event Description -->
-      <p class="text-gray-600 w-full">
-        <strong>Description: </strong>
-        {{ event.eventDescription || "No description available" }}
-      </p>
-
-      <!-- Event Date and Time and Venue -->
-      <div class="flex-1">
-        <p class="text-gray-600">
-          <strong>Date:</strong> {{ event.dateAndTime | date : "longDate" }}
-        </p>
-        <p class="text-gray-600">
-          <strong>Time: </strong>
-          {{ getFormattedTimeWithTimezone(event.dateAndTime) }}
-        </p>
-      </div>
-
-      <!-- Booking Form -->
-      <form (ngSubmit)="onSubmit()">
-        <div class="mb-4 mt-6">
-          <label
-            class="block text-gray-700 text-lg font-bold mb-2"
-            for="tickets"
+          <!-- Event Title Section -->
+          <div
+            class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/50 to-transparent"
           >
-            Select Number of Tickets
-          </label>
-          <div class="flex items-center">
-            <button
-              type="button"
-              class="bg-gray-300 text-gray-700 px-3 py-2 rounded-l hover:bg-gray-400"
-              (click)="decreaseTickets()"
-              [disabled]="numTickets <= 1"
-            >
-              -
-            </button>
-
-            <input
-              type="number"
-              id="tickets"
-              class="text-center w-16 px-3 py-2 border-t border-b border-gray-300 focus:outline-none"
-              [(ngModel)]="numTickets"
-              name="numTickets"
-              min="1"
-              max="8"
-              readonly
-            />
-
-            <button
-              type="button"
-              class="bg-gray-300 text-gray-700 px-3 py-2 rounded-r hover:bg-gray-400"
-              (click)="increaseTickets()"
-              [disabled]="numTickets >= 8"
-            >
-              +
-            </button>
+            <h1 class="text-3xl font-bold text-white mb-2">{{ event.name }}</h1>
+            <div class="flex flex-wrap gap-2">
+              <ng-container *ngFor="let category of event.categories">
+                <span
+                  class="px-3 py-1 rounded-full text-xs font-medium bg-white/20 text-white backdrop-blur-sm"
+                >
+                  {{ category }}
+                </span>
+              </ng-container>
+            </div>
           </div>
         </div>
 
-        <!-- Total Price -->
-        <div class="mb-6">
-          <p class="text-lg">
-            <strong>Total Price:</strong>
-            {{ totalPrice | currency : "INR" : "symbol" : "1.2-2" }}
+        <!-- Content Section -->
+        <div class="p-6 space-y-6">
+          <!-- Date & Time -->
+          <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-lg bg-blue-50">
+                <span class="material-icons text-blue-600">event</span>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Date</p>
+                <p class="font-medium">
+                  {{ event.dateAndTime | date : "longDate" }}
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-lg bg-blue-50">
+                <span class="material-icons text-blue-600">schedule</span>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Time</p>
+                <p class="font-medium">
+                  {{ getFormattedTimeWithTimezone(event.dateAndTime) }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Selected Ticket Type -->
+          <div
+            *ngIf="selectedTicketType"
+            class="bg-gradient-to-r from-purple-50 to-blue-50 p-4 rounded-xl"
+          >
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-lg font-semibold text-purple-700">
+                  {{ selectedTicketType.type }}
+                </h3>
+                <p class="text-purple-600">
+                  ₹{{ selectedTicketType.price }} per ticket
+                </p>
+              </div>
+              <span class="material-icons text-2xl text-purple-400"
+                >confirmation_number</span
+              >
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+              About the Event
+            </h3>
+            <p class="text-gray-600">
+              {{ event.eventDescription || "No description available" }}
+            </p>
+          </div>
+
+          <!-- Booking Form -->
+          <form (ngSubmit)="addToCart()" class="space-y-6">
+            <!-- Ticket Counter -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Number of Tickets
+              </label>
+              <div
+                class="flex items-center justify-center max-w-[200px] rounded-lg border border-gray-200 p-1"
+              >
+                <button
+                  type="button"
+                  class="w-10 h-10 rounded-lg text-gray-500 hover:bg-gray-100 flex items-center justify-center transition-colors"
+                  (click)="decreaseTickets()"
+                  [disabled]="numTickets <= 1"
+                >
+                  <span class="material-icons">remove</span>
+                </button>
+                <input
+                  type="number"
+                  class="w-16 text-center border-0 bg-transparent font-medium text-gray-900 focus:outline-none"
+                  [(ngModel)]="numTickets"
+                  name="numTickets"
+                  min="1"
+                  max="8"
+                  readonly
+                />
+                <button
+                  type="button"
+                  class="w-10 h-10 rounded-lg text-gray-500 hover:bg-gray-100 flex items-center justify-center transition-colors"
+                  (click)="increaseTickets()"
+                  [disabled]="numTickets >= 8"
+                >
+                  <span class="material-icons">add</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Total Price -->
+            <div class="bg-gray-50 p-4 rounded-xl">
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600">Total Amount</span>
+                <span class="text-xl font-bold text-gray-900">
+                  {{ totalPrice | currency : "INR" : "symbol" : "1.2-2" }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-xl font-medium hover:from-blue-700 hover:to-indigo-700 transition-colors duration-200 flex items-center justify-center gap-2"
+            >
+              <span class="material-icons">shopping_cart</span>
+              Add to Cart
+            </button>
+          </form>
+        </div>
+      </ng-container>
+
+      <!-- No Event Template -->
+      <ng-template #noEvent>
+        <div class="p-8 text-center">
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4"
+          >
+            <span class="material-icons text-3xl text-gray-400"
+              >event_busy</span
+            >
+          </div>
+          <h2 class="text-xl font-semibold text-gray-900 mb-2">
+            No Event Found
+          </h2>
+          <p class="text-gray-600">
+            The event you're looking for doesn't exist or has been removed.
           </p>
         </div>
-
-        <!-- Confirm Booking Button -->
-        <div class="flex items-center justify-between">
-          <button
-            class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full font-semibold hover:bg-blue-600"
-            type="submit"
-          >
-            Confirm Booking
-          </button>
-        </div>
-      </form>
-    </ng-container>
-
-    <!-- No Event Found Message -->
-    <ng-template #noEvent>
-      <h1>No event found</h1>
-    </ng-template>
+      </ng-template>
+    </div>
   </div>
 </div>

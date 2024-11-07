@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { Event } from '../../models/Event';
+import { BookingEvent } from '../../models/Event';
 import { CommonModule } from '@angular/common';
 import { CarouselComponent } from '../ui/carousel/carousel.component';
 import { getFormattedTimeWithTimezone } from '../../utils/getFormattedTimeWithTimeZone';
@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './event.component.css',
 })
 export class EventComponent {
-  @Input() event: Event | null = null;
+  @Input() event: BookingEvent | null = null;
   getFormattedTimeWithTimezone = getFormattedTimeWithTimezone;
   currentSlide = 0;
 

@@ -19,7 +19,7 @@ namespace TicketBookingsAppAPI.Models.Domain
 
         [Required]
         public DateTime PaymentDate { get; set; } = DateTime.UtcNow; 
-        public DateTime RefundDate { get; set; } = DateTime.UtcNow; 
+        public DateTime? RefundDate { get; set; } = null; 
 
         public string PaymentMethod { get; set; } // E.g., Credit Card, PayPal, etc.
 

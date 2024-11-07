@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EventComponent } from '../../components/event/event.component';
 import { EventsService } from '../../services/events/events.service';
-import { Event, EventCategory } from '../../models/Event'; // Update this model to match your DTO
+import { BookingEvent, EventCategory } from '../../models/Event'; // Update this model to match your DTO
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './events.component.css',
 })
 export class EventsComponent implements OnInit {
-  events: Event[] = [];
+  events: BookingEvent[] = [];
 
   // Filter properties
   searchTerm: string = '';
@@ -123,7 +123,7 @@ export class EventsComponent implements OnInit {
   }
 
   // Map the API response to the Event model
-  private mapToEvent(item: any): Event {
+  private mapToEvent(item: any): BookingEvent {
     return {
       eventID: item.eventID,
       name: item.name,
